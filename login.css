@@ -58,7 +58,7 @@ body {
 	display: inline-block;
 }
 
-#submitButton {
+#loginButton {
 	-webkit-appearance: button;
 	font-size: 18px;
 	margin-left: 30px;
