@@ -11,8 +11,14 @@ function goHome(e) {
 function login(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {
-		//TODO: Validate and setItem correctly
-		sessionStorage.setItem('profile', 'user')
-		window.location.href = 'index.html'
+		const username = document.querySelector('#username').value
+		const password = document.querySelector('#password').value
+		// Validate against username and password on server
+		// code below requires server call
+		if ((username == 'user' && password == 'user') || 
+			(username == 'admin' && password == 'admin')) {
+			sessionStorage.setItem('profile', username)
+			window.location.href = 'index.html'
+		}
 	}
 }
