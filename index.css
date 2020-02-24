@@ -38,14 +38,14 @@ body {
 #home {
 }
 
-#indexTitleContainer {
+#titleContainer {
 	min-width: 500px;
 	width: 67%;
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 }
 
-#indexTitle {
+#title {
 	font-size: inherit;
 	margin: inherit;
 	padding: 20px;
