@@ -50,21 +50,21 @@ body {
 	padding: 20px;
 }
 
-#authentication {
+#registration {
 	margin-left: 45%;
 }
 
-#authentication div h3 {
+#registration div h3 {
 	display: inline-block;
 }
 
-#loginButton {
+#signUpButton {
 	-webkit-appearance: button;
 	font-size: 18px;
-	margin-left: 30px;
+	margin-left: 80px;
 }
 
-#authentication div button {
+#registration div button {
 	font-size: 18px;
 	margin-left: 30px;
 }
@@ -73,6 +73,6 @@ body {
 	margin-top: 18px;
 }
 
-#authentication div a {
+#registration div a {
 	color: black;
 }

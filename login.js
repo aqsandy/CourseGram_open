@@ -1,7 +1,9 @@
 const home = document.querySelector('#home')
 const authentication = document.querySelector('#authentication')
+const registration = document.querySelector('#signUpButton')
 home.addEventListener('click', goHome)
 authentication.addEventListener('submit', login)
+registration.addEventListener('click', signUp)
 
 function goHome(e) {
 	e.preventDefault()
@@ -21,4 +23,9 @@ function login(e) {
 			window.location.href = 'index.html'
 		}
 	}
+}
+
+function signUp(e) {
+	e.preventDefault()
+	window.location.href = 'sign-up.html'
 }

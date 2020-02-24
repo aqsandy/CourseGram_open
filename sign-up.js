@@ -1,14 +1,14 @@
 const home = document.querySelector('#home')
-const authentication = document.querySelector('#authentication')
+const registration = document.querySelector('#registration')
 home.addEventListener('click', goHome)
-authentication.addEventListener('submit', login)
+registration.addEventListener('submit', signUp)
 
 function goHome(e) {
 	e.preventDefault()
 	window.location.href = 'index.html'
 }
 
-function login(e) {
+function signUp(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {
 		const username = document.querySelector('#username').value
