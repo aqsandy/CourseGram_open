@@ -51,28 +51,33 @@ body {
 }
 
 #registration {
-	margin-left: 45%;
+	margin-left: 40%;
 }
 
 #registration div h3 {
 	display: inline-block;
 }
 
+#registration div p {
+	margin: 0;
+	color: red;
+}
+
 #signUpButton {
 	-webkit-appearance: button;
 	font-size: 18px;
 	margin-left: 80px;
-}
-
-#registration div button {
-	font-size: 18px;
-	margin-left: 30px;
+	margin-top: 20px;
 }
 
 #linkContainer {
 	margin-top: 18px;
 }
 
-#registration div a {
-	color: black;
+.valid {
+	height: 20px;
+	width: 20px;
+	border: 1px solid black;
+	display: inline-block;
+	text-align: center;
 }
