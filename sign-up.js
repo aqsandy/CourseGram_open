@@ -53,7 +53,11 @@ function valid(e) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Email cannot be blank.')
 			error.appendChild(errorText)
-		} 
+		} else if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+			box.appendChild(cross)
+			const errorText = document.createTextNode('Email is not valid.')
+			error.appendChild(errorText)
+		}
 		// Check if email already exists on server
 		// code below requires server call
 		else if (value == 'user@user.com' || value == 'admin@admin.com') {
