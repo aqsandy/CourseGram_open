@@ -3,7 +3,7 @@ let emailValid = false
 let passwordValid = false
 let confirmPasswordValid = false
 
-const invalidPasswordList = ['password', 'mypassword', '123456789', 'au4a83', 'ji32k7au4a83']
+const prohibitedPasswordList = ['password', 'mypassword', '123456789', 'au4a83', 'ji32k7au4a83']
 
 const home = document.querySelector('#home')
 const registration = document.querySelector('#registration')
@@ -38,7 +38,7 @@ function valid(e) {
 		} 
 		// Check if username already exists on server
 		// code below requires server call
-		if (value == 'user' || value == 'admin') {
+		else if (value == 'user' || value == 'admin') {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Username already used.')
 			error.appendChild(errorText)
@@ -78,9 +78,9 @@ function valid(e) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Password must be at least 8 characters in length.')
 			error.appendChild(errorText)
-		} else if (value.match(/(.)\1{7,}/) || invalidPasswordList.includes(value)) {
+		} else if (value.match(/(.)\1{7,}/) || prohibitedPasswordList.includes(value)) {
 			box.appendChild(cross)
-			const errorText = document.createTextNode(value + ' is not a valid password.')
+			const errorText = document.createTextNode(value + ' is a prohibited password.')
 			error.appendChild(errorText)
 		} else {
 			box.appendChild(checkmark)
