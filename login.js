@@ -21,6 +21,12 @@ function login(e) {
 			(username == 'admin' && password == 'admin')) {
 			sessionStorage.setItem('profile', username)
 			window.location.href = 'index.html'
+		} else {
+			const errorContainer = document.querySelector('#errorContainer')
+			const error = document.createElement('p')
+			const errorText = document.createTextNode('Invalid username or password.')
+			error.appendChild(errorText)
+			errorContainer.appendChild(error)
 		}
 	}
 }

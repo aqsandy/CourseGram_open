@@ -3,6 +3,7 @@ let emailValid = false
 let passwordValid = false
 let confirmPasswordValid = false
 
+// Prohibited password list on server
 const prohibitedPasswordList = ['password', 'mypassword', '123456789', 'au4a83', 'ji32k7au4a83']
 
 const home = document.querySelector('#home')
@@ -78,7 +79,10 @@ function valid(e) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Password must be at least 8 characters in length.')
 			error.appendChild(errorText)
-		} else if (value.match(/(.)\1{7,}/) || prohibitedPasswordList.includes(value)) {
+		}
+		// Check if password is part of prohibited passwords on server
+		// code below requires server call
+		else if (value.match(/(.)\1{7,}/) || prohibitedPasswordList.includes(value)) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode(value + ' is a prohibited password.')
 			error.appendChild(errorText)

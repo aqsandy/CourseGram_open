@@ -58,6 +58,12 @@ body {
 	display: inline-block;
 }
 
+#authentication div p {
+	margin: 0;
+	margin-bottom: 10px;
+	color: red;
+}
+
 #loginButton {
 	-webkit-appearance: button;
 	font-size: 18px;
