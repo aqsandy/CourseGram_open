@@ -48,7 +48,8 @@ function addProgram(e){
 
 function changeUser(e){
     const user = document.querySelector('#changeUserName').value;
-    sessionStorage.setItem('profile', user)
+    profileData.username = user
+    sessionStorage.setItem('profile', profileData)
     
     document.querySelector('#user').innerHTML = user; 
     const profile = document.querySelector('#profile');
@@ -57,6 +58,7 @@ function changeUser(e){
 
 function changeEmail(e){
     const email = document.querySelector('#changeEmailName').value;
-    sessionStorage.setItem('email', user)
+    profileData.email = email
+    sessionStorage.setItem('profile', profileData)
     document.querySelector('#email').innerHTML = email; 
 }
