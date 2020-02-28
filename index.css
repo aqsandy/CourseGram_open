@@ -56,3 +56,24 @@ body {
 
 #login {
 }
+
+#programs {
+	margin-left: 20px;
+}
+
+#programs ul {
+	border: 2px solid black;
+	width: 500px;
+	list-style: none;
+	padding-left: 100px;
+}
+
+#programs ul li button {
+	margin: 10px;
+	color: black;
+	background-color: white;
+	border: 1px solid black;
+	padding: 20px;
+	font-size: inherit;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}

@@ -11,6 +11,7 @@ function Profile(username, email, password, admin=false) {
 	this.email = email
 	this.password = password
 	this.admin = admin
+	this.requestDelete = false
 }
 
 function Storage() {
@@ -322,6 +323,28 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		this.profile = null
+		this.toStorage()
+	},
+
+	requestDelete: function() {
+		/*
+			Sets active profile requestDelete to true.
+		*/
+		this.fromStorage()
+		if (this.profile != null) {
+			this.profile.requestDelete = true
+		}
+		this.toStorage()
+	},
+
+	requestDeleteCancel: function() {
+		/*
+			Sets active profile requestDelete to false.
+		*/
+		this.fromStorage()
+		if (this.profile != null) {
+			this.profile.requestDelete = false
+		}
 		this.toStorage()
 	}
 }
