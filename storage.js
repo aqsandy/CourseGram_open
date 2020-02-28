@@ -18,6 +18,7 @@ function Storage() {
 	this.profiles = JSON.stringify(sessionStorage.getItem('profiles'))
 }
 
+
 Storage.prototype = {
 	createDefaultUser: function() {
 		/*
