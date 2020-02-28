@@ -286,6 +286,19 @@ Storage.prototype = {
 		return false
 	},
 
+	getUsername: function(id=null) {
+		/*
+			Returns username of active profile or profiles[id] is admin profile.
+		*/
+		this.fromStorage()
+		if (id != null && this.profiles != null) {
+			return this.profiles[id].username
+		} else if (this.profile != null) {
+			return this.profile.username
+		}
+		return null
+	},
+
 	login: function(username, password) {
 		/*
 			Sets active profile and returns true if username and password matches profile in profiles.
