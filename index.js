@@ -38,7 +38,13 @@ function goLogin(e) {
 
 function goProfile(e) {
 	e.preventDefault()
-	window.location.href = 'profile.html'
+	if (storage.profile != null) {
+		if (storage.profile.admin) {
+			window.location.href = 'admin.html'
+		} else {
+			window.location.href = 'profile.html'
+		}
+	}
 }
 
 function goProgram(e) {
