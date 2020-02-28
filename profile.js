@@ -1,4 +1,5 @@
-const profileName = sessionStorage.getItem('profile')
+const profileData = JSON.parse(sessionStorage.getItem('profile'))
+const profileName = profileData.username
 const home = document.querySelector('#home')
 const program = document.querySelector('#addProgram')
 const userChange = document.querySelector('#changeUser')
