@@ -143,11 +143,7 @@ function signUp(e) {
 		// Set profile data on server
 		// code below requires server call
 		if (usernameValid && emailValid && passwordValid && confirmPasswordValid) {
-			const profiles = []
-			const profile = new Profile(username, email, password)
-			profiles.push(profile)
-			sessionStorage.setItem('profiles', JSON.stringify(profiles))
-			sessionStorage.setItem('profile', JSON.stringify(profile))
+			storage.createProfileSetPush(username, email, password)
 			window.location.href = 'index.html'
 		}
 	}
