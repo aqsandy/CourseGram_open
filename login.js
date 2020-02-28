@@ -24,9 +24,13 @@ function login(e) {
 			window.location.href = 'index.html'
 		} else if (username == 'admin' && password == 'admin') {
 			storage.createDefaultAdmin()
-			window.location.href = 'index.html'
+			window.location.href = 'admin.html'
 		} else if (storage.login(username, password)){
-			window.location.href = 'index.html'
+			if (storage.profile.admin) {
+				window.location.href = 'admin.html'
+			} else {
+				window.location.href = 'index.html'
+			}
 		} else {
 			const errorContainer = document.querySelector('#errorContainer')
 			const error = document.createElement('p')
