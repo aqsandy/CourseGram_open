@@ -33,5 +33,6 @@ function goLogin(e) {
 
 function goProfile(e) {
 	e.preventDefault()
+	window.location.href = 'profile.html'
 }
 

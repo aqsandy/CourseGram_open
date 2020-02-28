@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>CourseGram Login</title>
+        <link rel='stylesheet' type='text/css' href='login.css'>
+        <link rel='stylesheet' type='text/css' href='profile.css'>
+	</head>
+	<body>
+		<div id='header'>
+			<ul>
+				<li id='homeContainer'><button id='home'>CourseGram</button></li>
+                <li id='titleContainer'><h1 id='title'>Profile</h1></li>
+                <li id='loginContainer'><button id='login'> user </button></li>
+			</ul>
+		</div>
+        <div id='changeInfo'>
+            <h1> User Info </h1>
+            <div class="userInfo">
+                <span>Username: </span> <span id='user'></span>
+                <br>
+                <input type="text" id="changeUserName" />
+                <br>
+                <button id="changeUser">Change Username</button>
+            </div>
+
+            <div class="emailInfo">
+                <span>Email: </span> <span id="email" > user@gmail.com</span>
+                <br>
+                <input type="text" id="changeEmailName" />
+                <br>
+                <button id="changeEmail">Change Email</button>
+            </div>
+
+            <div class="passInfo">
+                <span>Password </span>
+                <br>
+                <button>Change Password</button>
+            </div>
+        </div>
+        <div id='programs'>
+            <h1> Programs </h1>
+            <select id="programSelect">
+                <option value="Life Science">Life Science</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Statistics">Statistics</option>
+            </select>
+            <select id="majorSelect">
+                <option value="Major">Major</option>
+                <option value="Specialist">Specialist</option>
+                <option value="Minor">Minor</option>
+            </select>
+
+            <button id="addProgram">Add Program</button>
+            <ul id="programLst">
+                <li>
+                    Computer Science - Specialist
+                </li>
+                <li>
+                    Math - Major
+                </li>
+            </ul>
+        </div>
+		<script type="text/javascript" src="profile.js"></script>
+	</body>
+</html>
