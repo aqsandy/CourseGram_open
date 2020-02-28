@@ -252,6 +252,23 @@ Storage.prototype = {
 		}
 	},
 
+	login: function(username, password) {
+		/*
+			Sets active profile and returns true if username and password matches profile in profiles.
+		*/
+		this.fromStorage()
+		if (this.profiles != null) {
+			for (let i = 0; i < this.profiles.length; i++) {
+				if (this.profiles[i].username == username && this.profiles[i].password == password) {
+					this.profile = this.profiles[i]
+					this.toStorage()
+					return true
+				}
+			}
+		}
+		return false
+	},
+
 	logout: function() {
 		/*
 			Sets active profile to null.

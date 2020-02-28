@@ -5,15 +5,11 @@ home.addEventListener('click', goHome)
 authentication.addEventListener('submit', login)
 registration.addEventListener('click', signUp)
 
+const storage = new Storage()
+
 function goHome(e) {
 	e.preventDefault()
 	window.location.href = 'index.html'
-}
-
-function Profile(username, email, password) {
-	this.username = username
-	this.email = email
-	this.password = password
 }
 
 function login(e) {
@@ -23,18 +19,13 @@ function login(e) {
 		const password = document.querySelector('#password').value
 		// Validate against profile username and password on server
 		// code below requires server call
-		const profiles = JSON.parse(sessionStorage.getItem('profiles'))
-		if (profiles != null) {
-			for (let i = 0; i < profiles.length; i++) {
-				if (profiles[i].username == username && profiles[i].password == password) {
-					sessionStorage.setItem('profile', JSON.stringify(profiles[i]))
-				}
-			}
-		}
-		if ((username == 'user' && password == 'user') || 
-			(username == 'admin' && password == 'admin')) {
-			const profile = new Profile('user', 'user@user.com', 'user')
-			sessionStorage.setItem('profile', JSON.stringify(profile))
+		if (username == 'user' && password == 'user') {
+			storage.createDefaultUser()
+			window.location.href = 'index.html'
+		} else if (username == 'admin' && password == 'admin') {
+			storage.createDefaultAdmin()
+			window.location.href = 'index.html'
+		} else if (storage.login(username, password) == true){
 			window.location.href = 'index.html'
 		} else {
 			const errorContainer = document.querySelector('#errorContainer')
