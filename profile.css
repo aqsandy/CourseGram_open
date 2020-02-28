@@ -1,0 +1,32 @@
+#changeInfo{
+    /* padding-top: 3%; */
+    text-align: center;
+    max-width: 30%;
+    margin-right: 25%;
+    margin-left: 5%;
+    float: left;
+    padding-right: 5%;
+    border-right: 2px solid black;
+    height: 100%;
+    
+}
+
+#programs{
+    max-width: 50%;
+    float: left;
+    padding-left: 5%;
+    padding-top: 5%;
+}
+
+.userInfo{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.passInfo{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.emailInfo{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}

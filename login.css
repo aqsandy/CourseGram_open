@@ -45,13 +45,21 @@ body {
 }
 
 #title {
+	position: relative;
 	font-size: inherit;
 	margin: inherit;
+	width: 30%;
+	left: 39%;
 	padding: 20px;
 }
 
 #authentication {
-	margin-left: 45%;
+	text-align: center;
+	width: 30%;
+	top: 50%;
+	position: absolute;
+	left: 35%;
+	top: 30%;
 }
 
 #authentication div h3 {
