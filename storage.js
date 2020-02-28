@@ -159,7 +159,7 @@ Storage.prototype = {
 				this.toStorage()
 			}
 		}
-	}
+	},
 
 	changeProfileEmailSetPush: function(email) {
 		/*
@@ -197,7 +197,7 @@ Storage.prototype = {
 				this.toStorage()
 			}
 		}
-	}
+	},
 
 	changeProfileEmailSetPush: function(email) {
 		/*
@@ -235,7 +235,7 @@ Storage.prototype = {
 				this.toStorage()
 			}
 		}
-	}
+	},
 
 	changeProfilePasswordSetPush: function(password) {
 		/*
