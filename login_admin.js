@@ -1,8 +1,11 @@
 /* 
 adding button listeners
 */
-const authentication = document.querySelector('#authentication');
-authentication.addEventListener('submit', login)
+if(document.readyState === "complete") {
+    const authentication = document.querySelector('form')
+    console.log(authentication)
+    authentication.addEventListener('submit', login)
+}
 function login(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {
@@ -29,5 +32,7 @@ function login(e) {
 			error.appendChild(errorText)
 			errorContainer.appendChild(error)
 		}
-	}
+	}else{
+        console.log("type not found.");
+    }
 }
