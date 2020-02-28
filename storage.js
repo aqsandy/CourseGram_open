@@ -1,4 +1,4 @@
-/* JS Library for Accessing Profile Data */
+/* JS Library for Accessing and Modifying Profile Data Locally and on Server */
 
 /*
 	If profile is default user or admin profile, 
@@ -14,6 +14,7 @@ function Profile(username, email, password, admin=false) {
 }
 
 function Storage() {
+	// Code below requires server calls.
 	this.profile = JSON.parse(sessionStorage.getItem('profile'))
 	this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
 }
@@ -22,6 +23,7 @@ Storage.prototype = {
 	fromStorage: function() {
 		/*
 			Loads profile data from sessionStorage.
+			Code below requires server calls.
 		*/
 		this.profile = JSON.parse(sessionStorage.getItem('profile'))
 		this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
@@ -30,6 +32,7 @@ Storage.prototype = {
 	toStorage: function() {
 		/*
 			Saves profile data to sessionStorage.
+			Code below requires server calls.
 		*/
 		sessionStorage.setItem('profile', JSON.stringify(this.profile))
 		sessionStorage.setItem('profiles', JSON.stringify(this.profiles))
