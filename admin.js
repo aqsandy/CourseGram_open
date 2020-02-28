@@ -6,6 +6,6 @@ if(!storage.checkAdmin()){
 }else{
     /* Push user info to the page  */
     const username_field = document.querySelector("#username");
-    username_field.textContent = profile.username;
+    username_field.textContent = storage.getUsername();
 
 }
