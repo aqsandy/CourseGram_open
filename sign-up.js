@@ -3,9 +3,6 @@ let emailValid = false
 let passwordValid = false
 let confirmPasswordValid = false
 
-// Prohibited password list on server
-const prohibitedPasswordList = ['password', 'mypassword', '123456789', 'au4a83', 'ji32k7au4a83']
-
 const home = document.querySelector('#home')
 const registration = document.querySelector('#registration')
 home.addEventListener('click', goHome)
@@ -36,16 +33,27 @@ function valid(e) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Username cannot be blank.')
 			error.appendChild(errorText)
-		} 
-		// Check if username already exists on server
-		// code below requires server call
-		else if (value == 'user' || value == 'admin') {
-			box.appendChild(cross)
-			const errorText = document.createTextNode('Username already used.')
-			error.appendChild(errorText)
 		} else {
-			box.appendChild(checkmark)
-			usernameValid = true
+			// Check if username already exists on server
+			// code below requires server call
+			const profiles = JSON.parse(sessionStorage.getItem('profiles'))
+			if (profiles != null) {
+				for (let i = 0; i < profiles.length; i++) {
+					if (profiles[i].username == username) {
+						box.appendChild(cross)
+						const errorText = document.createTextNode('Username already used.')
+						error.appendChild(errorText)
+					}
+				}
+			} 
+			if (value == 'user' || value == 'admin') {
+				box.appendChild(cross)
+				const errorText = document.createTextNode('Username already used.')
+				error.appendChild(errorText)
+			} else {
+				box.appendChild(checkmark)
+				usernameValid = true
+			}
 		}
 	} else if (input == 'Email') {
 		value = value.trim()
@@ -59,17 +67,32 @@ function valid(e) {
 			const errorText = document.createTextNode('Email is not valid.')
 			error.appendChild(errorText)
 		}
-		// Check if email already exists on server
-		// code below requires server call
-		else if (value == 'user@user.com' || value == 'admin@admin.com') {
-			box.appendChild(cross)
-			const errorText = document.createTextNode('Email already used.')
-			error.appendChild(errorText)
-		} else {
-			box.appendChild(checkmark)
-			emailValid = true
+		else {
+			// Check if email already exists on server
+			// code below requires server call
+			const profiles = JSON.parse(sessionStorage.getItem('profiles'))
+			if (profiles != null) {
+				for (let i = 0; i < profiles.length; i++) {
+					if (profiles[i].email == email) {
+						box.appendChild(cross)
+						const errorText = document.createTextNode('Email already used.')
+						error.appendChild(errorText)
+					}
+				}
+			} 
+			if (value == 'user@user.com' || value == 'admin@admin.com') {
+				box.appendChild(cross)
+				const errorText = document.createTextNode('Email already used.')
+				error.appendChild(errorText)
+			} else {
+				box.appendChild(checkmark)
+				emailValid = true
+			}
 		}
 	} else if (input == 'Password') {
+		// Prohibited password list on server
+		const prohibitedPasswordList = ['password', 'mypassword', '123456789', 'au4a83', 'ji32k7au4a83']
+		
 		passwordValid = false
 		if (value == '') {
 			box.appendChild(cross)
@@ -103,15 +126,26 @@ function valid(e) {
 	}
 }
 
+function Profile(username, email, password) {
+	this.username = username
+	this.email = email
+	this.password = password
+}
+
 function signUp(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {
 		const username = document.querySelector('#username').value
+		const email = document.querySelector('#email').value
 		const password = document.querySelector('#password').value
 		// Set profile data on server
 		// code below requires server call
 		if (usernameValid && emailValid && passwordValid && confirmPasswordValid) {
-			sessionStorage.setItem('profile', username)
+			const profiles = []
+			const profile = new Profile(username, email, password)
+			profiles.push(profile)
+			sessionStorage.setItem('profiles', JSON.stringify(profiles))
+			sessionStorage.setItem('profile', JSON.stringify(profile))
 			window.location.href = 'index.html'
 		}
 	}
