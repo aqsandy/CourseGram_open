@@ -269,6 +269,19 @@ Storage.prototype = {
 		return false
 	},
 
+	checkAdmin: function() {
+		/*
+			Returns true if active profile is admin profile.
+		*/
+		this.fromStorage()
+		if (this.profile != null) {
+			if (this.profile.admin) {
+				return true
+			}
+		}
+		return false
+	},
+
 	login: function(username, password) {
 		/*
 			Sets active profile and returns true if username and password matches profile in profiles.

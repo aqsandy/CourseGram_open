@@ -1,4 +1,8 @@
-const profiles = JSON.parse(sessionStorage.getItem('profile'))
+const storage = new Storage()
+
+storage.
+
+const profile = JSON.parse(sessionStorage.getItem('profile'))
 if(typeof profile === 'undefined' || !profile.admin){
     alert("Invalid access to the page!");
     window.location.href = './index.html'
