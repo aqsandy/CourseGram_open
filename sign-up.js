@@ -9,6 +9,8 @@ home.addEventListener('click', goHome)
 registration.addEventListener('change', valid)
 registration.addEventListener('submit', signUp)
 
+const storage = new Storage()
+
 function goHome(e) {
 	e.preventDefault()
 	window.location.href = 'index.html'

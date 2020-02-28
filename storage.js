@@ -121,7 +121,7 @@ Storage.prototype = {
 				this.toStorage()
 			}
 		}
-	}
+	},
 
 	changeProfileUsernameSetPush: function(username) {
 		/*
