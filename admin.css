@@ -34,5 +34,7 @@ li#nav a#nav{
 li#nav a:hover:not(.active) {
     background-color: #111;
   }
-
-  
+h2#username{
+  font-size: inherit;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
