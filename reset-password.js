@@ -6,6 +6,8 @@ home.addEventListener('click', goHome)
 reset.addEventListener('change', valid)
 reset.addEventListener('submit', resetPassword)
 
+const storage = new Storage()
+
 function goHome(e) {
 	e.preventDefault()
 	window.location.href = 'index.html'
@@ -34,22 +36,6 @@ function valid(e) {
 			box.appendChild(cross)
 			const errorText = document.createTextNode('Email is not valid.')
 			error.appendChild(errorText)
-		}
-		// Check if email already exists on server
-		// code below requires server call
-		const profiles = JSON.parse(sessionStorage.getItem('profiles'))
-		if (profiles != null) {
-			for (let i = 0; i < profiles.length; i++) {
-				if (profiles[i].email == email) {
-					box.appendChild(cross)
-					const errorText = document.createTextNode('Email already used.')
-					error.appendChild(errorText)
-				}
-			}
-		} else if (value == 'user@user.com' || value == 'admin@admin.com') {
-			box.appendChild(cross)
-			const errorText = document.createTextNode('Email already used.')
-			error.appendChild(errorText)
 		} else {
 			box.appendChild(checkmark)
 			emailValid = true
@@ -60,25 +46,20 @@ function valid(e) {
 function resetPassword(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {
+		const email = document.querySelector('#email').value
 		// Check server for email and send password reset link to email if email is a profile email
 		// Password reset link causes password reset and server directs view to reset-password-change
 		// code below requires server call
 		if (emailValid) {
-			const profiles = JSON.parse(sessionStorage.getItem('profiles'))
-			if (profiles != null) {
-				for (let i = 0; i < profiles.length; i++) {
-					if (profiles[i].email == email) {
-						sessionStorage.setItem('profile', JSON.stringify(profiles[i]))
-					}
-				}
+			if (email == 'user@user.com') {
+				storage.createDefaultUser()
+				window.location.href = 'reset-password-change.html'
+			} else if (email == 'admin@admin.com') {
+				storage.createDefaultAdmin()
+				window.location.href = 'reset-password-change.html'
+			} else if (storage.checkEmail(email)) {
+				window.location.href = 'reset-password-change.html'
 			}
-			if ((username == 'user' && password == 'user') || 
-				(username == 'admin' && password == 'admin')) {
-				const profile = new Profile('user', 'user@user.com', 'user')
-				sessionStorage.setItem('profile', JSON.stringify(profile))
-				window.location.href = 'index.html'
-			}
-			window.location.href = 'reset-password-change.html'
 		}
 	}
 }

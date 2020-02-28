@@ -25,7 +25,7 @@ function login(e) {
 		} else if (username == 'admin' && password == 'admin') {
 			storage.createDefaultAdmin()
 			window.location.href = 'index.html'
-		} else if (storage.login(username, password) == true){
+		} else if (storage.login(username, password)){
 			window.location.href = 'index.html'
 		} else {
 			const errorContainer = document.querySelector('#errorContainer')

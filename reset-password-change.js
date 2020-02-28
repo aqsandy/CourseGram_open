@@ -4,6 +4,8 @@ const registration = document.querySelector('#change')
 change.addEventListener('change', valid)
 change.addEventListener('submit', changePassword)
 
+const storage = new Storage()
+
 function valid(e) {
 	e.preventDefault()
 	const box = e.target.parentElement.children[2]
@@ -60,20 +62,12 @@ function changePassword(e) {
 		// Change password on server
 		// code below requires server call
 		if (passwordValid) {
-			const profile = JSON.parse(sessionStorage.getItem('profile'))
-			const profiles = JSON.parse(sessionStorage.getItem('profiles'))
-			if (profiles != null) {
-				for (let i = 0; i < profiles.length; i++) {
-					if (profiles[i].email == profile.email) {
-						profiles[i].password = password
-						sessionStorage.setItem('profiles', JSON.stringify(profiles))
-						sessionStorage.setItem('profile', JSON.stringify(profiles[i]))
-					}
-				}
-			}
-			if (username == 'user'  || username == 'admin') {
-				profile.password = password
-				sessionStorage.setItem('profile', JSON.stringify(profile))
+			storage.fromStorage()
+			const username = storage.profile.username
+			if (username == 'user' || username == 'admin') {
+				storage.changeProfilePasswordSet(password)
+			} else {
+				storage.changeProfilePasswordSetPush(password)
 			}
 			window.location.href = 'login.html'
 		}
