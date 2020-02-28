@@ -269,12 +269,16 @@ Storage.prototype = {
 		return false
 	},
 
-	checkAdmin: function() {
+	checkAdmin: function(id=null) {
 		/*
-			Returns true if active profile is admin profile.
+			Returns true if active profile or profiles[id] is admin profile.
 		*/
 		this.fromStorage()
-		if (this.profile != null) {
+		if (id != null && this.profiles != null) {
+			if (this.profiles[id].admin) {
+				return true
+			}
+		} else if (this.profile != null) {
 			if (this.profile.admin) {
 				return true
 			}
