@@ -401,28 +401,32 @@ Storage.prototype = {
 		this.toStorage()
 	},
 
-	getProgramName: function(id) {
+	getProgramName: function(id=null) {
 		/*
-			Get programs[id] name.
+			Get active program name or programs[id] name.
 		*/
 		this.fromStorage()
 		if (this.programs != null) {
 			if (id < this.programs.length) {
 				return this.programs[id].name
 			}
+		} else if (this.program != null) {
+			return this.program.name
 		}
 		return null
 	},
 
-	getProgramCode: function(id) {
+	getProgramCode: function(id=null) {
 		/*
-			Get programs[id] code.
+			Get active program code programs[id] code.
 		*/
 		this.fromStorage()
 		if (this.programs != null) {
 			if (id < this.programs.length) {
 				return this.programs[id].code
 			}
+		} else if (this.program != null) {
+			return this.program.name
 		}
 		return null
 	},
