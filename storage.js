@@ -12,6 +12,7 @@ function Profile(username, email, password, admin=false) {
 	this.password = password
 	this.admin = admin
 	this.requestDelete = false
+	this.programs = []
 }
 
 function Storage() {
@@ -289,7 +290,7 @@ Storage.prototype = {
 
 	getUsername: function(id=null) {
 		/*
-			Returns username of active profile or profiles[id] is admin profile.
+			Returns username of active profile or profiles[id].
 		*/
 		this.fromStorage()
 		if (id != null && this.profiles != null) {

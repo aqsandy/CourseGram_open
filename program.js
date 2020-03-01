@@ -1,10 +1,5 @@
 const home = document.querySelector('#home')
 home.addEventListener('click', goHome)
-const programs = document.querySelector('#programs')
-for (const program of programs.children[1].children) {
-	const programButton = program.firstElementChild
-	programButton.addEventListener('click', goProgram)
-}
 
 const storage = new Storage()
 
@@ -45,9 +40,4 @@ function goProfile(e) {
 			window.location.href = 'profile.html'
 		}
 	}
-}
-
-function goProgram(e) {
-	e.preventDefault()
-	window.location.href = 'program.html'
 }
