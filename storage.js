@@ -418,7 +418,7 @@ Storage.prototype = {
 
 	getProgramCode: function(id=null) {
 		/*
-			Get active program code programs[id] code.
+			Get active program code or programs[id] code.
 		*/
 		this.fromStorage()
 		if (this.programs != null) {
@@ -427,6 +427,21 @@ Storage.prototype = {
 			}
 		} else if (this.program != null) {
 			return this.program.code
+		}
+		return null
+	},
+
+	getProgramCourses: function(id=null) {
+		/*
+			Get active program courses or programs[id] courses.
+		*/
+		this.fromStorage()
+		if (this.programs != null) {
+			if (id < this.programs.length) {
+				return this.programs[id].courses
+			}
+		} else if (this.program != null) {
+			return this.program.courses
 		}
 		return null
 	},
