@@ -15,10 +15,29 @@ function Profile(username, email, password, admin=false) {
 	this.programs = []
 }
 
+function Program(name, code) {
+	this.id = 0
+	this.name = name
+	this.code = code
+	this.courses = []
+}
+
+function Course(name, code) {
+	this.id = 0
+	this.name = name
+	this.code = code
+	this.prerequisites = []
+	this.corequisites = []
+	this.exclusion = []
+}
+
 function Storage() {
 	// Code below requires server calls.
 	this.profile = JSON.parse(sessionStorage.getItem('profile'))
 	this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
+	this.program = JSON.parse(sessionStorage.getItem('program'))
+	this.programs = JSON.parse(sessionStorage.getItem('programs'))
+	this.courses = JSON.parse(sessionStorage.getItem('courses'))
 }
 
 
@@ -30,6 +49,9 @@ Storage.prototype = {
 		*/
 		this.profile = JSON.parse(sessionStorage.getItem('profile'))
 		this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
+		this.program = JSON.parse(sessionStorage.getItem('program'))
+		this.programs = JSON.parse(sessionStorage.getItem('programs'))
+		this.courses = JSON.parse(sessionStorage.getItem('courses'))
 	},
 
 	toStorage: function() {
@@ -39,6 +61,9 @@ Storage.prototype = {
 		*/
 		sessionStorage.setItem('profile', JSON.stringify(this.profile))
 		sessionStorage.setItem('profiles', JSON.stringify(this.profiles))
+		sessionStorage.setItem('program', JSON.stringify(this.program))
+		sessionStorage.setItem('programs', JSON.stringify(this.programs))
+		sessionStorage.setItem('courses', JSON.stringify(this.courses))
 	},
 
 	createDefaultUser: function() {
@@ -345,6 +370,125 @@ Storage.prototype = {
 		this.fromStorage()
 		if (this.profile != null) {
 			this.profile.requestDelete = false
+		}
+		this.toStorage()
+	},
+
+	createProgramPush: function(name, code) {
+		/*
+			Creates a program and pushes it to programs.
+		*/
+		this.fromStorage()
+		const program = new Program(name, code)
+		if (this.programs == null) {
+			this.programs = []
+		}
+		program.id += this.programs.length
+		this.programs.push(program)
+		this.toStorage()
+	},
+
+	setProgram: function(id) {
+		/*
+			Sets programs[id] to active program.
+		*/
+		this.fromStorage()
+		if (this.programs != null) {
+			if (id < this.programs.length) {
+				this.program = this.programs[id]
+			}
+		}
+		this.toStorage()
+	},
+
+	getProgramName: function(id) {
+		/*
+			Get programs[id] name.
+		*/
+		this.fromStorage()
+		if (this.programs != null) {
+			if (id < this.programs.length) {
+				return this.programs[id].name
+			}
+		}
+		return null
+	},
+
+	getProgramCode: function(id) {
+		/*
+			Get programs[id] code.
+		*/
+		this.fromStorage()
+		if (this.programs != null) {
+			if (id < this.programs.length) {
+				return this.programs[id].code
+			}
+		}
+		return null
+	},
+
+	createCoursePush: function(name, code) {
+		/*
+			Creates a course and pushes it to courses.
+		*/
+		this.fromStorage()
+		const course = new Course(name, code)
+		if (this.courses == null) {
+			this.courses = []
+		}
+		course.id += this.courses.length
+		this.courses.push(course)
+		this.toStorage()
+	},
+
+	courseToProgram: function(courseId, programId) {
+		/*
+			Pushes courses[courseId] to courses of programs[programId].
+		*/
+		this.fromStorage()
+		if (this.courses != null && this.programs != null) {
+			if (courseId < this.courses.length && programId < this.programs.length) {
+				this.programs[programId].push(this.courses[courseId])
+			}
+		}
+		this.toStorage()
+	},
+
+	prerequisiteToCourse: function(prerequisiteId, courseId) {
+		/*
+			Pushes courses[prerequisiteId] to prerequisites of courses[courseId].
+		*/
+		this.fromStorage()
+		if (this.courses != null) {
+			if (prerequisiteId < this.courses.length && courseId < this.courses.length) {
+				this.courses[courseId].push(this.courses[prerequisiteId])
+			}
+		}
+		this.toStorage()
+	},
+
+	corequisiteToCourse: function(corequisiteId, courseId) {
+		/*
+			Pushes courses[corequisiteId] to corequisites of courses[courseId].
+		*/
+		this.fromStorage()
+		if (this.courses != null) {
+			if (corequisiteId < this.courses.length && courseId < this.courses.length) {
+				this.courses[courseId].push(this.courses[corequisiteId])
+			}
+		}
+		this.toStorage()
+	},
+
+	exclusionToCourse: function(exclusionId, courseId) {
+		/*
+			Pushes courses[exclusionId] to exclusions of courses[courseId].
+		*/
+		this.fromStorage()
+		if (this.courses != null) {
+			if (exclusionId < this.courses.length && courseId < this.courses.length) {
+				this.courses[courseId].push(this.courses[exclusionId])
+			}
 		}
 		this.toStorage()
 	}
