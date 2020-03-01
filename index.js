@@ -1,12 +1,9 @@
 const home = document.querySelector('#home')
 home.addEventListener('click', goHome)
-const programs = document.querySelector('#programs')
-for (const program of programs.children[1].children) {
-	const programButton = program.firstElementChild
-	programButton.addEventListener('click', goProgram)
-}
 
 const storage = new Storage()
+
+loadPrograms()
 
 if (storage.profile != null) {
 	const header = document.querySelector('#header')
@@ -24,6 +21,28 @@ if (storage.profile != null) {
 } else {
 	const login = document.querySelector('#login')
 	login.addEventListener('click', goLogin)
+}
+
+function loadPrograms() {
+	// Gets list of programs from server and creates buttons in DOM
+	// code below requires server call
+	if (storage.programs == null) {
+		storage.createProgramPush('Major in Architectural Studies', 'AHMAJ1000')
+	}
+	for (let i = 0; i < storage.programs.length; i++) {
+		const programName = storage.getProgramName(i)
+		const programCode = storage.getProgramCode(i)
+		const programs = document.querySelector('#programs')
+		const program = document.createElement('li')
+		program.setAttribute('class', 'program')
+		const programButton = document.createElement('button')
+		programButton.setAttribute('class', 'programButton')
+		const programButtonText = document.createTextNode(programName + ' (' + programCode + ')')
+		programButton.appendChild(programButtonText)
+		program.appendChild(programButton)
+		programs.children[1].appendChild(program)
+		programButton.addEventListener('click', goProgram)
+	}
 }
 
 function goHome(e) {
@@ -49,5 +68,11 @@ function goProfile(e) {
 
 function goProgram(e) {
 	e.preventDefault()
-	window.location.href = 'program.html'
+	const list = e.target.parentElement
+	for (let i = 0; i < list.children.length; i++) {
+		if (list.children[i] == e.target) {
+			storage.setProgram(i)
+			window.location.href = 'program.html'
+		}
+	}
 }
