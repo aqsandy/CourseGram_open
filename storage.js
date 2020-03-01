@@ -426,7 +426,7 @@ Storage.prototype = {
 				return this.programs[id].code
 			}
 		} else if (this.program != null) {
-			return this.program.name
+			return this.program.code
 		}
 		return null
 	},
