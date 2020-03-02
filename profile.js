@@ -39,14 +39,17 @@ if (storage.profile != null){
 loadProfilePrograms()
 
 function loadProfilePrograms() {
-    const programList = document.querySelector('#programLst')
+    const programList = document.querySelector('#programList')
     const select = document.querySelector('#programSelect')
     if (storage.profile != null) {
         for (let id = 0; id < storage.profile.programs.length; id++) {
             const profileProgramText = select.options[id].value
             const profileProgram = document.createElement('li')
-            profileProgram.innerHTML = profileProgramText
+            const profileProgramButton = document.createElement('button')
+            profileProgramButton.innerHTML = profileProgramText
+            profileProgram.appendChild(profileProgramButton)
             programList.appendChild(profileProgram)
+            profileProgramButton.addEventListener('click', goProgram)
         }
     }
 }
@@ -56,9 +59,23 @@ function goHome(e) {
 	window.location.href = 'index.html'
 }
 
+function goProgram(e) {
+    e.preventDefault()
+    if (storage.profile != null && storage.programs != null) {
+        const programList = document.querySelector('#programList')
+        for (let id = 0; id < programList.children.length; id++) {
+            if (programList.children[id].firstElementChild == e.target 
+                && id < storage.programs.length) {
+                storage.setProgram(id)
+                window.location.href = 'program.html'
+            }
+        }
+    }
+}
+
 function addProgram(e){
     e.preventDefault()
-    const programLst = document.querySelector('#programLst')
+    const programList = document.querySelector('#programList')
     const select = document.querySelector('#programSelect')
     const id = select.selectedIndex
     if (!storage.checkProfileForProgram(id)) {
@@ -67,7 +84,7 @@ function addProgram(e){
         const newProgram = document.createElement('li')
         console.log(chosen)
         newProgram.innerHTML = chosen;
-        programLst.appendChild(newProgram)
+        programList.appendChild(newProgram)
     } else {
         alert('Program already added to profile.')
     }
