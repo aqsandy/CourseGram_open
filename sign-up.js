@@ -128,12 +128,6 @@ function valid(e) {
 	}
 }
 
-function Profile(username, email, password) {
-	this.username = username
-	this.email = email
-	this.password = password
-}
-
 function signUp(e) {
 	e.preventDefault()
 	if (typeof(Storage) !== 'undefined') {

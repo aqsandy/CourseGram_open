@@ -16,6 +16,21 @@ if (storage.profile != null) {
 	header.firstElementChild.appendChild(profileContainer)
 	const profile = document.querySelector('#profile')
 	profile.addEventListener('click', goProfile)
+
+	const secondHeader = document.querySelector('#secondHeader')
+	const secondHeaderList = document.createElement('li')
+	secondHeaderList.setAttribute('class', 'secondHeaderList')
+	const addToProfileButton = document.createElement('button')
+	addToProfileButton.setAttribute('id', 'addToProfile')
+	const addToProfileButtonText = document.createTextNode('Add to Profile')
+	addToProfileButton.appendChild(addToProfileButtonText)
+	secondHeaderList.appendChild(addToProfileButton)
+	secondHeader.firstElementChild.appendChild(secondHeaderList)
+	addToProfileButton.addEventListener('click', addToProfile)
+
+	for (const child of secondHeader.firstElementChild.children) {
+		child.style.width = '24%'
+	}
 } else {
 	const login = document.querySelector('#login')
 	login.addEventListener('click', goLogin)
@@ -39,5 +54,14 @@ function goProfile(e) {
 		} else {
 			window.location.href = 'profile.html'
 		}
+	}
+}
+
+function addToProfile(e) {
+	e.preventDefault()
+	if (!storage.checkProfileForProgram(storage.getProgramId())) {
+		storage.programToProfile()
+	} else {
+		alert('Program already added to profile.')
 	}
 }

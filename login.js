@@ -19,13 +19,11 @@ function login(e) {
 		const password = document.querySelector('#password').value
 		// Validate against profile username and password on server
 		// code below requires server call
-		if (username == 'user' && password == 'user') {
+		if (storage.getNumberOfProfiles() == 0) {
 			storage.createDefaultUser()
-			window.location.href = 'index.html'
-		} else if (username == 'admin' && password == 'admin') {
 			storage.createDefaultAdmin()
-			window.location.href = 'admin.html'
-		} else if (storage.login(username, password)){
+		}
+		if (storage.login(username, password)){
 			if (storage.profile.admin) {
 				window.location.href = 'admin.html'
 			} else {

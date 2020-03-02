@@ -66,48 +66,16 @@ Storage.prototype = {
 		sessionStorage.setItem('courses', JSON.stringify(this.courses))
 	},
 
-	createDefaultUser: function() {
-		/*
-			Creates default user profile and sets it as active profile.
-		*/
-		this.fromStorage()
-		const profile = new Profile('user', 'user@user.com', 'user')
-		profile.id = -1
-		this.profile = profile
-		this.toStorage()
-	},
-
-	createDefaultAdmin: function() {
-		/*
-			Creates default admin profile and sets it as active profile.
-		*/
-		this.fromStorage()
-		const profile = new Profile('admin', 'admin@admin.com', 'admin', true)
-		profile.id = -2
-		this.profile = profile
-		this.toStorage()
-	},
-
-	createProfileSet: function(username, email, password, admin=false) {
-		/*
-			Creates a profile and sets it as active profile.
-		*/
-		this.fromStorage()
-		const profile = new Profile(username, email, password, admin)
-		this.profile = profile
-		this.toStorage()
-	},
-
 	createProfilePush: function(username, email, password, admin=false) {
 		/*
 			Creates a profile and pushes it to profiles.
 		*/
 		this.fromStorage()
-		const profile = new Profile(username, email, password, admin)
+		this.profile = new Profile(username, email, password, admin)
 		if (this.profiles == null) {
 			this.profiles = []
 		}
-		profile.id += this.profiles.length
+		this.profile.id += this.profiles.length
 		this.profiles.push(profile)
 		this.toStorage()
 	},
@@ -117,13 +85,30 @@ Storage.prototype = {
 			Creates a profile, sets it as active profile, and pushes it to profiles.
 		*/
 		this.fromStorage()
-		const profile = new Profile(username, email, password, admin)
-		this.profile = profile
+		this.profile = new Profile(username, email, password, admin)
 		if (this.profiles == null) {
 			this.profiles = []
 		}
-		profile.id += this.profiles.length
-		this.profiles.push(profile)
+		this.profile.id += this.profiles.length
+		this.profiles.push(this.profile)
+		this.toStorage()
+	},
+
+	createDefaultUser: function() {
+		/*
+			Creates default user profile, sets it as active profile, and pushes it to profiles.
+		*/
+		this.fromStorage()
+		this.createProfileSetPush('user', 'user@user.com', 'user')
+		this.toStorage()
+	},
+
+	createDefaultAdmin: function() {
+		/*
+			Creates default admin profile, sets it as active profile, and pushes it to profiles.
+		*/
+		this.fromStorage()
+		this.createProfileSetPush('admin', 'admin@admin.com', 'admin', true)
 		this.toStorage()
 	},
 
@@ -313,6 +298,17 @@ Storage.prototype = {
 		return false
 	},
 
+	getNumberOfProfiles: function(id=null) {
+		/*
+			Returns number of profiles.
+		*/
+		this.fromStorage()
+		if (this.profiles != null) {
+			return this.profiles.length
+		}
+		return 0
+	},
+
 	getUsername: function(id=null) {
 		/*
 			Returns username of active profile or profiles[id].
@@ -379,12 +375,12 @@ Storage.prototype = {
 			Creates a program and pushes it to programs.
 		*/
 		this.fromStorage()
-		const program = new Program(name, code)
+		this.program = new Program(name, code)
 		if (this.programs == null) {
 			this.programs = []
 		}
-		program.id += this.programs.length
-		this.programs.push(program)
+		this.program.id += this.programs.length
+		this.programs.push(this.program)
 		this.toStorage()
 	},
 
@@ -399,6 +395,61 @@ Storage.prototype = {
 			}
 		}
 		this.toStorage()
+	},
+
+	programToProfile: function(programId=null, profileId=null) {
+		/*
+			Pushes active program to active profile or programs[programId] to profiles[profileId].
+		*/
+		this.fromStorage()
+		if (programId != null && profileId != null) {
+			if (programId < this.programs.length && profileId < this.profiles.length) {
+				this.profiles[profileId].programs.push(this.programs[programId])
+			}
+		} else if (programId == null && profileId == null) {
+			this.profile.programs.push(this.program)
+			this.profiles[this.profile.id].programs.push(this.program)
+		}
+		this.toStorage()
+	},
+
+	checkProfileForProgram: function(programId, profileId=null) {
+		/*
+			Returns true if active profile (or profiles[profileId] if profileId not null) 
+			contains programs[programId].
+		*/
+		this.fromStorage()
+		if (profileId != null) {
+			if (this.programs != null && this.profiles != null) {
+				if (programId < this.programs.length && profileId < this.profiles.length) {
+					for (const program of this.profiles[profileId].programs) {
+						if (program.id == programId) {
+							return true
+						}
+					}
+				}
+			}
+		} else if (this.programs != null && this.profile != null && this.profiles != null) {
+			if (programId < this.programs.length) {
+				for (const program of this.profile.programs) {
+					if (program.id == programId) {
+						return true
+					}
+				}
+			}
+		}
+		return false
+	},
+
+	getProgramId: function() {
+		/*
+			Get active program ID.
+		*/
+		this.fromStorage()
+		if (this.program != null) {
+			return this.program.id
+		}
+		return null
 	},
 
 	getProgramName: function(id=null) {
@@ -451,12 +502,12 @@ Storage.prototype = {
 			Creates a course and pushes it to courses.
 		*/
 		this.fromStorage()
-		const course = new Course(name, code)
+		this.course = new Course(name, code)
 		if (this.courses == null) {
 			this.courses = []
 		}
-		course.id += this.courses.length
-		this.courses.push(course)
+		this.course.id += this.courses.length
+		this.courses.push(this.course)
 		this.toStorage()
 	},
 
