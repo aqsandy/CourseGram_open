@@ -12,6 +12,8 @@ emailChange.addEventListener('click', changeEmail)
 
 document.querySelector('#user').innerHTML = profileName; 
 
+const storage = new Storage()
+
 if (profileName != null){
 	const header = document.querySelector('#header')
 	header.firstElementChild.children[2].remove()
@@ -28,6 +30,21 @@ if (profileName != null){
 	login.addEventListener('click', goLogin)
 }
 
+loadProfilePrograms()
+
+function loadProfilePrograms() {
+    const programList = document.querySelector('#programLst')
+    const select = document.querySelector('#programSelect')
+    if (storage.profile != null) {
+        for (let id = 0; id < storage.profile.programs.length; id++) {
+            const profileProgramText = select.options[id].value
+            const profileProgram = document.createElement('li')
+            profileProgram.innerHTML = profileProgramText
+            programList.appendChild(profileProgram)
+        }
+    }
+}
+
 function goHome(e) {
 	e.preventDefault()
 	window.location.href = 'index.html'
@@ -37,13 +54,17 @@ function addProgram(e){
     e.preventDefault()
     const programLst = document.querySelector('#programLst')
     const select = document.querySelector('#programSelect')
-    const secondSelect = document.querySelector('#majorSelect')
-    const major = secondSelect.options[secondSelect.selectedIndex].value;
-    const chosen = select.options[select.selectedIndex].value;
-    const newProgram = document.createElement('li')
-    console.log(chosen)
-    newProgram.innerHTML = chosen + " - " + major;
-    programLst.appendChild(newProgram)
+    const id = select.selectedIndex
+    if (!storage.checkProfileForProgram(id)) {
+        storage.programToProfile(id)
+        const chosen = select.options[id].value
+        const newProgram = document.createElement('li')
+        console.log(chosen)
+        newProgram.innerHTML = chosen;
+        programLst.appendChild(newProgram)
+    } else {
+        alert('Program already added to profile.')
+    }
 }
 
 function changeUser(e){

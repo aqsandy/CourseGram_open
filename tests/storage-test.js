@@ -27,10 +27,21 @@ result = (function programToProfileTest2() {
 	sessionStorage.clear()
 	storage.createProgramPush('pa', 'pb')
 	storage.createProfileSetPush('a', 'b', 'c')
-	storage.programToProfile()
-	return storage.profile.programs[0].id
+	storage.programToProfile(0)
+	return [storage.profile.programs[0].id, storage.profiles[0].programs[0].id]
 })()
-console.assert(result == 0, {result: result, error: 'programToProfileTest2 expected 0'})
+console.assert(result[0] == 0 && result[1] == 0, {result: result, error: 
+	'programToProfileTest2 expected [0,0]'})
+
+result = (function programToProfileTest3() {
+	sessionStorage.clear()
+	storage.createProgramPush('pa', 'pb')
+	storage.createProfileSetPush('a', 'b', 'c')
+	storage.programToProfile()
+	return [storage.profile.programs[0].id, storage.profiles[0].programs[0].id]
+})()
+console.assert(result[0] == 0 && result[1] == 0, {result: result, error: 
+	'programToProfileTest3 expected [0, 0]'})
 
 result = (function checkProfileForProgramTest1() {
 	sessionStorage.clear()

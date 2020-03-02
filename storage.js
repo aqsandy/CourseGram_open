@@ -399,12 +399,18 @@ Storage.prototype = {
 
 	programToProfile: function(programId=null, profileId=null) {
 		/*
-			Pushes active program to active profile or programs[programId] to profiles[profileId].
+			Pushes active program to active profile or 
+			programs[programId] to active profile or profiles[profileId].
 		*/
 		this.fromStorage()
-		if (programId != null && profileId != null) {
-			if (programId < this.programs.length && profileId < this.profiles.length) {
-				this.profiles[profileId].programs.push(this.programs[programId])
+		if (programId != null) {
+			if (profileId != null) {
+				if (programId < this.programs.length && profileId < this.profiles.length) {
+					this.profiles[profileId].programs.push(this.programs[programId])
+				}
+			} else if (programId < this.programs.length) {
+				this.profile.programs.push(this.programs[programId])
+				this.profiles[this.profile.id].programs.push(this.programs[programId])
 			}
 		} else if (programId == null && profileId == null) {
 			this.profile.programs.push(this.program)
