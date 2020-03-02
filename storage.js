@@ -144,7 +144,7 @@ Storage.prototype = {
 		if (this.profile != null && this.profiles != null) {
 			if (this.profile.id < this.profiles.length) {
 				this.profile.username = username
-				this.profiles[id] = this.profile
+				this.profiles[this.profile.id] = this.profile
 				this.toStorage()
 			}
 		}
@@ -182,45 +182,7 @@ Storage.prototype = {
 		if (this.profile != null && this.profiles != null) {
 			if (this.profile.id < this.profiles.length) {
 				this.profile.email = email
-				this.profiles[id] = this.profile
-				this.toStorage()
-			}
-		}
-	},
-
-	changeProfileEmailSet: function(email) {
-		/*
-			Changes active profile email to email.
-		*/
-		this.fromStorage()
-		if (this.profile != null) {
-			this.profile.email = email
-			this.toStorage()
-		}
-	},
-
-	changeProfileEmailPush: function(email, id) {
-		/*
-			Changes profiles[id] email to email.
-		*/
-		this.fromStorage()
-		if (this.profiles != null) {
-			if (id < this.profiles.length) {
-				this.profiles[id].email = email
-				this.toStorage()
-			}
-		}
-	},
-
-	changeProfileEmailSetPush: function(email) {
-		/*
-			Changes active profile email to email and pushes change to profiles.
-		*/
-		this.fromStorage()
-		if (this.profile != null && this.profiles != null) {
-			if (this.profile.id < this.profiles.length) {
-				this.profile.email = email
-				this.profiles[id] = this.profile
+				this.profiles[this.profile.id] = this.profile
 				this.toStorage()
 			}
 		}
@@ -258,7 +220,7 @@ Storage.prototype = {
 		if (this.profile != null && this.profiles != null) {
 			if (this.profile.id < this.profiles.length) {
 				this.profile.password = password
-				this.profiles[id] = this.profile
+				this.profiles[this.profile.id] = this.profile
 				this.toStorage()
 			}
 		}
@@ -318,6 +280,19 @@ Storage.prototype = {
 			return this.profiles[id].username
 		} else if (this.profile != null) {
 			return this.profile.username
+		}
+		return null
+	},
+
+	getEmail: function(id=null) {
+		/*
+			Returns email of active profile or profiles[id].
+		*/
+		this.fromStorage()
+		if (id != null && this.profiles != null) {
+			return this.profiles[id].email
+		} else if (this.profile != null) {
+			return this.profile.email
 		}
 		return null
 	},
