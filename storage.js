@@ -1,10 +1,5 @@
 /* JS Library for Accessing and Modifying Profile Data Locally and on Server */
 
-/*
-	If profile is default user or admin profile, 
-	use Set variants of functions and do not use Push or SetPush variants.
-*/
-
 function Profile(username, email, password, admin=false) {
 	this.id = 0
 	this.username = username
