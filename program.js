@@ -65,7 +65,7 @@ function goProfile(e) {
 
 function goProgramRequirements(e) {
 	e.preventDefault()
-	alert('This feature has not been implemented yet.')
+	window.location.href = 'program-requirements.html'
 }
 
 function saveAsPDF(e) {

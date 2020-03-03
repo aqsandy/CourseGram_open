@@ -438,7 +438,7 @@ Storage.prototype = {
 			Get active program name or programs[id] name.
 		*/
 		this.fromStorage()
-		if (this.programs != null) {
+		if (id != null && this.programs != null) {
 			if (id < this.programs.length) {
 				return this.programs[id].name
 			}
@@ -453,7 +453,7 @@ Storage.prototype = {
 			Get active program code or programs[id] code.
 		*/
 		this.fromStorage()
-		if (this.programs != null) {
+		if (id != null && this.programs != null) {
 			if (id < this.programs.length) {
 				return this.programs[id].code
 			}
