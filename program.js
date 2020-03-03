@@ -1,5 +1,11 @@
 const home = document.querySelector('#home')
+const programRequirementsButton = document.querySelector('#programRequirements')
+const saveAsPDFButton = document.querySelector('#saveAsPDF')
+const printButton = document.querySelector('#print')
 home.addEventListener('click', goHome)
+programRequirementsButton.addEventListener('click', goProgramRequirements)
+saveAsPDFButton.addEventListener('click', saveAsPDF)
+printButton.addEventListener('click', print)
 
 const storage = new Storage()
 
@@ -55,6 +61,21 @@ function goProfile(e) {
 			window.location.href = 'profile.html'
 		}
 	}
+}
+
+function goProgramRequirements(e) {
+	e.preventDefault()
+	alert('This feature has not been implemented yet.')
+}
+
+function saveAsPDF(e) {
+	e.preventDefault()
+	alert('This feature has not been implemented yet.')
+}
+
+function print(e) {
+	e.preventDefault()
+	alert('This feature has not been implemented yet.')
 }
 
 function addToProfile(e) {
