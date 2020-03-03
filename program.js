@@ -2,6 +2,7 @@ const home = document.querySelector('#home')
 const programRequirementsButton = document.querySelector('#programRequirements')
 const saveAsPDFButton = document.querySelector('#saveAsPDF')
 const printButton = document.querySelector('#print')
+const svgCourse = document.querySelector('#graph')
 home.addEventListener('click', goHome)
 programRequirementsButton.addEventListener('click', goProgramRequirements)
 saveAsPDFButton.addEventListener('click', saveAsPDF)
@@ -13,12 +14,13 @@ const storage = new Storage()
 // Input related code goes here
 
 // Create the input graph
-var g = new dagreD3.graphlib.Graph()
+let g = new dagreD3.graphlib.Graph()
 .setGraph({edgesep: 40, ranksep: 300, nodesep: 40})
 .setDefaultEdgeLabel(function() { return {}; });
 
 // Here we're setting nodeclass, which is used by our custom drawNodes function
 // below.
+
 g.setNode(0,  { label: "ARC100H1",  class: "type-ARC100H1" });
 g.setNode(1,  { label: "JAV101H1",  class: "type-JAV101H1" });
 g.setNode(2,  { label: "JAV120H1",  class: "type-JAV120H1" });
@@ -50,74 +52,68 @@ g.setNode(27, { label: "ARC481H1",  class: "type-ARC481H1" });
 g.setNode(28, { label: "ARC482H1",  class: "type-ARC482H1" });
 g.setNode(29, { label: "ARC456H1",  class: "type-ARC456H1" });
 
-g.setEdge(25, 28);
-g.setEdge(25, 27);
-g.setEdge(25, 26);
-g.setEdge(24, 29);
-g.setEdge(9, 23);
-g.setEdge(9, 22);
-g.setEdge(9, 21);
-g.setEdge(10, 20);
-g.setEdge(11, 20);
-g.setEdge(12, 20);
-g.setEdge(10, 19);
-g.setEdge(11, 19);
-g.setEdge(12, 19);
-g.setEdge(10, 18);
-g.setEdge(11, 18);
-g.setEdge(12, 18);
-g.setEdge(10, 17);
-g.setEdge(11, 17);
-g.setEdge(12, 17);
-g.setEdge(10, 16);
-g.setEdge(11, 16);
-g.setEdge(12, 16);
-g.setEdge(10, 15);
-g.setEdge(11, 15);
-g.setEdge(12, 15);
-g.setEdge(10, 14);
-g.setEdge(11, 14);
-g.setEdge(12, 14);
-g.setEdge(7, 13);
-g.setEdge(6, 12);
-g.setEdge(7, 12);
-g.setEdge(6, 11);
-g.setEdge(7, 11);
-g.setEdge(6, 10);
-g.setEdge(7, 10);
-g.setEdge(2, 3);
-g.setEdge(4, 7);
-g.setEdge(5, 7);
-g.setEdge(0, 8);
-g.setEdge(0, 9);
-g.setEdge(1, 9);
-g.setEdge(14, 29);
-g.setEdge(15, 29);
-g.setEdge(16, 29);
-g.setEdge(17, 29);
-g.setEdge(18, 29);
-g.setEdge(19, 29);
-g.setEdge(20, 29);
+g.setEdge(25, 28, {curve:d3.curveBasis});
+g.setEdge(25, 27, {curve:d3.curveBasis});
+g.setEdge(25, 26, {curve:d3.curveBasis});
+g.setEdge(24, 29, {curve:d3.curveBasis});
+g.setEdge(9, 23, {curve:d3.curveBasis});
+g.setEdge(9, 22, {curve:d3.curveBasis});
+g.setEdge(9, 21, {curve:d3.curveBasis});
+g.setEdge(10, 20, {curve:d3.curveBasis});
+g.setEdge(11, 20, {curve:d3.curveBasis});
+g.setEdge(12, 20, {curve:d3.curveBasis});
+g.setEdge(10, 19, {curve:d3.curveBasis});
+g.setEdge(11, 19, {curve:d3.curveBasis});
+g.setEdge(12, 19, {curve:d3.curveBasis});
+g.setEdge(10, 18, {curve:d3.curveBasis});
+g.setEdge(11, 18, {curve:d3.curveBasis});
+g.setEdge(12, 18, {curve:d3.curveBasis});
+g.setEdge(10, 17, {curve:d3.curveBasis});
+g.setEdge(11, 17, {curve:d3.curveBasis});
+g.setEdge(12, 17, {curve:d3.curveBasis});
+g.setEdge(10, 16, {curve:d3.curveBasis});
+g.setEdge(11, 16, {curve:d3.curveBasis});
+g.setEdge(12, 16, {curve:d3.curveBasis});
+g.setEdge(10, 15, {curve:d3.curveBasis});
+g.setEdge(11, 15, {curve:d3.curveBasis});
+g.setEdge(12, 15, {curve:d3.curveBasis});
+g.setEdge(10, 14, {curve:d3.curveBasis});
+g.setEdge(11, 14, {curve:d3.curveBasis});
+g.setEdge(12, 14, {curve:d3.curveBasis});
+g.setEdge(7, 13, {curve:d3.curveBasis});
+g.setEdge(6, 12, {curve:d3.curveBasis});
+g.setEdge(7, 12, {curve:d3.curveBasis});
+g.setEdge(6, 11, {curve:d3.curveBasis});
+g.setEdge(7, 11, {curve:d3.curveBasis});
+g.setEdge(6, 10, {curve:d3.curveBasis});
+g.setEdge(7, 10, {curve:d3.curveBasis});
+g.setEdge(2, 3, {curve:d3.curveBasis});
+g.setEdge(4, 7, {curve:d3.curveBasis});
+g.setEdge(5, 7, {curve:d3.curveBasis});
+g.setEdge(0, 8, {curve:d3.curveBasis});
+g.setEdge(0, 9, {curve:d3.curveBasis});
+g.setEdge(1, 9, {curve:d3.curveBasis});
+g.setEdge(14, 29, {curve:d3.curveBasis});
+g.setEdge(15, 29, {curve:d3.curveBasis});
+g.setEdge(16, 29, {curve:d3.curveBasis});
+g.setEdge(17, 29, {curve:d3.curveBasis});
+g.setEdge(18, 29, {curve:d3.curveBasis});
+g.setEdge(19, 29, {curve:d3.curveBasis});
+g.setEdge(20, 29, {curve:d3.curveBasis});
 
-
-
-g.nodes().forEach(function(v) {
-	var node = g.node(v);
-	// Round the corners of the nodes
-	node.rx = node.ry = 5;
-});
 
 // Set up edges, no special attributes.
 
 // Create the renderer
-var render = new dagreD3.render();
+let render = new dagreD3.render();
 //render.createEdgePaths(createEdgePaths);
 
 // Set up an SVG group so that we can translate the final graph.
-var svg = d3.select("svg"),
+let svg = d3.select("svg"),
 	svgGroup = svg.append("g");
 
-var svg = d3.select("svg"),
+
+//From github documentation
 inner = d3.select("svg g"),
 zoom = d3.zoom().on("zoom", function() {
   inner.attr("transform", d3.event.transform);
@@ -127,10 +123,54 @@ svg.call(zoom);
 render(d3.select("svg g"), g);
 
 // Center the graph
-var xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
+
+//Error occurs here
+let xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
 svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
 svg.attr("height", g.graph().height + 40);
 
+//highlight edges
+let everyNode = svg.selectAll("g.nodes rect");
+let testpath = d3.selectAll('g.edgePath path');
+let everyPath = d3.selectAll('g.edgePath').select('.path');
+let node = svg.selectAll(".node");
+
+//highlight nodes	
+svg.selectAll("g.nodes text")
+  .on("mouseover", function(d) {
+	
+	//Hiding each path and node first
+    everyPath.style("opacity", 0.1);
+    everyNode.style("opacity", 0.1);
+	let connectedEdges = g.nodeEdges(d)
+		neighbors = g.neighbors(d);
+
+    everyPath.each(function(node) {
+      for (let i = 0; i < connectedEdges.length; i++) {
+
+		//If the node is connected to the edge in question at any end
+        if ((connectedEdges[i].w == node.w && d == node.w) || (connectedEdges[i].v == node.v && d == node.v)) {
+          d3.select(this).style("opacity", 1); //reset opacity
+        }
+      }
+    })
+    everyNode.each(function(node) {
+		if (d == node) {
+			d3.select(this).style("opacity",1)
+		};
+		for (var i = 0; i < d.length; i++){
+			if (neighbors[i] == d) {
+			   d3.select(this).style("opacity",1);                                 
+			  }				
+		   }
+		 
+    })
+  })
+  .on("mouseout", function(d, id) {
+    everyNode.style("opacity", 1); // 
+    everyPath.style("opacity", 1);
+  })
+  
 //////////////////////////////////
 
 if (storage.profile != null) {
@@ -198,8 +238,9 @@ function saveAsPDF(e) {
 }
 
 function print(e) {
+	window.print(svgCourse);
 	e.preventDefault()
-	alert('This feature has not been implemented yet.')
+	// alert('This feature has not been implemented yet.')
 }
 
 function addToProfile(e) {
