@@ -3,7 +3,11 @@
 	<head>
 	 	<meta charset='utf-8'>
 	    <title>CourseGram Program</title>
-	    <link rel='stylesheet' type='text/css' href='program.css'>
+		<link rel='stylesheet' type='text/css' href='program.css'>
+		<script src='https://d3js.org/d3.v4.js'></script>
+		<script src='https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js'></script>
+		<script src='https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js'></script>
+		<script type='text/javascript' src='storage.js'></script>
 	</head>
 	<body>
 		<div id='header'>
@@ -20,10 +24,11 @@
 				<li class='secondHeaderList'><button id='print'>Print</button></li>
 			</ul>
 		</div>
-		<div id='diagram'>
-		</div>
-		<script type='text/javascript' src='storage.js'></script>
-		<script type='text/javascript' ssrc='libraries/d3.js'></script>
+		<!-- <div id='diagram'>
+		</div> -->
+		<svg width=100%>
+		</svg>
+		<!-- <script type='text/javascript' src='libraries/d3.js'></script> -->
 		<script type='text/javascript' src='program.js'></script>
 	</body>
 </html>
