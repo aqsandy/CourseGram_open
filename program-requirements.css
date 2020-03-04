@@ -5,7 +5,7 @@ body {
 }
 
 #header {
-	background-color: dodgerblue;
+	background-color: black;
 }
 
 #header ul {
@@ -58,7 +58,8 @@ body {
 }
 
 #secondHeader {
-	background-color: dodgerblue;
+	border-top: 2px solid white;
+	background-color: black;
 }
 
 #secondHeader ul {
@@ -68,6 +69,7 @@ body {
 }
 
 #secondHeader ul li {
+	
 	list-style: none;
 	display: inline-block;
 	font-size: 18px;
