@@ -2,7 +2,7 @@
 
 START
 
-The app starts immediately on the home page in which a user is promted to select a program they are interested in viewing. In our case we will be using the Major in Architecture which gives us a good template for viewing our diagrams.
+The app starts immediately on the home page in which a user is prompted to select a program they are interested in viewing. In our case we will be using the Major in Architecture program which gives us a good template for viewing our diagrams.
 
 LOGIN
 
