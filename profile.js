@@ -75,19 +75,19 @@ function goProgram(e) {
 
 function addProgram(e){
     e.preventDefault()
-    const programList = document.querySelector('#programList')
-    const select = document.querySelector('#programSelect')
-    const id = select.selectedIndex
-    if (!storage.checkProfileForProgram(id)) {
-        storage.programToProfile(id)
-        const chosen = select.options[id].value
-        const newProgram = document.createElement('li')
-        console.log(chosen)
-        newProgram.innerHTML = chosen;
-        programList.appendChild(newProgram)
-    } else {
-        alert('Program already added to profile.')
-    }
+    // console.log("Hi")
+    // const programList = document.querySelector('#programList')
+    // const select = document.querySelector('#programSelect')
+    // const id = select.selectedIndex
+    // if (!storage.checkProfileForProgram(id)) {
+    //     storage.programToProfile(id)
+    //     const chosen = select.options[id].value
+    //     const newProgram = document.createElement('li')
+    //     console.log(chosen)
+    //     newProgram.innerHTML = chosen;
+    //     programList.appendChild(newProgram)
+    // } else {
+    alert('Program already added to profile.')
 }
 
 function changeUser(e){

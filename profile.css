@@ -1,3 +1,8 @@
+html, body{
+    text-align: center;
+}
+
+
 #changeInfo{
     /* padding-top: 3%; */
     text-align: center;
@@ -8,7 +13,7 @@
     padding-right: 5%;
     border-right: 2px solid black;
     height: 100%;
-    
+    padding-top: 5%;
 }
 
 #programs {
@@ -16,8 +21,12 @@
     float: left;
     padding-left: 5%;
     padding-top: 5%;
+    margin-bottom: 5px;
 }
 
+#addProgram{
+    margin-top: 5px;
+}
 .userInfo {
     margin-top: 10%;
     margin-bottom: 10%;
@@ -37,15 +46,6 @@ input[type='text'] {
     margin-top: 10px;
 }
 
-button {
-    margin: 10px;
-    color: black;
-    background-color: white;
-    border: 1px solid black;
-    padding: 10px;
-    font-size: inherit;
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-}
 
 #changeInfo div button {
     margin: 0;
@@ -56,7 +56,6 @@ button {
 select {
     -webkit-apperance: none;
     background-color: white;
-    border-radius: 25%;
     height: 40px;
     width:100%;
 }

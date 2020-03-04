@@ -95,7 +95,7 @@ let render = new dagreD3.render();
 
 // Set up an SVG group so that we can translate the final graph.
 let svg = d3.select("svg"),
-	svgGroup = svg.append("g");
+  svgGroup = svg.append("g");
 
 
 //From github documentation
@@ -108,8 +108,6 @@ svg.call(zoom);
 render(d3.select("svg g"), g);
 
 // Center the graph
-
-//Error occurs here
 let xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
 svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
 svg.attr("height", g.graph().height + 40);
@@ -123,35 +121,34 @@ let node = svg.selectAll(".node");
 //highlight nodes	
 svg.selectAll("g.nodes text")
   .on("mouseover", function(d) {
-	
 	//Hiding each path and node first
     everyPath.style("opacity", 0.1);
     everyNode.style("opacity", 0.1);
-	let connectedEdges = g.nodeEdges(d)
+	  let connectedEdges = g.nodeEdges(d)
 		neighbors = g.neighbors(d);
-
     everyPath.each(function(node) {
       for (let i = 0; i < connectedEdges.length; i++) {
 
 		//If the node is connected to the edge in question at any end
         if ((connectedEdges[i].w == node.w && d == node.w) || (connectedEdges[i].v == node.v && d == node.v)) {
-          d3.select(this).style("opacity", 1); //reset opacity
+          d3.select(this).style("opacity", 1); //reset opacity;
         }
       }
     })
     everyNode.each(function(node) {
-		if (d == node) {
-			d3.select(this).style("opacity",1)
-		};
-		for (var i = 0; i < d.length; i++){
-			if (neighbors[i] == d) {
-			   d3.select(this).style("opacity",1);                                 
-			  }				
-		   }
-		 
+      
+      if (d == node) {
+        
+        d3.select(this).style("opacity",1)
+      };
+      for (var i = 0; i < d.length; i++){
+        if (neighbors[i] == d) {
+          d3.select(this).style("opacity",1);                                 
+        }				
+      }
     })
   })
-  .on("mouseout", function(d, id) {
-    everyNode.style("opacity", 1); // 
+  .on("mouseout", function() {
+    everyNode.style("opacity", 1);
     everyPath.style("opacity", 1);
   })
