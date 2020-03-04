@@ -75,9 +75,8 @@ function saveAsPDF(e) {
 }
 
 function print(e) {
-	window.print(svgCourse);
 	e.preventDefault()
-	// alert('This feature has not been implemented yet.')
+	alert('This feature has not been implemented yet.')
 }
 
 function addToProfile(e) {

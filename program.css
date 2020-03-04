@@ -10,7 +10,7 @@ body {
 	width: 100%;
 }
 #header {
-	background-color: dodgerblue;
+	background-color: black;
 }
 svg{
 	padding-top: 2%;
@@ -68,7 +68,8 @@ svg{
 }
 
 #secondHeader {
-	background-color: dodgerblue;
+	background-color: black;
+	border-top: 2px solid white ;
 }
 
 #secondHeader ul {
