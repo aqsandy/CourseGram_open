@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="../style/semantic.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style/semantic.css">
     <link rel="stylesheet" type="text/css" href="./table.css">
 </head>
 <body id="course">
     <table>
-        <tr>
-            <td>Course ID</td>
-            <td>Course Name</td>
-            <td>Course Code</td>
-            <td colspan="2">Operations</td>
+        <tr class="header">
+            <th class="tb">Course ID</th>
+            <th class="tb">Course Name</th>
+            <th class="tb">Course Code</th>
+            <th class="tb" colspan="2">Operations</th>
         </tr>
         
             <tr class="course" id="1">
-                <td>1</td>
-                <td>Visual Concepts</td>
-                <td>JAV120H1</td>
-                <td id="opt"><button class="delete_course">Delete</button>
+                <td class="tb">1</td>
+                <td class="tb">Visual Concepts</td>
+                <td class="tb">JAV120H1</td>
+                <td class="tb" id="opt"><button class="delete_course">Delete</button>
                 </td>
-                <td id="opt"><button class="edit_course">Edit</button></td>
+                <td class="tb" id="opt"><button class="edit_course">Edit</button></td>
             <tr>
        
         
             <tr class="course" id="2">
-                <td>2</td>
-                <td>Visual Strategies</td>
-                <td>JAV130H1</td>
-                <td id="opt"><button class="delete_course">Delete</button></td>
-                <td id="opt"><button class="edit_course">Edit</button></td>
+                <td class="tb">2</td>
+                <td class="tb">Visual Strategies</td>
+                <td class="tb">JAV130H1</td>
+                <td class="tb" id="opt"><button class="delete_course">Delete</button></td>
+                <td class="tb" id="opt"><button class="edit_course">Edit</button></td>
             <tr>
         
     </table>

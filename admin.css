@@ -1,47 +1,17 @@
-div#nav{
-    margin: 0;
-    padding: 0;
+body{
+  background-color: lightgray;
 }
 div#info{
     margin-left:10%;
     height:100%;
-}
-ul#nav{
-  margin: 0;
-  padding: 0;
-  width: 10%;
-  background-color: lightgray;
-  height: 100%; 
-  position: fixed; 
-  overflow: auto; 
-}
-li#nav {
-    float: left;
-    display: block;
-    padding: 8px;
-    background-color: gray;
-    width:100%
-}
-li#nav a#nav{
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-li#nav a:hover:not(.active) {
-    background-color: #111;
-  }
-h2#username{
-  font-size: inherit;
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
+    background-color: lightgray;
 }
 embed{
   height: 89vh;        /* Viewport-relative units */
   width: 89vw;
-  margin:0;
+  margin-top:100px;
   padding:0;
   overflow: hidden;
   position:fixed;
+  background-color: lightgrey;
 }

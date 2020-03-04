@@ -3,27 +3,30 @@
 	<head>
 	 	<meta charset='utf-8'>
 	    <title>CourseGram - Welcome!</title>
-        <link rel='stylesheet' type='text/css' href='generalstyle.css'>
         <link rel='stylesheet' type='text/css' href='admin.css'>
+        <link rel="stylesheet" type="text/css" href="./style/semantic.css">
+        <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="./style/semantic.js"></script>
 	</head>
-	<body>
-		<div id='header'>
-			<ul>
-				<li id='homeContainer'><button id='home'>CourseGram</button></li>
-                <li id='titleContainer'><h1 id='title'>Welcome back to admin portal!</h1></li>
-                <li id="user_id"><h2 id="username"></h2></li>
-			</ul>
-        </div>
-       <div id="nav">
-           <ul id="nav">
-               <li id="nav"><a id="nav" href="javascript:load_profile();">Profile Dataset</a></li>
-               <li id="nav"><a id="nav" href="javascript:load_program();">Program Dataset</a></li>
-               <li id="nav"><a id="nav" href="javascript:load_course()">Course Dataset</a></li>
-               <li id="nav"><a id="nav" href="javascript:load_requests();">Requests Process</a></li>
-               <li id="nav"><a id="nav" href="javascript:load_manage();">General manage</a></li>
-            </ul>
-        </div>
+	<body style="background-color: lightgrey;">
+        <div class="ui fixed inverted menu">
+            <div class="ui container">
+              <a href="./index.html" class="header item">
+                <img class="logo" style="width:10em;" src="./img/logo.png">
+              </a>
+              <a href="./admin.html" class="item">Home</a>
+              <a href="javascript:load_profile();" class="item">Profile Dataset</a>
+              <a href="javascript:load_course()" class="item">Course Dataset</a>
+              <a href="javascript:load_requests();" class="item">Requests Process</a>
+              <a href="javascript:load_manage();" class="item">General manage</a>
+            </div>
+          </div>
+
         <div id="info">
+            <embed src="./admin/welcome.html"></embed>
         </div>
         <script type="text/javascript" src="storage.js"></script>
         <script type="text/javascript" src="header.js"></script>

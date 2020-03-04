@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
+    <link rel="stylesheet" type="text/css" href="../style/semantic.css">
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="../style/semantic.js"></script>
     <link rel="stylesheet" type="text/css" href="./table.css">
 </head>
 <body id="program">
     <table>
-        <tr>
-            <td>Program ID</td>
-            <td>Program Name</td>
-            <td>Program Code</td>
-            <td colspan="2">Operations</td>
+        <tr class="header">
+            <th class="tb">Program ID</th>
+            <th class="tb">Program Name</th>
+            <th class="tb">Program Code</th>
+            <th class="tb" colspan="2">Operations</th>
         </tr>
         
             <tr class="program" id="1">
-                <td>1</td>
-                <td>Architectural Studies</td>
-                <td>AHMAJ1000</td>
-                <td id="opt"><button class="delete_program">Delete</button>
+                <td class="tb">1</td>
+                <td class="tb">Architectural Studies</td>
+                <td class="tb">AHMAJ1000</td>
+                <td class="tb" id="opt"><button class="delete_program">Delete</button>
                 </td>
-                <td id="opt"><button class="edit_program">Edit</button></td>
+                <td class="tb" id="opt"><button class="edit_program">Edit</button></td>
             <tr>
        
     
