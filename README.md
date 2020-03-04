@@ -41,3 +41,8 @@ FEATURES WE DID NOT IMPLEMENT AND WHY
 
 Citations:
 
+1. https://github.com/dagrejs/dagre-d3/wiki
+This was to help me set up the tree diagram
+
+2. https://stackoverflow.com/questions/52536836/hover-effects-with-dagre-dagre-d3-d3-js
+Helped me create the hover affect for each node
