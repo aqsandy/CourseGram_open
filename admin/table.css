@@ -1,0 +1,11 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+td #opt{
+    width:50%;
+}
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+}

@@ -6,6 +6,8 @@ body {
 
 #header {
 	background-color: dodgerblue;
+	position: sticky;
+	overflow: hidden;
 }
 
 #header ul {
