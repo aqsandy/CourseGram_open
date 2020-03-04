@@ -5,10 +5,7 @@
 	    <title>Login - CourseGram</title>
 		<link rel='stylesheet' type='text/css' href='login.css'>
 		<link rel="stylesheet" type="text/css" href="./style/semantic.css">
-        <script
-        src="./style/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
+        <script src="./style/jquery-3.1.1.min.js"></script>
 		<script src="./style/semantic.js"></script>
 	</head>
 	<!-- <body>
@@ -65,16 +62,16 @@
 			  <div class="field">
 				<div class="ui left icon input">
 				  <i class="user icon"></i>
-				  <input type="text" name="email" placeholder="E-mail address">
+				  <input type="text" id="username" placeholder="Username">
 				</div>
 			  </div>
 			  <div class="field">
 				<div class="ui left icon input">
 				  <i class="lock icon"></i>
-				  <input type="password" name="password" placeholder="Password">
+				  <input type="password" id="password" placeholder="Password">
 				</div>
 			  </div>
-			  <div class="ui fluid large teal submit button">Login</div>
+			  <div id="login" class="ui fluid large teal submit button">Login</div>
 			</div>
 	  
 			<div class="ui error message"></div>
@@ -82,7 +79,7 @@
 		  </form>
 	  
 		  <div class="ui message">
-			New to us? <a href="#">Sign Up</a>
+			New to us? <a href="#" id="signup">Sign Up</a>
 		  </div>
 		</div>
 	  </div>

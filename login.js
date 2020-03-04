@@ -1,8 +1,6 @@
-const home = document.querySelector('#home')
-const authentication = document.querySelector('#authentication')
-const registration = document.querySelector('#signUpButton')
-home.addEventListener('click', goHome)
-authentication.addEventListener('submit', login)
+const authentication = document.querySelector('div#login')
+const registration = document.querySelector('a#signup')
+authentication.addEventListener('click', login)
 registration.addEventListener('click', signUp)
 
 const storage = new Storage()
@@ -30,11 +28,14 @@ function login(e) {
 				window.location.href = 'index.html'
 			}
 		} else {
-			const errorContainer = document.querySelector('#errorContainer')
-			const error = document.createElement('p')
+			const errorContainer = document.querySelector('#ui error message')
+			const unlist = document.createElement("ul")
+			unlist.setAttribute("class","list")
+			const error = document.createElement('li')
 			const errorText = document.createTextNode('Invalid username or password.')
 			error.appendChild(errorText)
-			errorContainer.appendChild(error)
+			unlist.appendChild(error)
+			errorContainer.appendChild(unlist)
 		}
 	}
 }
