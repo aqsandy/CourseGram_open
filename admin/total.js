@@ -31,13 +31,14 @@ else if(program_page != null){
 }
 function edit_course(e){
     e.preventDefault();
-    if(e.target.classList.contains('edit_course')){
+    if(e.target.getAttribute("id")=='edit_course'){
         alert("Not available yet!");
     }
 }
 function delete_course(e){
     e.preventDefault();
-    if(e.target.classList.contains('delete_course')){
+    console.log(e.target.getAttribute("id"));
+    if(e.target.getAttribute("id")=='delete_course'){
         console.log(course_page.children[0]);
         console.log(e.target.parentElement.parentElement);
         course_page.children[0].children[0].removeChild(e.target.parentElement.parentElement);
@@ -45,13 +46,13 @@ function delete_course(e){
 }
 function edit_profile(e){
     e.preventDefault();
-    if(e.target.classList.contains('edit_profile')){
+    if(e.target.getAttribute("id")=='edit_profile'){
         alert("Not available yet!");
     }
 }
 function delete_profile(e){
     e.preventDefault();
-    if(e.target.classList.contains('delete_profile')){
+    if(e.target.getAttribute("id")=='delete_profile'){
         console.log(e.target.parentElement.parentElement);
         profile_page.children[0].children[0].removeChild(e.target.parentElement.parentElement);
     }
@@ -59,13 +60,13 @@ function delete_profile(e){
 
 function edit_program(e){
     e.preventDefault();
-    if(e.target.classList.contains('edit_program')){
+    if(e.target.getAttribute("id")=='edit_program'){
         alert("Not available yet!");
     }
 }
 function delete_program(e){
     e.preventDefault();
-    if(e.target.classList.contains('delete_program')){
+    if(e.target.getAttribute("id")=='delete_program'){
         console.log(e.target.parentElement.parentElement);
         program_page.children[0].children[0].removeChild(e.target.parentElement.parentElement);
     }

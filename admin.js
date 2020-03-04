@@ -4,8 +4,8 @@ if(!storage.checkAdmin()){
     window.location.href = './index.html'
 }else{
     /* Push user info to the page  */
-    const username_field = document.querySelector("#username");
-    username_field.textContent = storage.getUsername();
+    // const username_field = document.querySelector("#username");
+    // username_field.textContent = storage.getUsername();
 }
 function load_profile(){
     const info = document.querySelector("#info");
