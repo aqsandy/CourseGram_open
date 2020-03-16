@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>CourseGram Program</title>
+		<link rel='stylesheet' type='text/css' href='program.css'>
+		<script src='https://d3js.org/d3.v4.js'></script>
+		<script src='https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js'></script>
+		<script src='https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js'></script>
+		<script type='text/javascript' src='storage.js'></script>
+	</head>
+	<body>
+		<div id='header'>
+			<ul>
+				<li id='homeContainer'>
+					<a id='home' href="./index.html" class="header item">
+						<img class="logo" style="width:5em;" src="./img/logo.png">
+					</a>
+				</li>
+				<li id='titleContainer'><h1 id='title'>Program</h1></li>
+				<li id='loginContainer'><button id='login'>Login / Sign Up</button></li>
+			</ul>
+		</div>
+		<div id='secondHeader'>
+			<ul>
+				<li class='secondHeaderList'><button id='programRequirements'>Program Requirements</button></li>
+				<li class='secondHeaderList'><button id='saveAsPDF'>Save as PDF</button></li>
+				<li class='secondHeaderList'><button id='print'>Print</button></li>
+			</ul>
+		</div>
+		<!-- <div id='diagram'>
+		</div> -->
+		<svg id="graph" width=75%>
+		</svg>
+		<!-- <script type='text/javascript' src='libraries/d3.js'></script> -->
+	
+		<script type='text/javascript' src='program.js'></script>
+		<script type='text/javascript' src='graph.js'></script>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+body{
+    background: lightgrey;
+}
+table{
+    text-align: center;    
+    width:100%;
+}
+td#opt{
+    margin:0;
+    display:inline-block;
+}

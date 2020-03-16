@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style/semantic.css">
+    <script
+    src="./style/jquery-3.1.1.min.js"
+    ></script>
+    <script src="../style/semantic.js"></script>
+    <link rel="stylesheet" type="text/css" href="./table.css">
+</head>
+<body id="profile">
+    <table>
+        <tr class="header">
+            <th class="tb">User ID</th>
+            <th class="tb">User Name</th>
+            <th class="tb">User Email</th>
+            <th  class="tb" colspan="2">Operations</th>
+        </tr>
+            <tr class="profile" id="1">
+                <td class="tb">1</td>
+                <td class="tb">User</td>
+                <td class="tb">user@user.com</td>
+                <td class="tb" id="opt"><button class="ui primary button" id="delete_profile">Delete</button>
+                </td>
+                <td class="tb" id="opt"><button class="ui primary button" id="edit_profile">Edit</button></td>
+            <tr>
+  
+            <tr class="profile" id="2">
+                <td class="tb">2</td>
+                <td class="tb">admin</td>
+                <td class="tb">admin@admin.com</td>
+                <td class="tb" id="opt"><button class="ui primary button" id="delete_profile">Delete</button></td>
+                <td class="tb" id="opt"><button class="ui primary button" id="edit_profile">Edit</button></td>
+            <tr>
+     
+    </table>
+</body>
+<script type="text/javascript" src="../storage.js"></script>
+<script type="text/javascript" src="total.js"></script>
+</html>
