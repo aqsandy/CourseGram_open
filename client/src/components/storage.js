@@ -26,8 +26,9 @@ function Course(name, code) {
 	this.exclusion = []
 }
 
-function Storage() {
+export default function Storage() {
 	// Code below requires server calls.
+	this.title = JSON.parse(sessionStorage.getItem('title'))
 	this.profile = JSON.parse(sessionStorage.getItem('profile'))
 	this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
 	this.program = JSON.parse(sessionStorage.getItem('program'))
@@ -42,6 +43,7 @@ Storage.prototype = {
 			Loads profile data from sessionStorage.
 			Code below requires server calls.
 		*/
+		this.title = JSON.parse(sessionStorage.getItem('title'))
 		this.profile = JSON.parse(sessionStorage.getItem('profile'))
 		this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
 		this.program = JSON.parse(sessionStorage.getItem('program'))
@@ -54,11 +56,22 @@ Storage.prototype = {
 			Saves profile data to sessionStorage.
 			Code below requires server calls.
 		*/
+		sessionStorage.setItem('title', JSON.stringify(this.title))
 		sessionStorage.setItem('profile', JSON.stringify(this.profile))
 		sessionStorage.setItem('profiles', JSON.stringify(this.profiles))
 		sessionStorage.setItem('program', JSON.stringify(this.program))
 		sessionStorage.setItem('programs', JSON.stringify(this.programs))
 		sessionStorage.setItem('courses', JSON.stringify(this.courses))
+	},
+
+	setTitle: function(title) {
+		this.title = title
+		this.toStorage()
+	},
+
+	getTitle: function() {
+		this.fromStorage()
+		return this.title
 	},
 
 	createProfilePush: function(username, email, password, admin=false) {
@@ -71,7 +84,7 @@ Storage.prototype = {
 			this.profiles = []
 		}
 		this.profile.id += this.profiles.length
-		this.profiles.push(profile)
+		this.profiles.push(this.profile)
 		this.toStorage()
 	},
 

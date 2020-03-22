@@ -1,48 +1,68 @@
-# team30
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-START
+## Available Scripts
 
-The app starts immediately on the home page in which a user is prompted to select a program they are interested in viewing. In our case we will be using the Major in Architecture program which gives us a good template for viewing our diagrams.
+In the project directory, you can run:
 
-LOGIN
+### `npm start`
 
-Login button is found on the top right corner of the website. Where users can either login or sign up.
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Login credentials for regular users:
-Login: user
-Password: user
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-For admins:
-Login: admin
-Password: admin
+### `npm test`
 
-On the top right hand corner of the website, where it said Login/Sign up before authentication, you will see either user or admin depending on how you logged in. Clicking on the name will take you to the user control panel, in which a regular user can do things such as change their username, email, and password. Admins can instead do the actions specified by the handout.
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-FUNCTIONALITY
+### `npm run build`
 
-On the home page (seen by clicking the top left corner) users can see the option of the programs they have saved, in this case it's Architecture. By clicking on it, they can see the program tree where each node contains a course code. One can drag the diagram or zoom in and out.
-Hovering over a node will highlight its edges and its neighbors for visibility reasons.
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Clicking on program requirement innthe panel above will give a text summary if what the program needs. On top of that, users will have the ability to print the diagram, save it, and download it as a pdf.
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-COMPLEXITY
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Taking account the sheer amount of the programs and the possible configurations their courses have, its clear that turning it into a readable directed graph will have a lot of complications moving on with the project.
+### `npm run eject`
 
-Firstly, we will need to find some sort of API if not create a webscraper to get the needed information. Then we have to create the appropriate edges and nodes and find a correct way to format them in cases such as too many disconnected nodes.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-FEATURES WE DID NOT IMPLEMENT AND WHY
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-1. In the case of hovering nodes, we wanted a tooltip to pop up with course information, however this wasn't feasible as any online resource was too old and said solutions seem deprecated.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-2. Saving an SVG to a PDF was far too complicated to do considering we may scrap DagreD3js to solution problem 1.
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Citations:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-1. https://github.com/dagrejs/dagre-d3/wiki
-This was to help me set up the tree diagram
+### Code Splitting
 
-2. https://stackoverflow.com/questions/52536836/hover-effects-with-dagre-dagre-d3-d3-js
-Helped me create the hover affect for each node
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
