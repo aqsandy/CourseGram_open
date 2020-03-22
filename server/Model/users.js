@@ -1,28 +1,30 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const saltRounds = 20;
+const saltRounds = 10;
 const Users = new mongoose.Schema({
-  user: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   email: {type: String, required: true },
   password: { type: String, required: true },
-  isAdmin: Boolean
+  isAdmin: {Boolean}
 });
 
-Users.pre('save', (next) => {
+Users.pre('save', function (next){
 // Check if document is new or a new password has been set
     if (this.isNew || this.isModified('password')) {
         // Saving reference to this because of changing scopes
+        
         const document = this;
         const callback = (e, hashedPassword) => {
-            if (!r) {
-                document.password = hashedPassword;
-                next();
-                
-            }
-            else {
-                next(r);
-            }
+          console.log(e)
+          if (!e) {
+              document.password = hashedPassword;
+              next();
+          }
+          else {
+              console.log(e)
+              next(e);
+          }
         };
         bcrypt.hash(document.password, saltRounds, callback);
     }
