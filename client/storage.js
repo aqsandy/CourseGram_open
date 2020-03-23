@@ -293,6 +293,36 @@ Storage.prototype = {
 		return null
 	},
 
+	register: function(username, email, password) {
+		/*
+			Registers new profile and returns true if server returns success status
+		*/
+		const url = this.serverUrl + '/api/v1/auth/register'
+			let data = {
+				username: username,
+				email: email,
+				password: password
+			}
+			const request = new Request(url, {
+				method: 'post',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'},
+			})
+			return fetch(request)
+				.then((res) => {
+					if (res.status === 200) {
+						return true
+					} else {
+						return false
+					}
+				}).catch((error) => {
+					return false
+				})
+
+
+	},
+
 	login: function(username, password) {
 		/*
 			Sets active profile and returns true if server returns profile data

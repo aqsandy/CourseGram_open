@@ -136,25 +136,9 @@ function signUp(e) {
 		const password = document.querySelector('#password').value
 
 		if (usernameValid && emailValid && passwordValid && confirmPasswordValid) {
-			const url = 'http://localhost:5001/api/v1/auth/register'
-			let data = {
-				username: username,
-				email: email,
-				password: password
+			if (storage.register(username, email, password)) {
+				window.location.href = 'index.html'
 			}
-			const request = new Request(url, {
-				method: 'post',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'},
-			})
-			console.log(JSON.stringify(data))
-			fetch(request)
-				.then((res) => {
-					window.location.href = 'index.html'
-				}).catch((error) => {
-					console.log(res.json())
-				})
 		}
 	}
 }
