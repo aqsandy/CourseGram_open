@@ -17,7 +17,9 @@ router.post('/register', async (req, res) => {
     }
     else{
       const isAdmin = false;
-      const user = new user_schema({ username, email, password, isAdmin });
+      const requestDelete = false;
+      const programs = [];
+      const user = new user_schema({ username, email, password, isAdmin, requestDelete, programs });
       user.save((err) => {
         if (err) {
           console.log(err)

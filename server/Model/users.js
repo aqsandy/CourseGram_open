@@ -6,7 +6,9 @@ const Users = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: {type: String, required: true },
   password: { type: String, required: true },
-  isAdmin: {Boolean}
+  isAdmin: {type: Boolean, required: true },
+  requestDelete: {type: Boolean, required: true},
+  programs: {type: Array, required: true}
 });
 
 Users.pre('save', function (next){

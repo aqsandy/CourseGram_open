@@ -1,7 +1,7 @@
 /* JS Library for Accessing and Modifying Profile Data Locally and on Server */
 
-function Profile(username, email, password, admin=false) {
-	this.id = 0
+function Profile(id, username, email, password, admin, requestDelete, programs) {
+	this.id = id
 	this.username = username
 	this.email = email
 	this.password = password
@@ -27,6 +27,7 @@ function Course(name, code) {
 }
 
 function Storage() {
+	this.serverUrl = 'http://localhost:5001'
 	// Code below requires server calls.
 	this.profile = JSON.parse(sessionStorage.getItem('profile'))
 	this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
@@ -294,19 +295,41 @@ Storage.prototype = {
 
 	login: function(username, password) {
 		/*
-			Sets active profile and returns true if username and password matches profile in profiles.
+			Sets active profile and returns true if server returns profile data
 		*/
-		this.fromStorage()
-		if (this.profiles != null) {
-			for (let i = 0; i < this.profiles.length; i++) {
-				if (this.profiles[i].username == username && this.profiles[i].password == password) {
-					this.profile = this.profiles[i]
-					this.toStorage()
-					return true
-				}
-			}
+		let bool = false
+		const url = this.serverUrl + '/api/v1/auth/login'
+		let data = {
+			username: username,
+			password: password
 		}
-		return false
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		})
+		return fetch(request)
+			.then((res) => {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					return false
+				}
+			})
+			.then((json) => {
+				console.log(json)
+				const profileData = json.user
+				this.fromStorage()
+				this.profile = new Profile(profileData._id, profileData.username, profileData.email, 
+					profileData.password, profileData.isAdmin, profileData.requestDelete, profileData.programs)
+				this.toStorage()
+				return true
+				console.log('Login success')
+			}).catch((error) => {
+				return false
+			})
 	},
 
 	logout: function() {

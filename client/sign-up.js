@@ -134,11 +134,27 @@ function signUp(e) {
 		const username = document.querySelector('#username').value
 		const email = document.querySelector('#email').value
 		const password = document.querySelector('#password').value
-		// Set profile data on server
-		// code below requires server call
+
 		if (usernameValid && emailValid && passwordValid && confirmPasswordValid) {
-			storage.createProfileSetPush(username, email, password)
-			window.location.href = 'index.html'
+			const url = 'http://localhost:5001/api/v1/auth/register'
+			let data = {
+				username: username,
+				email: email,
+				password: password
+			}
+			const request = new Request(url, {
+				method: 'post',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'},
+			})
+			console.log(JSON.stringify(data))
+			fetch(request)
+				.then((res) => {
+					window.location.href = 'index.html'
+				}).catch((error) => {
+					console.log(res.json())
+				})
 		}
 	}
 }
