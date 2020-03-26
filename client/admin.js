@@ -65,3 +65,8 @@ function load_manage(){
     newelement.setAttribute("id", "embed");
     info.appendChild(newelement);
 }
+
+function logout() {
+    storage.logout()
+    window.location.href = "index.html"
+}
