@@ -10,7 +10,7 @@ program.addEventListener('click', addProgram)
 userChange.addEventListener('click', changeUser)
 emailChange.addEventListener('click', changeEmail)
 passwordChange.addEventListener('click', changePassword)
-logout.addEventListener('click', logout)
+logout.addEventListener('click', signout)
 
 
 //document.querySelector('#user').innerHTML = profileName; 
@@ -112,7 +112,7 @@ function changePassword(e) {
     window.location.href = 'change-password.html'
 }
 
-function logout(e) {
+function signout(e) {
     e.preventDefault()
     storage.logout()
     window.location.href = 'index.html'
