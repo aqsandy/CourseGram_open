@@ -3,12 +3,14 @@ const program = document.querySelector('#addProgram')
 const userChange = document.querySelector('#changeUser')
 const emailChange = document.querySelector('#changeEmail')
 const passwordChange = document.querySelector('#changePassword')
+const logout = document.querySelector('#logout')
 
 home.addEventListener('click', goHome)
 program.addEventListener('click', addProgram)
 userChange.addEventListener('click', changeUser)
 emailChange.addEventListener('click', changeEmail)
 passwordChange.addEventListener('click', changePassword)
+logout.addEventListener('click', logout)
 
 
 //document.querySelector('#user').innerHTML = profileName; 
@@ -108,4 +110,10 @@ function changeEmail(e){
 function changePassword(e) {
     e.preventDefault()
     window.location.href = 'change-password.html'
+}
+
+function logout(e) {
+    e.preventDefault()
+    storage.logout()
+    window.location.href = 'index.html'
 }
