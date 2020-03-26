@@ -7,10 +7,6 @@ const cookieParser = require('cookie-parser');
 require("dotenv").config()
 const secret = 'secretsecret';
 
-//Enable CORS
-const cors = require('cors');
-app.use(cors());
-
 // Connect to database
 connect_db();
 
