@@ -36,6 +36,8 @@ app.use(cookieParser());
 
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/programs', require('./routes/program'));
+app.use('/api/v1/saveUsers', authMiddleWare, require('./routes/saveUser'));
+
 const PORT = process.env.PORT;
 app.listen(PORT, function() {
   console.log(`Node server listening on port ${PORT}!`);
