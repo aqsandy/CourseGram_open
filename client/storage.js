@@ -10,11 +10,16 @@ function Profile(id, username, email, password, admin, requestDelete, programs) 
 	this.programs = []
 }
 
-function Program(name, code) {
-	this.id = 0
-	this.name = name
+function Program(id, code, name, type, campus, credits, courses, subjectPostComb, notes) {
+	this.id = id
 	this.code = code
-	this.courses = []
+	this.name = name
+	this.type = type
+	this.campus = campus
+	this.credits = credits
+	this.courses = courses
+	this.subjectPostComb = subjectPostComb
+	this.notes = notes
 }
 
 function Course(name, code) {
@@ -293,32 +298,59 @@ Storage.prototype = {
 		return null
 	},
 
+	loadPrograms: function() {
+		/*
+			Gets programs from server and saves them in storage.
+		*/
+		const url = this.serverUrl + '/api/v1/programs/getPrograms'
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return res.json()
+				}
+			})
+			.then((json) => {
+				const programs = []
+				json.map((program) => {
+					programs.push(new Program(program._id, program.POStID, program.name, program.type,
+						program.campus, program.required_credits, program.required_courses,
+						program.subjectPostCombinations, program.notes))
+				})
+				this.programs = programs
+				this.toStorage()
+			}).catch((error) => {
+				this.programs = []
+				this.toStorage()
+			})
+
+	},
+
 	register: function(username, email, password) {
 		/*
 			Registers new profile and returns true if server returns success status
 		*/
 		const url = this.serverUrl + '/api/v1/auth/register'
-			let data = {
-				username: username,
-				email: email,
-				password: password
-			}
-			const request = new Request(url, {
-				method: 'post',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'},
-			})
-			return fetch(request)
-				.then((res) => {
-					if (res.status === 200) {
-						return true
-					} else {
-						return false
-					}
-				}).catch((error) => {
+		let data = {
+			username: username,
+			email: email,
+			password: password
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'},
+		})
+		return fetch(request)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
 					return false
-				})
+				}
+			}).catch((error) => {
+				return false
+			})
 
 
 	},
@@ -496,6 +528,21 @@ Storage.prototype = {
 		return null
 	},
 
+	getProgramType: function(id=null) {
+		/*
+			Get active program type or programs[id] type.
+		*/
+		this.fromStorage()
+		if (id != null && this.programs != null) {
+			if (id < this.programs.length) {
+				return this.programs[id].type
+			}
+		} else if (this.program != null) {
+			return this.program.type
+		}
+		return null
+	},
+
 	getProgramCode: function(id=null) {
 		/*
 			Get active program code or programs[id] code.
@@ -507,6 +554,21 @@ Storage.prototype = {
 			}
 		} else if (this.program != null) {
 			return this.program.code
+		}
+		return null
+	},
+
+	getProgramCampus: function(id=null) {
+		/*
+			Get active program campus or programs[id] campus.
+		*/
+		this.fromStorage()
+		if (id != null && this.programs != null) {
+			if (id < this.programs.length) {
+				return this.programs[id].campus
+			}
+		} else if (this.program != null) {
+			return this.program.campus
 		}
 		return null
 	},
