@@ -25,19 +25,25 @@ if (storage.profile != null) {
 
 function loadPrograms() {
 	// Gets list of programs from server and creates buttons in DOM
-	// code below requires server call
 	if (storage.programs == null) {
-		storage.createProgramPush('Major in Architectural Studies', 'AHMAJ1000')
+		storage.loadPrograms()
 	}
 	for (let i = 0; i < storage.programs.length; i++) {
 		const programName = storage.getProgramName(i)
+		const programType = storage.getProgramType(i)
 		const programCode = storage.getProgramCode(i)
+		let programCampus = storage.getProgramCampus(i)
+		if (programCampus == 'stg') {
+			programCampus = 'St. George'
+		} else if (programCampus == 'eri') {
+			programCampus = 'UTM'
+		}
 		const programs = document.querySelector('#programs')
 		const program = document.createElement('li')
 		program.setAttribute('class', 'program')
 		const programButton = document.createElement('button')
 		programButton.setAttribute('class', 'programButton')
-		const programButtonText = document.createTextNode(programName + ' (' + programCode + ')')
+		const programButtonText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
 		programButton.appendChild(programButtonText)
 		program.appendChild(programButton)
 		programs.children[1].appendChild(program)
