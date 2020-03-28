@@ -4,6 +4,16 @@ const program_schema = require('../model/programs');
 const courses_schema = require('../model/courses');
 
 
+router.get('/getPrograms', async (req, res) => {
+    const programs = await program_schema.find({});
+    if(programs){
+        res.status(200).json(programs);
+    }
+    else{
+        res.status(409).json({error: "Programs not found"});
+    }
+})
+
 router.post('/getProgram', async (req, res) => {
     const { code } = req.body;
     const programs = await program_schema.findOne({POStID: code});
