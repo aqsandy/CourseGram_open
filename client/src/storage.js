@@ -6,8 +6,8 @@ function Profile(id, username, email, password, admin, requestDelete, programs) 
 	this.email = email
 	this.password = password
 	this.admin = admin
-	this.requestDelete = false
-	this.programs = []
+	this.requestDelete = requestDelete
+	this.programs = programs
 }
 
 function Program(id, code, name, type, campus, credits, courses, subjectPostComb, notes) {
@@ -352,8 +352,6 @@ Storage.prototype = {
 			}).catch((error) => {
 				return false
 			})
-
-
 	},
 
 	login: function(username, password) {
@@ -457,18 +455,8 @@ Storage.prototype = {
 			programs[programId] to active profile or profiles[profileId].
 		*/
 		this.fromStorage()
-		if (programId != null) {
-			if (profileId != null) {
-				if (programId < this.programs.length && profileId < this.profiles.length) {
-					this.profiles[profileId].programs.push(this.programs[programId])
-				}
-			} else if (programId < this.programs.length) {
-				this.profile.programs.push(this.programs[programId])
-				this.profiles[this.profile.id].programs.push(this.programs[programId])
-			}
-		} else if (programId == null && profileId == null) {
-			this.profile.programs.push(this.program)
-			this.profiles[this.profile.id].programs.push(this.program)
+		if (programId == null && profileId == null) {
+			this.profile.programs.push(this.program.id)
 		}
 		this.toStorage()
 	},
@@ -489,12 +477,10 @@ Storage.prototype = {
 					}
 				}
 			}
-		} else if (this.programs != null && this.profile != null && this.profiles != null) {
-			if (programId < this.programs.length) {
-				for (const program of this.profile.programs) {
-					if (program.id == programId) {
-						return true
-					}
+		} else if (this.program != null && this.profile != null) {
+			for (const programId of this.profile.programs) {
+				if (this.program.id == programId) {
+					return true
 				}
 			}
 		}
