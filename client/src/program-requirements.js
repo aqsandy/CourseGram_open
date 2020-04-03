@@ -24,8 +24,17 @@ if (storage.profile != null) {
 }
 
 if (storage.program != null) {
+	const programName = storage.getProgramName()
+	const programType = storage.getProgramType()
+	const programCode = storage.getProgramCode()
 	const programTitle = document.querySelector('#programTitle')
-	programTitle.innerHTML = storage.getProgramName() + ' - ' + storage.getProgramCode()
+	let programCampus = storage.getProgramCampus()
+		if (programCampus == 'stg') {
+			programCampus = 'St. George'
+		} else if (programCampus == 'eri') {
+			programCampus = 'UTM'
+		}
+	programTitle.innerHTML = programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')'
 }
 
 function goHome(e) {

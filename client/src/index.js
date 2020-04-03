@@ -77,7 +77,8 @@ function goProgram(e) {
 	const list = e.target.parentElement
 	for (let i = 0; i < list.children.length; i++) {
 		if (list.children[i] == e.target) {
-			storage.setProgram(i)
+			const id = Object.keys(storage.programs)[i]
+			storage.setProgram(id)
 			window.location.href = 'program.html'
 		}
 	}
