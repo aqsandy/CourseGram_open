@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const saved_schema = require('../model/savedPrograms');
+// const saved_schema = require('../model/savedPrograms');
 const user_schema = require('../model/users');
 
 router.post('/getUserPrograms', async (req, res) => {
@@ -16,7 +16,10 @@ router.post('/getUserPrograms', async (req, res) => {
 
 router.post('/saveUserProgram', async (req, res) => {
     const { username, program } = req.body;
-    let userExists = await saved_schema.findOne({username});
+    if(!username || !program){
+        res.status(400).send("Username or password not provided");
+    }
+    let userExists = await user_schema.findOne({username});
     if(userExists){
         if(!(userExists.programs.includes(program))){
             userExists.programs.push(program)
@@ -28,23 +31,14 @@ router.post('/saveUserProgram', async (req, res) => {
                 else {
                   res.status(200).send("User saved");
                 }
-            })  ;
+            });
         }
         else{
             res.status(200).send("Program already saved");
         }
     }
     else{
-        const user = new saved_schema({ username, programs: [program] });
-        user.save((err) => {
-            if (err) {
-              console.log(err)
-              res.status(500).send(err);
-            }
-            else {
-              res.status(200).send("User saved");
-            }
-        });
+        res.status(404).send("User not found"); 
     }
 });
 
