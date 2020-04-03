@@ -35,6 +35,9 @@ if (storage.program != null) {
 			programCampus = 'UTM'
 		}
 	programTitle.innerHTML = programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')'
+	const notes = document.querySelector('#notes')
+	const notesText = document.createTextNode(storage.getProgramNotes())
+	notes.appendChild(notesText)
 }
 
 function goHome(e) {

@@ -567,7 +567,7 @@ Storage.prototype = {
 			Get active program courses or programs[id] courses.
 		*/
 		this.fromStorage()
-		if (this.programs != null) {
+		if (id != null && this.programs != null) {
 			return this.programs[id].courses
 		} else if (this.program != null) {
 			return this.program.courses
@@ -580,7 +580,7 @@ Storage.prototype = {
 			Get active program courses or programs[id] courses.
 		*/
 		this.fromStorage()
-		if (this.programs != null) {
+		if (id != null && this.programs != null) {
 			return this.programs[id].notes
 		} else if (this.program != null) {
 			return this.program.notes
