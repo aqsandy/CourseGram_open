@@ -310,13 +310,12 @@ Storage.prototype = {
 				}
 			})
 			.then((json) => {
-				const programs = []
+				this.programs = {}
 				json.map((program) => {
-					programs.push(new Program(program._id, program.POStID, program.name, program.type,
+					this.programs[program._id] = new Program(program._id, program.POStID, program.name, program.type,
 						program.campus, program.required_credits, program.required_courses,
-						program.subjectPostCombinations, program.notes))
+						program.subjectPostCombinations, program.notes)
 				})
-				this.programs = programs
 				this.toStorage()
 			}).catch((error) => {
 				this.programs = []
@@ -519,9 +518,7 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (id != null && this.programs != null) {
-			if (id < this.programs.length) {
-				return this.programs[id].name
-			}
+			return this.programs[id].name
 		} else if (this.program != null) {
 			return this.program.name
 		}
@@ -534,9 +531,7 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (id != null && this.programs != null) {
-			if (id < this.programs.length) {
-				return this.programs[id].type
-			}
+			return this.programs[id].type
 		} else if (this.program != null) {
 			return this.program.type
 		}
@@ -549,9 +544,7 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (id != null && this.programs != null) {
-			if (id < this.programs.length) {
-				return this.programs[id].code
-			}
+			return this.programs[id].code
 		} else if (this.program != null) {
 			return this.program.code
 		}
@@ -564,9 +557,7 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (id != null && this.programs != null) {
-			if (id < this.programs.length) {
-				return this.programs[id].campus
-			}
+			return this.programs[id].campus
 		} else if (this.program != null) {
 			return this.program.campus
 		}
@@ -579,9 +570,7 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.programs != null) {
-			if (id < this.programs.length) {
-				return this.programs[id].courses
-			}
+			return this.programs[id].courses
 		} else if (this.program != null) {
 			return this.program.courses
 		}

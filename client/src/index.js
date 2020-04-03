@@ -28,11 +28,11 @@ function loadPrograms() {
 	if (storage.programs == null) {
 		storage.loadPrograms()
 	}
-	for (let i = 0; i < storage.programs.length; i++) {
-		const programName = storage.getProgramName(i)
-		const programType = storage.getProgramType(i)
-		const programCode = storage.getProgramCode(i)
-		let programCampus = storage.getProgramCampus(i)
+	Object.keys(storage.programs).map((id) => {
+		const programName = storage.getProgramName(id)
+		const programType = storage.getProgramType(id)
+		const programCode = storage.getProgramCode(id)
+		let programCampus = storage.getProgramCampus(id)
 		if (programCampus == 'stg') {
 			programCampus = 'St. George'
 		} else if (programCampus == 'eri') {
@@ -48,7 +48,7 @@ function loadPrograms() {
 		program.appendChild(programButton)
 		programs.children[1].appendChild(program)
 		programButton.addEventListener('click', goProgram)
-	}
+	})
 }
 
 function goHome(e) {
