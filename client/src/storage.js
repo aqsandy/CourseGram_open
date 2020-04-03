@@ -22,13 +22,15 @@ function Program(id, code, name, type, campus, credits, courses, subjectPostComb
 	this.notes = notes
 }
 
-function Course(name, code) {
+function Course(id, name, code, prerequisites, corequisites, exclusion, breadth, distribution) {
 	this.id = 0
 	this.name = name
 	this.code = code
-	this.prerequisites = []
-	this.corequisites = []
-	this.exclusion = []
+	this.prerequisites = prerequisites
+	this.corequisites = corequisites
+	this.exclusion = exclusion
+	this.breadth = breadth
+	this.distribution = distribution
 }
 
 function Storage() {
