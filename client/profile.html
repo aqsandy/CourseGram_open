@@ -4,7 +4,7 @@
 	 	<meta charset='utf-8'>
 	    <title>CourseGram Login</title>
         <link rel='stylesheet' type='text/css' href='src/login.css'>
-        <link rel='stylesheet' type='text/css' href='src/profile.css'>
+        <link rel='stylesheet' type='text/css' href='src/css/profile.css'>
         <link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
 
 	</head>
@@ -16,8 +16,6 @@
               </a>
             </div>
         </div>
-
-
         <div id="changeInfo">
             <h1> User Info </h1>
             <div class='ui form'>
@@ -48,22 +46,16 @@
                 </div>
             </div>
         </div>
-
         <div id='programs'>
-            <h1> Programs </h1>
-            <div class="ui fluid selection dropdown">
-                <input type="hidden" name="profileProgram">
-                <div class="default text">Profile Programs</div>
-                <div class="menu">
-                </div>
-            </div>
-            <button id="addProgram" class="ui inverted blue button programBut">Select Program</button>
+            <h1> Profile Programs </h1>
+            <select class="ui fluid dropdown">
+                <option value="">Profile Programs</div>
+            </select>
+            <button id="selectProgramButton" class="ui inverted blue button">Select Program</button>
         </div>
-        <ul id='programList'>
-        </ul>
         <script src="src/libraries/jquery-3.1.1.min.js"></script>
         <script src="src/libraries/semantic.js"></script>
         <script type='text/javascript' src='src/storage.js'></script>
-		<script type="text/javascript" src="src/profile.js"></script>
+		<script type="text/javascript" src="src/javascript/profile.js"></script>
 	</body>
 </html>

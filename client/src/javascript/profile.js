@@ -4,13 +4,14 @@ const userChange = document.querySelector('#changeUser')
 const emailChange = document.querySelector('#changeEmail')
 const passwordChange = document.querySelector('#changePassword')
 const logout = document.querySelector('#logout')
+const selectProgramButton = document.querySelector('#selectProgramButton')
 
 home.addEventListener('click', goHome)
-program.addEventListener('click', addProgram)
 userChange.addEventListener('click', changeUser)
 emailChange.addEventListener('click', changeEmail)
 passwordChange.addEventListener('click', changePassword)
 logout.addEventListener('click', signout)
+selectProgramButton.addEventListener('click', goProgram)
 
 
 //document.querySelector('#user').innerHTML = profileName; 
@@ -21,8 +22,7 @@ loadProfilePrograms()
 
 function loadProfilePrograms() {
     console.log('Loading profile programs.')
-    const programList = document.querySelector('#programList')
-    const menu = document.querySelector('.ui.selection.dropdown .menu')
+    const select = document.querySelector('.ui.dropdown')
     if (storage.profile != null) {
         for (const id of storage.profile.programs) {
             const programName = storage.getProgramName(id)
@@ -34,20 +34,11 @@ function loadProfilePrograms() {
             } else if (programCampus == 'eri') {
                 programCampus = 'UTM'
             }
-            const item = document.createElement('div')
-            item.setAttribute('class', 'item')
-            item.setAttribute('data-value', id)
-            const itemText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
-            item.appendChild(itemText)
-            menu.appendChild(item)
-            const profileProgramText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
-            const profileProgramButton = document.createElement('button')
-            profileProgramButton.setAttribute('value', id)
-            const profileProgram = document.createElement('li')
-            profileProgramButton.appendChild(profileProgramText)
-            profileProgram.appendChild(profileProgramButton)
-            programList.appendChild(profileProgram)
-            profileProgramButton.addEventListener('click', goProgram)
+            const option = document.createElement('option')
+            option.setAttribute('value', id)
+            const optionText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
+            option.appendChild(optionText)
+            select.appendChild(option)
         }
     }
 }
@@ -59,26 +50,11 @@ function goHome(e) {
 
 function goProgram(e) {
     e.preventDefault()
-    if (storage.profile != null && storage.programs != null) {
-        storage.setProgram(e.target.value)
+    const select = document.querySelector('.ui.dropdown')
+    const id = select.value
+    if (id != '' && storage.profile != null && storage.programs != null) {
+        storage.setProgram(id)
         window.location.href = 'program.html'
-    }
-}
-
-function addProgram(e){
-    e.preventDefault()
-    const programList = document.querySelector('#programList')
-    const select = document.querySelector('#programSelect')
-    const id = select.selectedIndex
-    if (!storage.checkProfileForProgram(id)) {
-        storage.programToProfile(id)
-        const chosen = select.options[id].value
-        const newProgram = document.createElement('li')
-        console.log(chosen)
-        newProgram.innerHTML = chosen;
-        programList.appendChild(newProgram)
-    } else {
-        alert('Program already added to profile.')
     }
 }
 
