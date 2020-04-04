@@ -5,8 +5,8 @@ const Programs = new mongoose.Schema({
     type: {type: String},
     campus: {type: String},
     required_credits: { type: String, required: true, unique: true },
-    required_courses: [[]],
-    subjectPOStCombinations: [[]],
+    required_courses: [],
+    subjectPOStCombinations: [],
     notes: { type: String, required: true, unique: true }
 });
 module.exports = mongoose.model('programs', Programs);
