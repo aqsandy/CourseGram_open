@@ -17,7 +17,7 @@ router.post('/getUserPrograms', async (req, res) => {
 router.post('/saveUserProgram', async (req, res) => {
     const { username, program } = req.body;
     if(!username || !program){
-        res.status(400).send("Username or password not provided");
+        res.status(400).send("Username or program not provided");
     }
     let userExists = await user_schema.findOne({username});
     if(userExists){
@@ -34,7 +34,7 @@ router.post('/saveUserProgram', async (req, res) => {
             });
         }
         else{
-            res.status(200).send("Program already saved");
+            res.status(403).send("Program already saved");
         }
     }
     else{

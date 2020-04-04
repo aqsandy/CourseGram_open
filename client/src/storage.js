@@ -323,7 +323,6 @@ Storage.prototype = {
 				this.programs = []
 				this.toStorage()
 			})
-
 	},
 
 	register: function(username, email, password) {
@@ -456,9 +455,39 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (programId == null && profileId == null) {
-			this.profile.programs.push(this.program.id)
+			if (this.programToProfileServer(this.profile.username, this.program.id)) {
+				this.profile.programs.push(this.program.id)
+			}
 		}
 		this.toStorage()
+	},
+
+	programToProfileServer: function(username, programId) {
+		/*
+			Sets program to profile on server and returns true if success.
+		*/
+		const url = this.serverUrl + '/api/v1/saveUsers/saveUserProgram'
+		let data = {
+			username: username,
+			program: programId
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
+					return false
+				}
+			}).catch((error) => {
+				return false
+			})
 	},
 
 	checkProfileForProgram: function(programId, profileId=null) {

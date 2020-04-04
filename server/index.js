@@ -30,6 +30,7 @@ const authMiddleWare = (req, res, next) => {
     }
 }
 
+//Enable CORS
 const cors = require('cors');
 app.use(cors());
 
