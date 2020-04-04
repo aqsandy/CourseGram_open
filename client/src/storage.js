@@ -34,7 +34,7 @@ function Course(id, name, code, prerequisites, corequisites, exclusion, breadth,
 }
 
 function Storage() {
-	this.serverUrl = 'http://localhost:5001'
+	this.serverUrl = 'http://127.0.0.1:5001'
 	// Code below requires server calls.
 	this.profile = JSON.parse(sessionStorage.getItem('profile'))
 	this.profiles = JSON.parse(sessionStorage.getItem('profiles'))
@@ -460,6 +460,7 @@ Storage.prototype = {
 			}
 		}
 		this.toStorage()
+		window.location.reload()
 	},
 
 	programToProfileServer: function(username, programId) {
@@ -486,6 +487,7 @@ Storage.prototype = {
 					return false
 				}
 			}).catch((error) => {
+				console.log(error)
 				return false
 			})
 	},
@@ -528,6 +530,7 @@ Storage.prototype = {
 					return false
 				}
 			}).catch((error) => {
+				console.log(error)
 				return false
 			})
 	},
