@@ -1,9 +1,7 @@
-const home = document.querySelector('#home')
 const programRequirementsButton = document.querySelector('#programRequirements')
 const saveAsPDFButton = document.querySelector('#saveAsPDF')
 const printButton = document.querySelector('#print')
 const svgCourse = document.querySelector('#graph')
-home.addEventListener('click', goHome)
 programRequirementsButton.addEventListener('click', goProgramRequirements)
 saveAsPDFButton.addEventListener('click', saveAsPDF)
 printButton.addEventListener('click', print)
@@ -11,19 +9,6 @@ printButton.addEventListener('click', print)
 const storage = new Storage()
 
 if (storage.profile != null) {
-	const header = document.querySelector('#header')
-	header.firstElementChild.children[2].remove()
-	const profileContainer = document.createElement('li')
-	profileContainer.setAttribute('id', 'profileContainer')
-	const profileButton = document.createElement('button')
-	profileButton.setAttribute('id', 'profile')
-	const profileButtonText = document.createTextNode(storage.getUsername())
-	profileButton.appendChild(profileButtonText)
-	profileContainer.appendChild(profileButton)
-	header.firstElementChild.appendChild(profileContainer)
-	const profile = document.querySelector('#profile')
-	profile.addEventListener('click', goProfile)
-
 	const secondHeader = document.querySelector('#secondHeader')
 	const secondHeaderList = document.createElement('li')
 	secondHeaderList.setAttribute('class', 'secondHeaderList')
@@ -49,19 +34,6 @@ if (storage.profile != null) {
 	for (const child of secondHeader.firstElementChild.children) {
 		child.style.width = '24%'
 	}
-} else {
-	const login = document.querySelector('#login')
-	login.addEventListener('click', goLogin)
-}
-
-function goHome(e) {
-	e.preventDefault()
-	window.location.href = 'index.html'
-}
-
-function goLogin(e) {
-	e.preventDefault()
-	window.location.href = 'login.html'
 }
 
 function goProfile(e) {

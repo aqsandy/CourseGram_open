@@ -3,18 +3,11 @@ let emailValid = false
 let passwordValid = false
 let confirmPasswordValid = false
 
-const home = document.querySelector('#home')
 const registration = document.querySelector('#registration')
-home.addEventListener('click', goHome)
 registration.addEventListener('change', valid)
 registration.addEventListener('submit', signUp)
 
 const storage = new Storage()
-
-function goHome(e) {
-	e.preventDefault()
-	window.location.href = 'index.html'
-}
 
 function valid(e) {
 	e.preventDefault()
