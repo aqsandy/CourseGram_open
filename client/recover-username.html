@@ -3,16 +3,14 @@
 	<head>
 	 	<meta charset='utf-8'>
 	    <title>CourseGram Recover Username</title>
-	    <link rel='stylesheet' type='text/css' href='src/recover-username.css'>
+	    <link rel='stylesheet' type='text/css' href='src/css/recover-username.css'>
+	    <link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
 	</head>
 	<body>
-		<div id='header'>
-			<ul>
-				<a id='home' href="./index.html" class="header item">
-					<img class="logo" style="width:10em;" src="./img/logo.png">
-				</a>
-				<li id='titleContainer'><h1 id='title'>Recover Username</h1></li>
-			</ul>
+		<div class='ui three item menu' style="background-color: black">
+			<a class="item" href="index.html"><img class="logo" style="width:15em;" src="./img/logo.png"></a>
+			<div class="item"><h1 class="ui header" style="color: white">Recover Username</h1></div>
+			<div class="item"></div>
 		</div>
 		<form id='recover'>
 			<div id='recoverTextContainer'>
@@ -29,6 +27,7 @@
 				<input id='recoverUsernameButton' type='submit' value='Recover Username'>
 			</div>
 		</form>
-		<script type="text/javascript" src="src/recover-username.js"></script>
+		<script type="text/javascript" src="src/javascript/recover-username.js"></script>
+		<script type='text/javascript' src='src/javascript/header.js'></script>
 	</body>
 </html>
