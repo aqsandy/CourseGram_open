@@ -42,5 +42,32 @@ router.post('/saveUserProgram', async (req, res) => {
     }
 });
 
+router.post('/removeUserProgram', async (req, res) => {
+    const { username, program } = req.body;
+    if(!username || !program){
+        res.status(400).send("Username or program not provided");
+    }
+    let userExists = await user_schema.findOne({username});
+    if(userExists){
+        if(userExists.programs.includes(program)){
+            userExists.programs.splice(userExists.indexOf(program), 1)
+            userExists.save((err) => {
+                if (err) {
+                  console.log(err)
+                  res.status(500).send(err);
+                }
+                else {
+                  res.status(200).send("User saved");
+                }
+            });
+        }
+        else{
+            res.status(403).send("Program already removed");
+        }
+    }
+    else{
+        res.status(404).send("User not found"); 
+    }
+});
 
 module.exports = router;

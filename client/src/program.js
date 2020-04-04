@@ -27,13 +27,24 @@ if (storage.profile != null) {
 	const secondHeader = document.querySelector('#secondHeader')
 	const secondHeaderList = document.createElement('li')
 	secondHeaderList.setAttribute('class', 'secondHeaderList')
-	const addToProfileButton = document.createElement('button')
-	addToProfileButton.setAttribute('id', 'addToProfile')
-	const addToProfileButtonText = document.createTextNode('Add to Profile')
-	addToProfileButton.appendChild(addToProfileButtonText)
-	secondHeaderList.appendChild(addToProfileButton)
-	secondHeader.firstElementChild.appendChild(secondHeaderList)
-	addToProfileButton.addEventListener('click', addToProfile)
+
+	if (storage.checkProfileForProgram(storage.getProgramId())) {
+		const removeProgramFromProfileButton = document.createElement('button')
+		removeProgramFromProfileButton.setAttribute('id', 'addToProfile')
+		const removeProgramFromProfileButtonText = document.createTextNode('Remove from Profile')
+		removeProgramFromProfileButton.appendChild(removeProgramFromProfileButtonText)
+		secondHeaderList.appendChild(removeProgramFromProfileButton)
+		secondHeader.firstElementChild.appendChild(secondHeaderList)
+		removeProgramFromProfileButton.addEventListener('click', removeFromProfile)
+	} else {
+		const addToProfileButton = document.createElement('button')
+		addToProfileButton.setAttribute('id', 'addToProfile')
+		const addToProfileButtonText = document.createTextNode('Add to Profile')
+		addToProfileButton.appendChild(addToProfileButtonText)
+		secondHeaderList.appendChild(addToProfileButton)
+		secondHeader.firstElementChild.appendChild(secondHeaderList)
+		addToProfileButton.addEventListener('click', addToProfile)
+	}
 
 	for (const child of secondHeader.firstElementChild.children) {
 		child.style.width = '24%'
@@ -85,5 +96,14 @@ function addToProfile(e) {
 		storage.programToProfile()
 	} else {
 		alert('Program already added to profile.')
+	}
+}
+
+function removeFromProfile(e) {
+	e.preventDefault()
+	if (storage.checkProfileForProgram(storage.getProgramId())) {
+		storage.removeProgramFromProfile()
+	} else {
+		alert('Program already removed from profile.')
 	}
 }

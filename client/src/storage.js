@@ -490,6 +490,48 @@ Storage.prototype = {
 			})
 	},
 
+	removeProgramFromProfile: function(programId) {
+		/*
+			Removes programId from active profile programs.
+		*/
+		this.fromStorage()
+		if (this.profile != null) {
+			if (this.removeProgramFromProfileServer(this.profile.username, this.program.id)) {
+				this.profile.programs.splice(this.profile.programs.indexOf(programId), 1)
+			}
+		}
+		this.toStorage()
+		window.location.reload()
+	},
+
+	removeProgramFromProfileServer: function(username, programId) {
+		/*
+			Sets program to profile on server and returns true if success.
+		*/
+		const url = this.serverUrl + '/api/v1/saveUsers/removeUserProgram'
+		let data = {
+			username: username,
+			program: programId
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
+					return false
+				}
+			}).catch((error) => {
+				return false
+			})
+	},
+
 	checkProfileForProgram: function(programId, profileId=null) {
 		/*
 			Returns true if active profile (or profiles[profileId] if profileId not null) 
