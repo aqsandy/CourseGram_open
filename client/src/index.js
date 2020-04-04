@@ -1,6 +1,9 @@
 const home = document.querySelector('#home')
 home.addEventListener('click', goHome)
 
+const selectProgramButton = document.querySelector('#selectProgramButton')
+selectProgramButton.addEventListener('click', goProgram)
+
 const storage = new Storage()
 
 loadPrograms()
@@ -28,6 +31,7 @@ function loadPrograms() {
 	if (storage.programs == null) {
 		storage.loadPrograms()
 	}
+	const select = document.querySelector('.ui.dropdown')
 	Object.keys(storage.programs).map((id) => {
 		const programName = storage.getProgramName(id)
 		const programType = storage.getProgramType(id)
@@ -38,16 +42,11 @@ function loadPrograms() {
 		} else if (programCampus == 'eri') {
 			programCampus = 'UTM'
 		}
-		const programs = document.querySelector('#programs')
-		const program = document.createElement('li')
-		program.setAttribute('class', 'program')
-		const programButton = document.createElement('button')
-		programButton.setAttribute('class', 'programButton')
-		const programButtonText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
-		programButton.appendChild(programButtonText)
-		program.appendChild(programButton)
-		programs.children[1].appendChild(program)
-		programButton.addEventListener('click', goProgram)
+		const option = document.createElement('option')
+		option.setAttribute('value', id)
+		const optionText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
+		option.appendChild(optionText)
+		select.appendChild(option)
 	})
 }
 
@@ -74,12 +73,10 @@ function goProfile(e) {
 
 function goProgram(e) {
 	e.preventDefault()
-	const list = e.target.parentElement
-	for (let i = 0; i < list.children.length; i++) {
-		if (list.children[i] == e.target) {
-			const id = Object.keys(storage.programs)[i]
-			storage.setProgram(id)
-			window.location.href = 'program.html'
-		}
+	const select = document.querySelector('.ui.dropdown')
+	const id = select.value
+	if (id != '') {
+		storage.setProgram(id)
+		window.location.href = 'program.html'
 	}
 }

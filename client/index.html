@@ -4,11 +4,7 @@
 	 	<meta charset='utf-8'>
 	    <title>CourseGram Home</title>
 		<link rel='stylesheet' type='text/css' href='src/index.css'>
-		<link rel="stylesheet" type="text/css" href="./style/semantic.css">
-        <script
-        src="./style/jquery-3.1.1.min.js"
-        ></script>
-        <script src="./style/semantic.js"></script>
+		<link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
 	</head>
 	<body>
 		<!-- <div class="ui fixed inverted menu header">
@@ -32,12 +28,15 @@
 				<li id='loginContainer'><button id='login'>Login / Sign Up</button></li>
 			</ul>
 		</div>
-
 		<div id='programs'>
-			<div class="ui huge header">Programs</div>
-			<ul>
-			</ul>
-		</div>
+            <h1> Programs </h1>
+            <select class="ui dropdown">
+                <option value="">Program</option>
+            </select>
+            <button id="selectProgramButton" class="ui inverted blue button">Select Program</button>
+        </div>
+        <script src='src/libraries/jquery-3.1.1.min.js'></script>
+        <script src='src/libraries/semantic.js'></script>
 		<script type='text/javascript' src='src/storage.js'></script>
 		<script type='text/javascript' src='src/index.js'></script>
 	</body>

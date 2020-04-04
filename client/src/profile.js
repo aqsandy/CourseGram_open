@@ -22,6 +22,7 @@ loadProfilePrograms()
 function loadProfilePrograms() {
     console.log('Loading profile programs.')
     const programList = document.querySelector('#programList')
+    const menu = document.querySelector('.ui.selection.dropdown .menu')
     if (storage.profile != null) {
         for (const id of storage.profile.programs) {
             const programName = storage.getProgramName(id)
@@ -33,6 +34,12 @@ function loadProfilePrograms() {
             } else if (programCampus == 'eri') {
                 programCampus = 'UTM'
             }
+            const item = document.createElement('div')
+            item.setAttribute('class', 'item')
+            item.setAttribute('data-value', id)
+            const itemText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
+            item.appendChild(itemText)
+            menu.appendChild(item)
             const profileProgramText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
             const profileProgramButton = document.createElement('button')
             profileProgramButton.setAttribute('value', id)
