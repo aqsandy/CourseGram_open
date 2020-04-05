@@ -22,84 +22,80 @@ async function get_programs() {
     return response.json()
 }
 
-
-async function get_profiles() {
-    let token = sessionStorage.getItem('token')
-    console.log(token)
-    const data = {
-        "token": token
-    }
-    const url = "http://localhost:5001/api/v1/saveUsers/getUsers"
+async function get_courses() {
+    const url = "http://localhost:5001/api/v1/programs/getCourses"
     const request = new Request(url, {
-        method: 'POST',
-        body:JSON.stringify(data).replace(/\\"/g, ''),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    const response = await fetch(request);
-    return response.json()
-}
-
-
-async function del_courses(courseCode) {
-    const url = "http://localhost:5001/api/v1/saveUsers/deleteCourse"
-    let token = sessionStorage.getItem('token')
-    const data = {
-        courseCode,
-        token
-    }
-    const request = new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(data).replace(/\\"/g, ''),
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }    
     })
     const response = await fetch(request);
-    return response.json()
-}
-
-async function del_program(POStID) {
-    const url = "http://localhost:5001/api/v1/saveUsers/deleteProgram"
-    let token = sessionStorage.getItem('token')
-    const data = {
-        POStID,
-        token
-    }
-    const request = new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(data).replace(/\\"/g, ''),
-        headers: {
-            'Content-Type': 'application/json'
-        }    
-    })
-    const response = await fetch(request);
-    return response.json()
-}
-
-async function del_username(username) {
-    const url = "http://localhost:5001/api/v1/saveUsers/deleteUser"
-    let token = sessionStorage.getItem('token')
-    const data = {
-        username,
-        token
-    }
-    const request = new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(data).replace(/\\"/g, ''),
-        headers: {
-            'Content-Type': 'application/json'
-        }    
-    })
-    const response = await fetch(request);
-    console.log(response.status)
     return response.json()
 }
 
 const course_page = document.querySelector("#course");
 const profile_page = document.querySelector("#profile");
 const program_page = document.querySelector("#program");
+
+async function loading_courses(){
+    let courses = await get_courses()
+    const table = document.querySelector('tbody')
+    for(let i=0;i<courses.length;i++){
+        let campus = ''
+        switch(courses[i].courseCode.substr(7,8)){
+            case '1':
+                campus = "St.George"
+                break;
+            case '5':
+                campus = "Mississauga"
+        }
+        /* Buttons */
+        const delete_button = document.createElement('td')
+        delete_button.setAttribute('class','tb')
+        delete_button.setAttribute('id','opt')
+        const button1 = document.createElement('button')
+        button1.setAttribute('class','ui primary button')
+        button1.setAttribute('id','delete_course')
+        button1.innerText = 'Delete'
+        delete_button.appendChild(button1)
+        const edit_button = document.createElement('td')
+        edit_button.setAttribute('class','tb')
+        edit_button.setAttribute('id','opt')
+        const button2 = document.createElement('button')
+        button2.setAttribute('class','ui primary button')
+        button2.setAttribute('id','edit_course')
+        button2.innerText ='Edit'
+        edit_button.appendChild(button2)
+        const course = document.createElement('tr')
+        course.setAttribute('class','course')
+        course.setAttribute('id',courses[i].courseCode)
+        const course_code = document.createElement('td')
+        course_code.setAttribute('class','tb')
+        course_code.innerText=courses[i].courseCode
+        const course_name = document.createElement('td')
+        course_name.setAttribute('class','tb')
+        course_name.innerText=courses[i].data.courseTitle
+        const course_br = document.createElement('td')
+        course_br.setAttribute('class','tb')
+        course_br.innerText =courses[i].data.breadthCategories
+        const course_distribution = document.createElement('td')
+        course_distribution.setAttribute('class','tb')
+        course_distribution.innerText =courses[i].data.distributionCategories
+        const course_campus = document.createElement('td')
+        course_campus.setAttribute('class','tb')
+        course_campus.innerText=campus
+        course.appendChild(course_code)
+        course.appendChild(course_name)
+        course.appendChild(course_br)
+        course.appendChild(course_distribution)
+        course.appendChild(course_campus)
+        course.appendChild(delete_button)
+        course.appendChild(edit_button)
+        table.appendChild(course)
+    }
+}
+
 async function loading_programs(){
     let programs = await get_programs()
     const table = document.querySelector('tbody')
@@ -128,7 +124,7 @@ async function loading_programs(){
         edit_button.setAttribute('id','opt')
         const button2 = document.createElement('button')
         button2.setAttribute('class','ui primary button')
-        button2.setAttribute('id','delete_program')
+        button2.setAttribute('id','edit_program')
         button2.innerText ='Edit'
         edit_button.appendChild(button2)
         const program = document.createElement('tr')
@@ -234,7 +230,9 @@ async function load_courses(){
 
 
 if(course_page != null){
-    load_courses()
+    loading_courses()
+    course_page.addEventListener('click', delete_course);
+    course_page.addEventListener('click', edit_course);
 }
 else if(profile_page != null){
     load_profiles()
