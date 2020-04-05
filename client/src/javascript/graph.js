@@ -1,154 +1,240 @@
-// Create the input graph
-let g = new dagreD3.graphlib.Graph()
-.setGraph({edgesep: 40, ranksep: 300, nodesep: 40})
+
+var g = new dagreD3.graphlib.Graph({compound:true})
+.setGraph({edgesep: 10, ranksep: 500, nodesep: 18})
 .setDefaultEdgeLabel(function() { return {}; });
+const log = console.log
 
-// Here we're setting nodeclass, which is used by our custom drawNodes function
-// below.
-
-g.setNode(0,  { label: "ARC100H1",  class: "type-ARC100H1" });
-g.setNode(1,  { label: "JAV101H1",  class: "type-JAV101H1" });
-g.setNode(2,  { label: "JAV120H1",  class: "type-JAV120H1" });
-g.setNode(3,  { label: "JAV130H1",  class: "type-JAV130H1" });
-g.setNode(4,  { label: "JAV131H1",  class: "type-JAV131H1" });
-g.setNode(5,  { label: "JAV151H1",  class: "type-JAV151H1" });
-g.setNode(6,  { label: "JAV132H1",  class: "type-JAV132H1" });
-g.setNode(7,  { label: "JAV152H1",  class: "type-JAV152H1" });
-g.setNode(8,  { label: "ARC200H1",  class: "type-ARC200H1" });
-g.setNode(9,  { label: "ARC201H1",  class: "type-ARC201H1" });
-g.setNode(10, { label: "ARC251H1",  class: "type-ARC251H1" });
-g.setNode(11, { label: "ARC252H1",  class: "type-ARC252H1" });
-g.setNode(12, { label: "ARC253H1",  class: "type-ARC253H1" });
-g.setNode(13, { label: "ARC302H1",  class: "type-ARC302H1" });
-g.setNode(14, { label: "ARC351H1",  class: "type-ARC351H1" });
-g.setNode(15, { label: "ARC352H1",  class: "type-ARC352H1" });
-g.setNode(16, { label: "ARC353H1",  class: "type-ARC353H1" });
-g.setNode(17, { label: "ARC354H1",  class: "type-ARC354H1" });
-g.setNode(18, { label: "ARC355H1",  class: "type-ARC355H1" });
-g.setNode(19, { label: "ARC356H1",  class: "type-ARC356H1" });
-g.setNode(20, { label: "ARC357H1",  class: "type-ARC357H1" });
-g.setNode(21, { label: "ARC365H1",  class: "type-ARC365H1" });
-g.setNode(22, { label: "ARC366H1",  class: "type-ARC366H1" });
-g.setNode(23, { label: "ARC367H1",  class: "type-ARC367H1" });
-g.setNode(24, { label: "ARC462Y1",  class: "type-ARC462Y1" });
-g.setNode(25, { label: "ARC382H1",  class: "type-ARC382H1" });
-g.setNode(26, { label: "ARC480H1",  class: "type-ARC480H1" });
-g.setNode(27, { label: "ARC481H1",  class: "type-ARC481H1" });
-g.setNode(28, { label: "ARC482H1",  class: "type-ARC482H1" });
-g.setNode(29, { label: "ARC456H1",  class: "type-ARC456H1" });
-
-g.setEdge(25, 28, {curve:d3.curveBasis});
-g.setEdge(25, 27, {curve:d3.curveBasis});
-g.setEdge(25, 26, {curve:d3.curveBasis});
-g.setEdge(24, 29, {curve:d3.curveBasis});
-g.setEdge(9, 23, {curve:d3.curveBasis});
-g.setEdge(9, 22, {curve:d3.curveBasis});
-g.setEdge(9, 21, {curve:d3.curveBasis});
-g.setEdge(10, 20, {curve:d3.curveBasis});
-g.setEdge(11, 20, {curve:d3.curveBasis});
-g.setEdge(12, 20, {curve:d3.curveBasis});
-g.setEdge(10, 19, {curve:d3.curveBasis});
-g.setEdge(11, 19, {curve:d3.curveBasis});
-g.setEdge(12, 19, {curve:d3.curveBasis});
-g.setEdge(10, 18, {curve:d3.curveBasis});
-g.setEdge(11, 18, {curve:d3.curveBasis});
-g.setEdge(12, 18, {curve:d3.curveBasis});
-g.setEdge(10, 17, {curve:d3.curveBasis});
-g.setEdge(11, 17, {curve:d3.curveBasis});
-g.setEdge(12, 17, {curve:d3.curveBasis});
-g.setEdge(10, 16, {curve:d3.curveBasis});
-g.setEdge(11, 16, {curve:d3.curveBasis});
-g.setEdge(12, 16, {curve:d3.curveBasis});
-g.setEdge(10, 15, {curve:d3.curveBasis});
-g.setEdge(11, 15, {curve:d3.curveBasis});
-g.setEdge(12, 15, {curve:d3.curveBasis});
-g.setEdge(10, 14, {curve:d3.curveBasis});
-g.setEdge(11, 14, {curve:d3.curveBasis});
-g.setEdge(12, 14, {curve:d3.curveBasis});
-g.setEdge(7, 13, {curve:d3.curveBasis});
-g.setEdge(6, 12, {curve:d3.curveBasis});
-g.setEdge(7, 12, {curve:d3.curveBasis});
-g.setEdge(6, 11, {curve:d3.curveBasis});
-g.setEdge(7, 11, {curve:d3.curveBasis});
-g.setEdge(6, 10, {curve:d3.curveBasis});
-g.setEdge(7, 10, {curve:d3.curveBasis});
-g.setEdge(2, 3, {curve:d3.curveBasis});
-g.setEdge(4, 7, {curve:d3.curveBasis});
-g.setEdge(5, 7, {curve:d3.curveBasis});
-g.setEdge(0, 8, {curve:d3.curveBasis});
-g.setEdge(0, 9, {curve:d3.curveBasis});
-g.setEdge(1, 9, {curve:d3.curveBasis});
-g.setEdge(14, 29, {curve:d3.curveBasis});
-g.setEdge(15, 29, {curve:d3.curveBasis});
-g.setEdge(16, 29, {curve:d3.curveBasis});
-g.setEdge(17, 29, {curve:d3.curveBasis});
-g.setEdge(18, 29, {curve:d3.curveBasis});
-g.setEdge(19, 29, {curve:d3.curveBasis});
-g.setEdge(20, 29, {curve:d3.curveBasis});
-
-
-// Set up edges, no special attributes.
-
-// Create the renderer
-let render = new dagreD3.render();
-//render.createEdgePaths(createEdgePaths);
-
-// Set up an SVG group so that we can translate the final graph.
-let svg = d3.select("svg"),
-  svgGroup = svg.append("g");
-
-
-//From github documentation
-inner = d3.select("svg g"),
-zoom = d3.zoom().on("zoom", function() {
-  inner.attr("transform", d3.event.transform);
-});
-svg.call(zoom);
-// Run the renderer. This is what draws the final graph.
-render(d3.select("svg g"), g);
-
-// Center the graph
-let xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
-svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
-svg.attr("height", g.graph().height + 40);
-
-//highlight edges
-let everyNode = svg.selectAll("g.nodes rect");
-let testpath = d3.selectAll('g.edgePath path');
-let everyPath = d3.selectAll('g.edgePath').select('.path');
-let node = svg.selectAll(".node");
-
-//highlight nodes	
-svg.selectAll("g.nodes text")
-  .on("mouseover", function(d) {
-	//Hiding each path and node first
-    everyPath.style("opacity", 0.1);
-    everyNode.style("opacity", 0.1);
-	  let connectedEdges = g.nodeEdges(d)
-		neighbors = g.neighbors(d);
-    everyPath.each(function(node) {
-      for (let i = 0; i < connectedEdges.length; i++) {
-
-		//If the node is connected to the edge in question at any end
-        if ((connectedEdges[i].w == node.w && d == node.w) || (connectedEdges[i].v == node.v && d == node.v)) {
-          d3.select(this).style("opacity", 1); //reset opacity;
+function getprogram(program) {
+    log("get program is running")
+    const url = "http://localhost:5001/api/v1/programs/getProgram"
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify({code: program}),
+        headers: {
+            'Content-Type': 'application/json'
+        }    
+    })
+    fetch(request).then((res) => {
+        if (res.status === 200) {
+            //draw graph
+            return res.json()
         }
-      }
+        else {
+            return false
+        }
     })
-    everyNode.each(function(node) {
-      
-      if (d == node) {
+    .then((info) =>{
+        log("The info: " + JSON.stringify(info))
+        draw_program(info)
+    })
+    .catch((error) => {
+        log("error occured")
+        log(error)
+        return false
+    })
+
+}
+
+async function get_course(course) {
+    const url = "http://localhost:5001/api/v1/programs/getCourse"
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify({courseCode: course}),
+        headers: {
+            'Content-Type': 'application/json'
+        }    
+    })
+    const response = await fetch(request);
+    return response.json()
+}
+
+async function edge_setter(course){
+    
+    let course_info = await get_course(course)
+    if(course_info.prerequisite.length != 0){
+        //prerequisite exits
+        log(course)
+        course_info.prerequisite.forEach((prereq)=>{
+            if(prereq.substr(0,3)== 'MAT'||prereq.substr(0,3)== 'STA'||prereq.substr(0,3)== 'CSC'){
+                log("adding edge for prereq " + prereq)
+                g.setNode(prereq,{label:prereq,style:"fill:#7c8e51"})
+                g.setEdge(prereq,course,{label: "prerequisite",curve:d3.curveBasis})
+            }
+            return true
+        })
+    }
+    if(course_info.corequisite.length != 0){
+        //prerequisite exits
+        course_info.corequisite.forEach((coreq)=>{
+            if(coreq.substr(0,3)== 'MAT'||coreq.substr(0,3)== 'STA'||coreq.substr(0,3)== 'CSC'){
+                log("adding edge for coreq "+coreq)
+                g.setNode(coreq,{label:coreq,style:"fill:#7c8e51"})
+                g.setEdge(coreq,course,{label: "corequisite",curve:d3.curveBasis,arrowheadStyle:"stroke: #a7d0b8;fill:#a7d0b8"})
+            }
+            return true
+        })
+    }
+}
+
+function requirement_generator(requirement,type){
+    switch(requirement.requisiteType){
+        case "MINIMUM":
+            g.setNode(requirement.rid,{label:"One of the "+type+" in the group", clusterLabelPos: 'bottom',style:"fill: #bad5dc"});
+            requirement.code.forEach((course)=>{
+                
+                if(type == "course"){
+                    edge_setter(course)
+                }
+                g.setParent(course, requirement.rid)
+            });
+            break;
+        case "ALL":
+            g.setNode(requirement.rid,{label:"All of the "+type+" in the group", clusterLabelPos: 'bottom',style:"fill: #b4b4af"});
+            requirement.code.forEach((course)=>{
+                
+                if(type == "course"){
+                    edge_setter(course)
+                }
+                g.setParent(course, requirement.rid)
+            });
+            break;
+        case "ANY":
+            g.setNode(requirement.rid,{label:"Any of the "+type+" in the group", clusterLabelPos: 'bottom',style:"fill: #e3e8ee"});
+            requirement.code.forEach((course)=>{
+               
+                if(type == "course"){
+                    edge_setter(course)
+                }
+                g.setParent(course, requirement.rid)
+            });
+            break;
+        case "EXCLUDE":
+            g.setNode(requirement.rid,{label:"Not accept", clusterLabelPos: 'bottom',style:"fill: #d4dfe5"});
+            requirement.code.forEach((course)=>{
+                
+                if(type == "course"){
+                    edge_setter(course)
+                }
+                g.setParent(course, requirement.rid)
+            });
+            break;
+        case "NOF":
+            g.setNode(requirement.rid,{label:requirement.nof+" of the course in the group", clusterLabelPos: 'bottom',style:"fill: #a5b4b9"});
+            requirement.code.forEach((course)=>{
+                
+                if(type == "course"){
+                    edge_setter(course)
+                }
+                g.setParent(course, requirement.rid)
+            });
+            break;
+    }
+}
+
+async function draw_program(program_info){
+    let name = program_info.name;
+    let type = program_info.type;
+    let ori_campus = program_info.campus;
+    let campus = "";
+    let req_credit = program_info.required_credits;
+    let note = program_info.notes;
+    let subject_comb = program_info.subjectPOStCombinations;
+    let required_courses = program_info.required_courses;
+    switch(ori_campus){
+        case "stg":
+            campus = "St. George Campus"
+            break;
+        case "eri":
+            campus = "Mississauga Campus"
+    }
+    // bottom layer of the graph
+    // g.setNode('program', {label: name+" "+type+" holds at "+campus+" Require Credits: "+req_credit, clusterLabelPos: 'top', style: 'fill: #d3d7e8'});
+    /* creating all course node */
+    for (let i = 0;i<required_courses.length;i++){
+        const requirement = required_courses[i];
+        // g.setParent(requirement.rid,'program')
+        if(requirement.courseEntity == true){
+            //course requirement
+            requirement.code.forEach((course)=>{
+                log(course)
+                g.setNode(course,{label:course,style:"fill:#7c8e51"})
+            })
+        }else if(requirement.categoryEntity == true){
+            //category requirement
+            requirement.code.forEach((category)=>{
+                log(category)
+                g.setNode(category,{label:category,style:"fill:#384d47"})
+            })
+        }
+    }
+    /* Creating relation */
+    log("relation here!")
+    for (let i = 0;i<required_courses.length;i++){
+        const requirement = required_courses[i];
+        if(requirement.courseEntity == true){
+            for(let j=0;j<requirement.code.length;j++){
+                log("edge setter called")
+                await edge_setter(requirement.code[j])
+            }
+        }
+    }
+    // for (let i = 0;i<required_courses.length;i++){
+    //     const requirement = required_courses[i];
+    //     if(requirement.courseEntity == true){
+    //         //course requirement
+    //         requirement_generator(requirement,"course")
+    //     }else if(requirement.categoryEntity == true){
+    //         //category requirement
+    //         requirement_generator(requirement,"category")
+    //     }else if(requirement.setholder == true){
+    //         //skip setholder
+    //         continue
+    //     }else if(requirement.combination == true){
+    //         //combination dealer
+    //         g.setNode(requirement.rid, {style: 'fill: #d3d7e8'});
+    //         requirement.code.forEach((rid)=>{
+    //             const sub_category = required_courses[rid]
+    //             log(sub_category)
+    //             if(sub_category.courseEntity){
+    //                 //course requirement
+    //                 requirement_generator(sub_category,"course")
+                    
+    //             }else if(sub_category.categoryEntity){
+    //                 //category requirement
+    //                 requirement_generator(sub_category,"category")
+    //             }
+    //             g.setParent(sub_category,requirement.rid)
+    //         })
+    //     }
+    // }
+    log(g.nodes())
+    g.nodes().forEach(function(v) {
+        var node = g.node(v);
+        // Round the corners of the nodes
+        node.rx = node.ry = 5;
         
-        d3.select(this).style("opacity",1)
-      };
-      for (var i = 0; i < d.length; i++){
-        if (neighbors[i] == d) {
-          d3.select(this).style("opacity",1);                                 
-        }				
-      }
-    })
-  })
-  .on("mouseout", function() {
-    everyNode.style("opacity", 1);
-    everyPath.style("opacity", 1);
-  })
+      });
+
+    // Create the renderer
+    var render = new dagreD3.render();
+    /* Putting notes here */
+    const newelement = document.createElement("p");
+    newelement.textContent = "Notes:"+note
+    document.body.appendChild(newelement)
+    // Set up an SVG group so that we can translate the final graph.
+    var svg = d3.select("svg"),
+        svgGroup = svg.append("g");
+        inner = d3.select("svg g"),
+        zoom = d3.zoom().on("zoom", function() {
+          inner.attr("transform", d3.event.transform);
+        });
+        svg.call(zoom);
+    // Run the renderer. This is what draws the final graph.
+    render(d3.select("svg g"), g);
+
+    // Center the graph
+    var xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
+    svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
+    svg.attr("height", g.graph().height + 40);
+    return true
+}
