@@ -8,6 +8,14 @@ printButton.addEventListener('click', print)
 
 const storage = new Storage()
 
+if(storage.getProgramId()){
+	const newelement = document.createElement("embed");
+	console.log(storage.getProgramId())
+	newelement.setAttribute("src","./graph.html?id="+storage.getProgramId());
+	newelement.setAttribute("style","height:100%;width:100%");
+	document.body.appendChild(newelement);
+}
+
 if (storage.profile != null) {
 	const secondHeader = document.querySelector('#secondHeader')
 	const secondHeaderList = document.createElement('li')
