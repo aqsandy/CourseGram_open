@@ -112,15 +112,15 @@ router.post('/saveUserProgram', async (req, res) => {
 });
 
 router.post('/removeUserProgram', async (req, res) => {
-    console.log("Reached")
     const { username, program } = req.body;
+    console.log(program)
     if(!username || !program){
         res.status(400).send("Username or program not provided");
     }
     let userExists = await user_schema.findOne({username});
     if(userExists){
         if(userExists.programs.includes(program)){
-            userExists.programs.splice(userExists.indexOf(program), 1)
+            userExists.programs.splice(userExists.programs.indexOf(program), 1)
             userExists.save((err) => {
                 if (err) {
                   console.log(err)

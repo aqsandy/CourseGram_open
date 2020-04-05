@@ -21,22 +21,16 @@ function login(e) {
 		
 		storage.login(username, password).then(res => {
 			if (res){
+				console.log(storage.token)
 				if (storage.profile.admin) {
 					window.location.href = 'admin.html'
 				} else {
 					window.location.href = 'index.html'
 				}
-			} else {
+			}
+			else {
 				
 				const errorContainer = document.querySelector(".ui.yellow.message")
-				
-				// const unlist = document.createElement("ul")
-				// unlist.setAttribute("class","list")
-				// const error = document.createElement('li')
-				// error.appendChild(errorText)
-				// unlist.appendChild(error)
-				// const errorText = document.createTextNode('')
-				
 				errorContainer.innerHTML = "Invalid username or password"
 			}
 		})

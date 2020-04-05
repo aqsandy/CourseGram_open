@@ -42,7 +42,8 @@ function goProfile(e) {
 	if (storage.profile != null) {
 		if (storage.profile.admin) {
 			window.location.href = 'admin.html'
-		} else {
+		}
+		else {
 			window.location.href = 'profile.html'
 		}
 	}
@@ -67,8 +68,6 @@ function addToProfile(e) {
 	e.preventDefault()
 	if (!storage.checkProfileForProgram(storage.getProgramId())) {
 		storage.programToProfile()
-	} else {
-		alert('Program already added to profile.')
 	}
 }
 
@@ -76,8 +75,5 @@ function removeFromProfile(e) {
 	e.preventDefault()
 	if (storage.checkProfileForProgram(storage.getProgramId())) {
 		storage.removeProgramFromProfile()
-	}
-	else {
-		alert('Program already removed from profile.')
 	}
 }

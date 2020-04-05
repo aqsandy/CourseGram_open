@@ -64,7 +64,6 @@ Storage.prototype = {
 			Saves profile data to sessionStorage.
 			Code below requires server calls.
 		*/
-		console.log("In storage: " + this.token)
 		sessionStorage.setItem('profile', JSON.stringify(this.profile))
 		sessionStorage.setItem('profiles', JSON.stringify(this.profiles))
 		sessionStorage.setItem('program', JSON.stringify(this.program))
@@ -549,21 +548,20 @@ Storage.prototype = {
 		this.toStorage()
 	},
 
-	programToProfile: function(programId=null, profileId=null) {
+	programToProfile: function() {
 		/*
 			Pushes active program to active profile or 
 			programs[programId] to active profile or profiles[profileId].
 		*/
 		this.fromStorage()
-		console.log("OK: " + this.program.id)
-		if (programId == null && profileId == null) {
-			if (this.programToProfileServer(this.profile.username, this.program.id)) {
-				
-				this.profile.programs.push(this.program.id)
+		
+		this.programToProfileServer(this.profile.username, this.program.code).then( bool =>{
+			if (bool) {
+				this.profile.programs.push(this.program.code)
 			}
-		}
-		this.toStorage()
-		window.location.reload()
+			this.toStorage()
+			window.location.reload()
+		})
 	},
 
 	programToProfileServer: function(username, programId) {
@@ -573,16 +571,17 @@ Storage.prototype = {
 		const url = this.serverUrl + '/api/v1/saveUsers/saveUserProgram'
 		let data = {
 			username: username,
-			program: programId
+			program: programId,
+			token: this.token
 		}
 		const request = new Request(url, {
 			method: 'post',
-			body: JSON.stringify(data),
+			body: JSON.stringify(data),	
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		})
-		return fetch(url)
+		return fetch(request)
 			.then((res) => {
 				if (res.status === 200 || res.status === 403) {
 					return true
@@ -601,14 +600,13 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			console.log("Hi")
-			return this.removeProgramFromProfileServer(this.profile.username, this.program.id).then((bool)=>{
+			return this.removeProgramFromProfileServer(this.profile.username, this.program.code).then((bool)=>{
 				
 				if (bool) {
 					this.profile.programs.splice(this.profile.programs.indexOf(programId), 1)
 				}
 				this.toStorage()
-				// wi	ndow.location.reload()
+				window.location.reload()
 			})
 		}
 		return false;
@@ -621,16 +619,16 @@ Storage.prototype = {
 		const url = this.serverUrl + '/api/v1/saveUsers/removeUserProgram'
 		let data = {
 			username: username,
-			program: programId
+			program: programId,
+			token: this.token
 		}
 		const request = new Request(url, {
-			method: 'post',
+			method: 'POST',
 			body: JSON.stringify(data),
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		})
-		console.log(this.token + "____________________")
 		return fetch(request)
 			.then((res) => {
 				if (res.status === 200) {
@@ -653,17 +651,16 @@ Storage.prototype = {
 		
 		if (profileId != null) {
 			if (this.programs != null && this.profiles != null) {
-				if (programId < this.programs.length && profileId < this.profiles.length) {
-					for (const program of this.profiles[profileId].programs) {
-						if (program.id == programId) {
-							return true
-						}
+				for (const program of this.profiles[profileId].programs) {
+					if (program == programId) {
+						return true
 					}
 				}
 			}
-		} else if (this.program != null && this.profile != null) {
-			for (const programId of this.profile.programs) {
-				if (this.program.id == programId) {
+		}
+		else if (this.program != null && this.profile != null) {
+			for (const program of this.profile.programs) {
+				if (program == programId) {
 					return true
 				}
 			}
@@ -676,10 +673,8 @@ Storage.prototype = {
 			Get active program ID.
 		*/
 		this.fromStorage()
-		
-		
+
 		if (this.program != null) {
-			console.log(this.program)
 			return this.program.code
 		}
 		return null

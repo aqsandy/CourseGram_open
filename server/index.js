@@ -12,11 +12,11 @@ connect_db();
 
 //Middleware
 const authMiddleWare = (req, res, next) => {
-    const token = req.body;
-    
+    const token = req.body.token;
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
-    } 
+    }
+    
     else {
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
