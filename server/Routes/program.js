@@ -37,4 +37,15 @@ router.post('/getCourse', async (req, res) =>{
     }
 });
 
+router.get('/getCourses', async (req, res) =>{
+    const { courseCode } = req.body;
+    const courses = await courses_schema.find({});
+    if(courses){
+        res.status(200).json(courses);
+    }
+    else{
+        res.status(409).json({error: "Course not found"});
+    }
+});
+
 module.exports = router;

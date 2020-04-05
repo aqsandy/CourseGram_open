@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 // const saved_schema = require('../model/savedPrograms');
 const user_schema = require('../model/users');
+const courses_schema = require('../model/courses');
+const program_schema = require('../model/programs');
 
 router.post('/getUserPrograms', async (req, res) => {
     const { username } = req.body;
@@ -139,5 +141,61 @@ router.post('/removeUserProgram', async (req, res) => {
         res.status(404).send("User not found"); 
     }
 });
+
+router.post('/getUsers', async (req, res) => {
+    const { user } = req;
+    console.log(req.user)
+    if(user.isAdmin){
+        const users = await user_schema.find({})
+        res.status(200).json(users)
+    }
+    else{
+        res.status(404).send("Not allowed")
+    }
+})
+
+router.post('/deleteCourse', async (req, res) => {
+    console.log("REached")
+
+    const { user } = req;
+    const {courseCode} = req.body
+    
+    if(user.isAdmin){
+        const users = await courses_schema.deleteOne({courseCode})
+        console.log(users)
+        res.status(200).json(users)
+    }
+    else{
+        res.status(404).send("Not allowed")
+    }
+})
+
+router.post('/deleteProgram', async (req, res) => {
+    console.log("REached")
+
+    const { user } = req;
+    const {POStID} = req.body
+    
+    if(user.isAdmin){
+        const program = await program_schema.deleteOne({POStID})
+        res.status(200).json(program)
+    }
+    else{
+        res.status(404).send("Not allowed")
+    }
+})
+
+router.post('/deleteUser', async (req, res) => {
+    const { user } = req;
+    const {username} = req.body
+    if(user.isAdmin){
+        
+        const user_del = await user_schema.deleteOne({username})
+        res.status(200).json(user_del)
+    }
+    else{
+        res.status(404).send("Not allowed")
+    }
+})
 
 module.exports = router;

@@ -13,6 +13,7 @@ connect_db();
 //Middleware
 const authMiddleWare = (req, res, next) => {
     const token = req.body.token;
+    console.log(req.body)
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
     }

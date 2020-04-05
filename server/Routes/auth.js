@@ -71,8 +71,9 @@ router.post('/login', async (req, res)  => {
           // Issue token
           const payload = { user };
           const token = jwt.sign(payload, secret, {
-            expiresIn: '1h'
+            expiresIn: '10h'
           });
+          console.log(token)
           res.json({token, user})
         }
       });

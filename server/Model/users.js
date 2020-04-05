@@ -18,7 +18,6 @@ Users.pre('save', function (next){
         
         const document = this;
         const callback = (e, hashedPassword) => {
-          console.log(e)
           if (!e) {
               document.password = hashedPassword;
               next();
