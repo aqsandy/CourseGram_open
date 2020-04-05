@@ -12,26 +12,35 @@ function goHome(e) {
 
 function login(e) {
 	e.preventDefault()
+	
 	if (typeof(Storage) !== 'undefined') {
+		
 		const username = document.querySelector('#username').value
 		const password = document.querySelector('#password').value
 		// Validate against profile username and password on server
-		if (storage.login(username, password)){
-			if (storage.profile.admin) {
-				window.location.href = 'admin.html'
+		
+		storage.login(username, password).then(res => {
+			if (res){
+				if (storage.profile.admin) {
+					window.location.href = 'admin.html'
+				} else {
+					window.location.href = 'index.html'
+				}
 			} else {
-				window.location.href = 'index.html'
+				
+				const errorContainer = document.querySelector(".ui.yellow.message")
+				
+				// const unlist = document.createElement("ul")
+				// unlist.setAttribute("class","list")
+				// const error = document.createElement('li')
+				// error.appendChild(errorText)
+				// unlist.appendChild(error)
+				// const errorText = document.createTextNode('')
+				
+				errorContainer.innerHTML = "Invalid username or password"
 			}
-		} else {
-			const errorContainer = document.querySelector('#ui error message')
-			const unlist = document.createElement("ul")
-			unlist.setAttribute("class","list")
-			const error = document.createElement('li')
-			const errorText = document.createTextNode('Invalid username or password.')
-			error.appendChild(errorText)
-			unlist.appendChild(error)
-			errorContainer.appendChild(unlist)
-		}
+		})
+		
 	}
 }
 

@@ -43,6 +43,7 @@ router.post('/saveUserProgram', async (req, res) => {
 });
 
 router.post('/removeUserProgram', async (req, res) => {
+    console.log("Reached")
     const { username, program } = req.body;
     if(!username || !program){
         res.status(400).send("Username or program not provided");

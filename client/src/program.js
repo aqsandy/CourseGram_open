@@ -27,7 +27,7 @@ if (storage.profile != null) {
 	const secondHeader = document.querySelector('#secondHeader')
 	const secondHeaderList = document.createElement('li')
 	secondHeaderList.setAttribute('class', 'secondHeaderList')
-
+	
 	if (storage.checkProfileForProgram(storage.getProgramId())) {
 		const removeProgramFromProfileButton = document.createElement('button')
 		removeProgramFromProfileButton.setAttribute('id', 'addToProfile')
@@ -43,6 +43,7 @@ if (storage.profile != null) {
 		addToProfileButton.appendChild(addToProfileButtonText)
 		secondHeaderList.appendChild(addToProfileButton)
 		secondHeader.firstElementChild.appendChild(secondHeaderList)
+		
 		addToProfileButton.addEventListener('click', addToProfile)
 	}
 
@@ -103,7 +104,8 @@ function removeFromProfile(e) {
 	e.preventDefault()
 	if (storage.checkProfileForProgram(storage.getProgramId())) {
 		storage.removeProgramFromProfile()
-	} else {
+	}
+	else {
 		alert('Program already removed from profile.')
 	}
 }

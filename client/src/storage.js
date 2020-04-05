@@ -41,6 +41,7 @@ function Storage() {
 	this.program = JSON.parse(sessionStorage.getItem('program'))
 	this.programs = JSON.parse(sessionStorage.getItem('programs'))
 	this.courses = JSON.parse(sessionStorage.getItem('courses'))
+	this.token = JSON.parse(sessionStorage.getItem('token'))
 }
 
 
@@ -55,6 +56,7 @@ Storage.prototype = {
 		this.program = JSON.parse(sessionStorage.getItem('program'))
 		this.programs = JSON.parse(sessionStorage.getItem('programs'))
 		this.courses = JSON.parse(sessionStorage.getItem('courses'))
+		this.token = JSON.parse(sessionStorage.getItem('token'))
 	},
 
 	toStorage: function() {
@@ -62,11 +64,13 @@ Storage.prototype = {
 			Saves profile data to sessionStorage.
 			Code below requires server calls.
 		*/
+		console.log("In storage: " + this.token)
 		sessionStorage.setItem('profile', JSON.stringify(this.profile))
 		sessionStorage.setItem('profiles', JSON.stringify(this.profiles))
 		sessionStorage.setItem('program', JSON.stringify(this.program))
 		sessionStorage.setItem('programs', JSON.stringify(this.programs))
 		sessionStorage.setItem('courses', JSON.stringify(this.courses))
+		sessionStorage.setItem('token', JSON.stringify(this.token))
 	},
 
 	createProfilePush: function(username, email, password, admin=false) {
@@ -314,7 +318,7 @@ Storage.prototype = {
 			.then((json) => {
 				this.programs = {}
 				json.map((program) => {
-					this.programs[program._id] = new Program(program._id, program.POStID, program.name, program.type,
+					this.programs[program.POStID] = new Program(program._id, program.POStID, program.name, program.type,
 						program.campus, program.required_credits, program.required_courses,
 						program.subjectPostCombinations, program.notes)
 				})
@@ -379,15 +383,19 @@ Storage.prototype = {
 				}
 			})
 			.then((json) => {
-				console.log(json)
+				if(json == false){
+					return false
+				}
 				const profileData = json.user
+				
 				this.fromStorage()
+				this.token = json.token
 				this.profile = new Profile(profileData._id, profileData.username, profileData.email, 
 					profileData.password, profileData.isAdmin, profileData.requestDelete, profileData.programs)
 				this.toStorage()
 				return true
-				console.log('Login success')
 			}).catch((error) => {
+				console.log(error)
 				return false
 			})
 	},
@@ -454,8 +462,10 @@ Storage.prototype = {
 			programs[programId] to active profile or profiles[profileId].
 		*/
 		this.fromStorage()
+		console.log("OK: " + this.program.id)
 		if (programId == null && profileId == null) {
 			if (this.programToProfileServer(this.profile.username, this.program.id)) {
+				
 				this.profile.programs.push(this.program.id)
 			}
 		}
@@ -481,7 +491,7 @@ Storage.prototype = {
 		})
 		return fetch(url)
 			.then((res) => {
-				if (res.status === 200) {
+				if (res.status === 200 || res.status === 403) {
 					return true
 				} else {
 					return false
@@ -498,12 +508,17 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			if (this.removeProgramFromProfileServer(this.profile.username, this.program.id)) {
-				this.profile.programs.splice(this.profile.programs.indexOf(programId), 1)
-			}
+			console.log("Hi")
+			return this.removeProgramFromProfileServer(this.profile.username, this.program.id).then((bool)=>{
+				
+				if (bool) {
+					this.profile.programs.splice(this.profile.programs.indexOf(programId), 1)
+				}
+				this.toStorage()
+				// wi	ndow.location.reload()
+			})
 		}
-		this.toStorage()
-		window.location.reload()
+		return false;
 	},
 
 	removeProgramFromProfileServer: function(username, programId) {
@@ -522,7 +537,8 @@ Storage.prototype = {
 				'Content-Type': 'application/json',
 			},
 		})
-		return fetch(url)
+		console.log(this.token + "____________________")
+		return fetch(request)
 			.then((res) => {
 				if (res.status === 200) {
 					return true
@@ -541,6 +557,7 @@ Storage.prototype = {
 			contains programs[programId].
 		*/
 		this.fromStorage()
+		
 		if (profileId != null) {
 			if (this.programs != null && this.profiles != null) {
 				if (programId < this.programs.length && profileId < this.profiles.length) {
@@ -566,8 +583,11 @@ Storage.prototype = {
 			Get active program ID.
 		*/
 		this.fromStorage()
+		
+		
 		if (this.program != null) {
-			return this.program.id
+			console.log(this.program)
+			return this.program.code
 		}
 		return null
 	},
