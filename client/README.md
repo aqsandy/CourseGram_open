@@ -23,7 +23,7 @@ FUNCTIONALITY
 On the home page (seen by clicking the top left corner) users can see the option of the programs they have saved, in this case it's Architecture. By clicking on it, they can see the program tree where each node contains a course code. One can drag the diagram or zoom in and out.
 Hovering over a node will highlight its edges and its neighbors for visibility reasons.
 
-Clicking on program requirement innthe panel above will give a text summary if what the program needs. On top of that, users will have the ability to print the diagram, save it, and download it as a pdf.
+Clicking on program requirement in the panel above will give a text summary if what the program needs. 
 
 COMPLEXITY
 
@@ -36,7 +36,7 @@ FEATURES WE DID NOT IMPLEMENT AND WHY
 
 1. In the case of hovering nodes, we wanted a tooltip to pop up with course information, however this wasn't feasible as any online resource was too old and said solutions seem deprecated.
 
-2. Saving an SVG to a PDF was far too complicated to do considering we may scrap DagreD3js to solution problem 1.
+2. Print and Save to PDF functionality was not implemented due to complexity of d3 graphing implementation.
 
 
 Citations:
