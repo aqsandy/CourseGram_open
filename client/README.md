@@ -31,6 +31,7 @@ Taking account the sheer amount of the programs and the possible configurations 
 
 Firstly, we will need to find some sort of API if not create a webscraper to get the needed information. Then we have to create the appropriate edges and nodes and find a correct way to format them in cases such as too many disconnected nodes.
 
+We are grabbing the program data from the database's program collection for the graph. Analyzing the information for each course from course collection then reform a graph to user to show the requirement courses with prerequisite and co-requisite by arrowlines.
 
 FEATURES WE DID NOT IMPLEMENT AND WHY
 
@@ -38,7 +39,7 @@ FEATURES WE DID NOT IMPLEMENT AND WHY
 
 2. Print and Save to PDF functionality was not implemented due to complexity of d3 graphing implementation.
 
-
+3. Due to the lack of backend support, we are unable to develop delete/edit program, course and profile from admin side. Also, loading users profile and course info cannot get developed due to the same reason.
 Citations:
 
 1. https://github.com/dagrejs/dagre-d3/wiki
