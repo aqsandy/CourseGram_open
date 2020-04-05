@@ -22,15 +22,78 @@ async function get_programs() {
     return response.json()
 }
 
-async function get_courses() {
-    const url = "http://localhost:5001/api/v1/programs/getCourses"
+
+async function get_profiles() {
+    let token = sessionStorage.getItem('token')
+    console.log(token)
+    const data = {
+        "token": token
+    }
+    const url = "http://localhost:5001/api/v1/saveUsers/getUsers"
     const request = new Request(url, {
-        method: 'GET',
+        method: 'POST',
+        body:JSON.stringify(data).replace(/\\"/g, ''),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const response = await fetch(request);
+    return response.json()
+}
+
+
+async function del_courses(courseCode) {
+    const url = "http://localhost:5001/api/v1/saveUsers/deleteCourse"
+    let token = sessionStorage.getItem('token')
+    const data = {
+        courseCode,
+        token
+    }
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify(data).replace(/\\"/g, ''),
         headers: {
             'Content-Type': 'application/json'
         }    
     })
     const response = await fetch(request);
+    return response.json()
+}
+
+async function del_program(POStID) {
+    const url = "http://localhost:5001/api/v1/saveUsers/deleteProgram"
+    let token = sessionStorage.getItem('token')
+    const data = {
+        POStID,
+        token
+    }
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify(data).replace(/\\"/g, ''),
+        headers: {
+            'Content-Type': 'application/json'
+        }    
+    })
+    const response = await fetch(request);
+    return response.json()
+}
+
+async function del_username(username) {
+    const url = "http://localhost:5001/api/v1/saveUsers/deleteUser"
+    let token = sessionStorage.getItem('token')
+    const data = {
+        username,
+        token
+    }
+    const request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify(data).replace(/\\"/g, ''),
+        headers: {
+            'Content-Type': 'application/json'
+        }    
+    })
+    const response = await fetch(request);
+    console.log(response.status)
     return response.json()
 }
 
@@ -230,9 +293,7 @@ async function load_courses(){
 
 
 if(course_page != null){
-    loading_courses()
-    course_page.addEventListener('click', delete_course);
-    course_page.addEventListener('click', edit_course);
+    load_courses()
 }
 else if(profile_page != null){
     load_profiles()
