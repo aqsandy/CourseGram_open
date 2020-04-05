@@ -16,8 +16,14 @@ if (storage.program != null) {
 		}
 	programTitle.innerHTML = programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')'
 	const notes = document.querySelector('#notes')
-	const notesText = document.createTextNode(storage.getProgramNotes())
-	notes.appendChild(notesText)
+	notes.innerHTML = '';
+	
+	const array = storage.getProgramNotes().split("\\n")
+	console.log(array)
+	for(let i = 0; i < array.length; i++){
+		notes.innerHTML += "<b>" + array[i].substring(0, 2) + "</b>" + " " + array[i].substring(2)
+		notes.innerHTML +='<br/><br/>'
+	}
 }
 
 function goProgram(e) {

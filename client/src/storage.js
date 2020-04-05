@@ -123,11 +123,14 @@ Storage.prototype = {
 			Changes active profile username to username.
 		*/
 		this.fromStorage()
-		if (this.profile != null) {
-			if (changeProfileUsernameServer(this.profile.username, username)) {
-				this.profile.username = username
-				this.toStorage()
-			}
+		if (this.profile != null && username) {
+			return this.changeProfileUsernameServer(this.profile.username, username).then((bool) =>{
+				if (bool) {
+					this.profile.username = username
+					this.toStorage()
+				}
+				return bool
+			})
 		}
 	},
 
@@ -138,7 +141,8 @@ Storage.prototype = {
 		const url = this.serverUrl + '/api/v1/saveUsers/saveUserUsername'
 		let data = {
 			username: username,
-			newUsername: newUsername
+			newUsername: newUsername,
+			token: this.token
 		}
 		const request = new Request(url, {
 			method: 'post',
@@ -147,7 +151,7 @@ Storage.prototype = {
 				'Content-Type': 'application/json',
 			},
 		})
-		return fetch(url)
+		return fetch(request)
 			.then((res) => {
 				if (res.status === 200) {
 					return true
@@ -192,11 +196,15 @@ Storage.prototype = {
 			Changes active profile email to email.
 		*/
 		this.fromStorage()
-		if (this.profile != null) {
-			if (changeProfileEmailServer(this.profile.username, email)) {
-				this.profile.email = email
-				this.toStorage()
-			}
+		if (this.profile != null && email) {
+			return this.changeProfileEmailServer(this.profile.username, email).then(bool =>{
+				if (bool) {
+					this.profile.email = email
+					this.toStorage()
+				}
+				return bool
+			})
+			
 		}
 	},
 
@@ -207,7 +215,8 @@ Storage.prototype = {
 		const url = this.serverUrl + '/api/v1/saveUsers/saveUserEmail'
 		let data = {
 			username: username,
-			email: email
+			email: email,
+			token: this.token
 		}
 		const request = new Request(url, {
 			method: 'post',
@@ -216,7 +225,7 @@ Storage.prototype = {
 				'Content-Type': 'application/json',
 			},
 		})
-		return fetch(url)
+		return fetch(request)
 			.then((res) => {
 				if (res.status === 200) {
 					return true
@@ -262,10 +271,13 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			if (changeProfilePasswordServer(this.profile.username, password)) {
-				this.profile.password = password
-				this.toStorage()
-			}
+			return this.changeProfilePasswordServer(this.profile.username, password).then((bool =>{
+				if(bool){
+					this.profile.password = password
+					this.toStorage()
+				}
+				return bool
+			}))
 		}
 	},
 
@@ -276,7 +288,8 @@ Storage.prototype = {
 		const url = this.serverUrl + '/api/v1/saveUsers/saveUserPassword'
 		let data = {
 			username: username,
-			password: password
+			password: password,
+			token: this.token
 		}
 		const request = new Request(url, {
 			method: 'post',
@@ -285,7 +298,7 @@ Storage.prototype = {
 				'Content-Type': 'application/json',
 			},
 		})
-		return fetch(url)
+		return fetch(request)
 			.then((res) => {
 				if (res.status === 200) {
 					return true

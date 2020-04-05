@@ -5,6 +5,8 @@ const emailChange = document.querySelector('#changeEmail')
 const passwordChange = document.querySelector('#changePassword')
 const logout = document.querySelector('#logout')
 const selectProgramButton = document.querySelector('#selectProgramButton')
+const email = document.querySelector('#email')
+const prof = document.querySelector('#user')
 
 home.addEventListener('click', goHome)
 userChange.addEventListener('click', changeUser)
@@ -24,16 +26,23 @@ function loadProfilePrograms() {
     console.log('Loading profile programs.')
     const select = document.querySelector('.ui.dropdown')
     if (storage.profile != null) {
+        const emailprof = storage.getEmail()
+        const username = storage.getUsername( )
+        email.innerHTML = emailprof;
+        prof.innerHTML = username;
         for (const id of storage.profile.programs) {
             const programName = storage.getProgramName(id)
             const programType = storage.getProgramType(id)
             const programCode = storage.getProgramCode(id)
+            
             let programCampus = storage.getProgramCampus(id)
             if (programCampus == 'stg') {
                 programCampus = 'St. George'
             } else if (programCampus == 'eri') {
                 programCampus = 'UTM'
             }
+
+            
             const option = document.createElement('option')
             option.setAttribute('value', id)
             const optionText = document.createTextNode(programName + ' ' + programType + ' (' + programCode + ', ' + programCampus + ')')
@@ -60,17 +69,27 @@ function goProgram(e) {
 
 function changeUser(e){
     const user = document.querySelector('#changeUserName').value;
-    storage.changeProfileUsernameSet(user)
+    const promise = storage.changeProfileUsernameSet(user)
+    if(promise){
+        promise.then(bool =>{
+            if(bool){
+                prof.innerHTML = user;
+            }
+        })
+    }
     
-    document.querySelector('#user').innerHTML = user; 
-    const profile = document.querySelector('#profile');
-    profile.innerHTML = user;
 }
 
 function changeEmail(e){
     const email = document.querySelector('#changeEmailName').value;
-    storage.changeProfileEmailSet(email)
-    document.querySelector('#email').innerHTML = email; 
+    const promise = storage.changeProfileEmailSet(email)
+    if(promise){
+        promise.then((bool) =>{
+            if(bool){
+                document.querySelector('#email').innerHTML = email; 
+            }
+        })
+    }
 }
 
 function changePassword(e) {

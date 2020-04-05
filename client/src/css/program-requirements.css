@@ -102,3 +102,10 @@ p {
 .bold {
 	font-weight: bold;
 }
+
+.mainDiv{
+	align-content: center;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 5%;
+}
