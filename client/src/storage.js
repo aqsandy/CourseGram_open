@@ -125,9 +125,40 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			this.profile.username = username
-			this.toStorage()
+			if (changeProfileUsernameServer(this.profile.username, username)) {
+				this.profile.username = username
+				this.toStorage()
+			}
 		}
+	},
+
+	changeProfileUsernameServer: function(username, newUsername) {
+		/*
+			Sets username to profile on server and returns true if success.
+		*/
+		const url = this.serverUrl + '/api/v1/saveUsers/saveUserUsername'
+		let data = {
+			username: username,
+			newUsername: newUsername
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
+					return false
+				}
+			}).catch((error) => {
+				console.log(error)
+				return false
+			})
 	},
 
 	changeProfileUsernamePush: function(username, id) {
@@ -163,9 +194,40 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			this.profile.email = email
-			this.toStorage()
+			if (changeProfileEmailServer(this.profile.username, email)) {
+				this.profile.email = email
+				this.toStorage()
+			}
 		}
+	},
+
+	changeProfileEmailServer: function(username, email) {
+		/*
+			Sets program to profile on server and returns true if success.
+		*/
+		const url = this.serverUrl + '/api/v1/saveUsers/saveUserEmail'
+		let data = {
+			username: username,
+			email: email
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
+					return false
+				}
+			}).catch((error) => {
+				console.log(error)
+				return false
+			})
 	},
 
 	changeProfileEmailPush: function(email, id) {
@@ -201,9 +263,40 @@ Storage.prototype = {
 		*/
 		this.fromStorage()
 		if (this.profile != null) {
-			this.profile.password = password
-			this.toStorage()
+			if (changeProfilePasswordServer(this.profile.username, password)) {
+				this.profile.password = password
+				this.toStorage()
+			}
 		}
+	},
+
+	changeProfilePasswordServer: function(username, password) {
+		/*
+			Sets program to profile on server and returns true if success.
+		*/
+		const url = this.serverUrl + '/api/v1/saveUsers/saveUserPassword'
+		let data = {
+			username: username,
+			password: password
+		}
+		const request = new Request(url, {
+			method: 'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		return fetch(url)
+			.then((res) => {
+				if (res.status === 200) {
+					return true
+				} else {
+					return false
+				}
+			}).catch((error) => {
+				console.log(error)
+				return false
+			})
 	},
 
 	changeProfilePasswordPush: function(password, id) {

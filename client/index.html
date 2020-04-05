@@ -7,26 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
 	</head>
 	<body>
-		<!-- <div class="ui fixed inverted menu header">
-            <div class="ui container">
-              <a id='home' href="./index.html" class="header item">
-                <img class="logo" style="width:10em;" src="./img/logo.png">
-			  </a>
-            <div id='loginContainer'>
-              <button id='login'>Login / Sign Up</button> </div>
-            </div>
-		</div> -->
-		  
-		<div id='header'>
-			<ul>
-				<li id='homeContainer'>
-					<a id='home' href="./index.html" class="header item">
-						<img class="logo" style="width:5em;" src="./img/logo.png">
-					</a>
-				</li>
-				<li id='titleContainer'><h1 id='title'>Welcome to CourseGram</h1></li>
-				<li id='loginContainer'><button id='login'>Login / Sign Up</button></li>
-			</ul>
+		<div class='ui three item menu' style="background-color: black">
+			<a class="item" href="index.html"><img class="logo" style="width:15em;" src="./img/logo.png"></a>
+			<div class="item"><h1 class="ui header" style="color: white">Welcome to CourseGram</h1></div>
+			<a id="login" class="item" href="login.html"><h1 id="loginHeader" class="ui header" style="color: white">Login / Sign Up</h1></a>
 		</div>
 		<div id='programs'>
             <h1> Programs </h1>
@@ -39,5 +23,6 @@
         <script src='src/libraries/semantic.js'></script>
 		<script type='text/javascript' src='src/storage.js'></script>
 		<script type='text/javascript' src='src/javascript/index.js'></script>
+		<script type='text/javascript' src='src/javascript/header.js'></script>
 	</body>
 </html>

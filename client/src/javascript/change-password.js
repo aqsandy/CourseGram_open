@@ -1,52 +1,10 @@
-const home = document.querySelector('#home')
-home.addEventListener('click', goHome)
-
 const storage = new Storage()
-
-if (storage.profile != null) {
-	const header = document.querySelector('#header')
-	header.firstElementChild.children[2].remove()
-	const profileContainer = document.createElement('li')
-	profileContainer.setAttribute('id', 'profileContainer')
-	const profileButton = document.createElement('button')
-	profileButton.setAttribute('id', 'profile')
-	const profileButtonText = document.createTextNode(storage.getUsername())
-	profileButton.appendChild(profileButtonText)
-	profileContainer.appendChild(profileButton)
-	header.firstElementChild.appendChild(profileContainer)
-	const profile = document.querySelector('#profile')
-	profile.addEventListener('click', goProfile)
-} else {
-	const login = document.querySelector('#login')
-	login.addEventListener('click', goLogin)
-}
 
 let passwordValid = false
 
 const registration = document.querySelector('#change')
 change.addEventListener('change', valid)
 change.addEventListener('submit', changePassword)
-
-function goHome(e) {
-	e.preventDefault()
-	window.location.href = 'index.html'
-}
-
-function goLogin(e) {
-	e.preventDefault()
-	window.location.href = 'login.html'
-}
-
-function goProfile(e) {
-	e.preventDefault()
-	if (storage.profile != null) {
-		if (storage.profile.admin) {
-			window.location.href = 'admin.html'
-		} else {
-			window.location.href = 'profile.html'
-		}
-	}
-}
 
 function valid(e) {
 	e.preventDefault()
@@ -104,7 +62,7 @@ function changePassword(e) {
 		// Change password on server
 		// code below requires server call
 		if (passwordValid) {
-			storage.changeProfilePasswordSetPush(password)
+			storage.changeProfilePasswordSet(password)
 			window.location.href = 'profile.html'
 		}
 	}
