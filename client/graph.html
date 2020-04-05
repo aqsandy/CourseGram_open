@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+<script type="text/javascript" src="./src/libraries/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./src/javascript/graph.js"></script>
+<script>
+window.onload = function() {   
+    const queryString = window.location.search; 
+    var params = new URLSearchParams(queryString);
+    var id = params.get("id");
+    console.log("it ran.")
+    console.log(id)
+	if (id==null) {
+	    document.body.appendChild(document.createTextNode("No Trace ID specified"));
+    } else {
+        getprogram(id);
+    }
+}
+</script>
+<style id="css">
+    text {
+      font-weight: 300;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+      font-size: 14px;
+    }
+    .node rect {
+      stroke: #999;
+      fill: #fff;
+      stroke-width: 1.5px;
+    }
+    
+    .edgePath path {
+      stroke: #333;
+      stroke-width: 1.5px;
+    }
+</style>
+</head>
+<body>
+    <svg id="svg-canvas" width = 100% height = 90%></svg>
+</body>
+</html>
