@@ -62,7 +62,7 @@ function changePassword(e) {
 		// Change password on server
 		// code below requires server call
 		if (passwordValid) {
-			storage.changeProfilePasswordSetPush(password)
+			storage.changeProfilePasswordSet(password)
 			window.location.href = 'profile.html'
 		}
 	}

@@ -14,6 +14,75 @@ router.post('/getUserPrograms', async (req, res) => {
     }
 });
 
+router.post('/saveUserUsername', async (req, res) => {
+    const { username, newUsername } = req.body;
+    if(!username || !newUsername){
+        res.status(400).send("Username or newUsername not provided");
+    }
+    let userExists = await user_schema.findOne({username});
+    if(userExists){
+        userExists.username = newUsername
+        userExists.save((err) => {
+            if (err) {
+              console.log(err)
+              res.status(500).send(err);
+            }
+            else {
+              res.status(200).send("User saved");
+            }
+        });
+    }
+    else{
+        res.status(404).send("User not found"); 
+    }
+});
+
+router.post('/saveUserEmail', async (req, res) => {
+    const { username, email } = req.body;
+    if(!username || !email){
+        res.status(400).send("Username or email not provided");
+    }
+    let userExists = await user_schema.findOne({username});
+    if(userExists){
+        userExists.email = email
+        userExists.save((err) => {
+            if (err) {
+              console.log(err)
+              res.status(500).send(err);
+            }
+            else {
+              res.status(200).send("User saved");
+            }
+        });
+    }
+    else{
+        res.status(404).send("User not found"); 
+    }
+});
+
+router.post('/saveUserPassword', async (req, res) => {
+    const { username, password } = req.body;
+    if(!username || !password){
+        res.status(400).send("Username or password not provided");
+    }
+    let userExists = await user_schema.findOne({username});
+    if(userExists){
+        userExists.password = password
+        userExists.save((err) => {
+            if (err) {
+              console.log(err)
+              res.status(500).send(err);
+            }
+            else {
+              res.status(200).send("User saved");
+            }
+        });
+    }
+    else{
+        res.status(404).send("User not found"); 
+    }
+});
+
 router.post('/saveUserProgram', async (req, res) => {
     const { username, program } = req.body;
     if(!username || !program){

@@ -60,7 +60,7 @@ function goProgram(e) {
 
 function changeUser(e){
     const user = document.querySelector('#changeUserName').value;
-    storage.changeProfileUsernameSetPush(user)
+    storage.changeProfileUsernameSet(user)
     
     document.querySelector('#user').innerHTML = user; 
     const profile = document.querySelector('#profile');
@@ -69,7 +69,7 @@ function changeUser(e){
 
 function changeEmail(e){
     const email = document.querySelector('#changeEmailName').value;
-    storage.changeProfileEmailSetPush(email)
+    storage.changeProfileEmailSet(email)
     document.querySelector('#email').innerHTML = email; 
 }
 
