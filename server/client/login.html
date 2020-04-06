@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>Login - CourseGram</title>
+		<link rel='stylesheet' type='text/css' href='src/css/login.css'>
+		<link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
+	</head>
+	<!-- <body>
+		<div id='header'>
+			<ul>
+				<a id='home' href="./index.html" class="header item">
+					<img class="logo" style="width:10em;" src="./img/logo.png">
+				</a>
+				<li id='titleContainer'><h1 id='title'>Login</h1></li>
+			</ul>
+		</div>
+		<form id='authentication'>
+			<div id='usernameContainer'>
+				<h3>Username:</h3>
+				<input id ='username' type='text' name='Username'>
+			</div>
+			<div id='passwordContainer'>
+				<h3>Password:</h3>
+				<input id='password' type='password' name='Password'>
+			</div>
+			<div id='errorContainer'></div>
+			<div id='buttonContainer'>
+				<input id='loginButton' type='submit' value='Login'>
+				<button id='signUpButton'>Sign Up</button>
+			</div>
+			<div id='linkContainer'>
+				<a href='recover-username.html'>Forgot username</a>
+				<a href='reset-password.html'>Forgot password</a>
+			</div>
+		</form>
+	</body> -->
+	<style type="text/css">
+		body {
+		  background-color: #DADADA;
+		}
+		body > .grid {
+		  height: 100%;
+		}
+		.image {
+		  margin-top: -100px;
+		}
+		.column {
+		  max-width: 450px;
+		}
+	  </style>
+<body>
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
+		  <h2 class="ui black image header">
+			<div class="content">
+			  Log-in to your account
+			</div>
+		  </h2>
+		  <form class="ui large form">
+			<div class="ui stacked segment">
+			  <div class="field">
+				<div class="ui left icon input">
+				  <i class="user icon"></i>
+				  <input type="text" id="username" placeholder="Username">
+				</div>
+			  </div>
+			  <div class="field">
+				<div class="ui left icon input">
+				  <i class="lock icon"></i>
+				  <input type="password" id="password" placeholder="Password">
+				</div>
+			  </div>
+			  <div id="login" class="ui fluid large black submit button">Login</div>
+			</div>
+	  
+			<div class="ui yellow message"></div>
+	  
+		  </form>
+	  
+		  <div class="ui message">
+			New to us? <a href="#" id="signup">Sign Up</a>
+		  </div>
+		</div>
+	  </div>
+	<script src="src/libraries/jquery-3.1.1.min.js"></script>
+	<script src="src/libraries/semantic.js"></script>
+	<script type='text/javascript' src='src/storage.js'></script>
+	<script type='text/javascript' src='src/javascript/login.js'></script>
+</body>
+</html>

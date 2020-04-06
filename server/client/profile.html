@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>CourseGram Login</title>
+        <link rel='stylesheet' type='text/css' href='src/css/login.css'>
+        <link rel='stylesheet' type='text/css' href='src/css/profile.css'>
+        <link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
+
+	</head>
+	<body>
+        <div class="ui fixed inverted menu">
+            <div class="ui container">
+              <a id="home" href="./index.html" style="width:100%" class="header item">
+                <img class="logo" style="width:10em;" src="./img/logo.png">
+              </a>
+            </div>
+        </div>
+        <div id="changeInfo">
+            <h1> User Info </h1>
+            <div class='ui form'>
+                
+                <div class="field">
+                    <span>Username: </span> <span id='user'></span>
+                    <br>
+                    <input type="text" id="changeUserName" />
+                    <br>
+                    <button id="changeUser" class="ui primary button">Change Username</button>
+                </div>
+                <div class="field">
+                    <span>Email: </span> <span id="email" > user@user.com</span>
+                    <br>
+                    <input type="text" id="changeEmailName" />
+                    <br>
+                    <button id="changeEmail" class="ui primary button" id="changeEmail">Change Email</button>
+                </div>
+
+                <div class="field">
+                    <span>Password: *** </span>
+                    <br>
+                    <button id="changePassword" class="ui primary button" id='changePassword'>Change Password</button>
+                </div>
+
+                <div class="field">
+                    <button id="logout" class="ui primary button" id='logout'>Logout</button>
+                </div>
+            </div>
+        </div>
+        <div id='programs'>
+            <h1> Profile Programs </h1>
+            <select class="ui fluid dropdown">
+                <option value="">Profile Programs</div>
+            </select>
+            <button id="selectProgramButton" class="ui inverted blue button">Select Program</button>
+        </div>
+        <script src="src/libraries/jquery-3.1.1.min.js"></script>
+        <script src="src/libraries/semantic.js"></script>
+        <script type='text/javascript' src='src/storage.js'></script>
+		<script type="text/javascript" src="src/javascript/profile.js"></script>
+	</body>
+</html>

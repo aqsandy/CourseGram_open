@@ -3,6 +3,8 @@ const connect_db = require('./config/db');
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const app = express();
+var path = require('path');
+
 const cookieParser = require('cookie-parser');
 require("dotenv").config()
 const secret = 'secretsecret';
@@ -35,6 +37,8 @@ const authMiddleWare = (req, res, next) => {
 const cors = require('cors');
 app.use(cors());
 
+app.use(express.static(path.join(__dirname,'/client')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cookieParser());
@@ -43,7 +47,7 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/programs', require('./routes/program'));
 app.use('/api/v1/saveUsers', authMiddleWare, require('./routes/saveUser'));
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, function() {
   console.log(`Node server listening on port ${PORT}!`);
 });

@@ -1,6 +1,9 @@
 # team30
 
+NOTE: This has been submitted late
 START
+
+HEROKU LINK: https://powerful-stream-32762.herokuapp.com
 
 First, you should copy all files under folder client to your http server folder, or you can simply open 'index.html'. The app starts immediately on the home page in which a user is prompted to select a program they are interested in viewing. In our case we will be using the Major in Architecture program which gives us a good template for viewing our diagrams.
 
@@ -44,8 +47,6 @@ FEATURES WE DID NOT IMPLEMENT AND WHY
 1. In the case of hovering nodes, we wanted a tooltip to pop up with course information, however this wasn't feasible as any online resource was too old and said solutions seem deprecated.
 
 2. Print and Save to PDF functionality was not implemented due to complexity of d3 graphing implementation.
-
-3. Due to the lack of backend support, we are unable to develop edit program, course and profile from admin side. 
 
 4. We suppose to use different colour of clusters to distinguish the requirement under each program. However, due to the complexity of course and program data structure, we are unable to cluster courses. 
 

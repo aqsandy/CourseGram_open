@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>CourseGram Recover Username</title>
+	    <link rel='stylesheet' type='text/css' href='src/css/recover-username.css'>
+	    <link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
+	</head>
+	<body>
+		<div class='ui three item menu' style="background-color: black">
+			<a class="item" href="index.html"><img class="logo" style="width:15em;" src="./img/logo.png"></a>
+			<div class="item"><h1 class="ui header" style="color: white">Recover Username</h1></div>
+			<div class="item"></div>
+		</div>
+		<form id='recover'>
+			<div id='recoverTextContainer'>
+				<p>Please enter your profile email to recover your username.</p>
+				<p>If the email is valid, the username will be sent to the email.</p>
+			</div>
+			<div id='emailContainer'>
+				<h3>Email:</h3>
+				<input id='email' type='text' name='Email'>
+				<div class='valid'>&#x2717</div>
+				<p></p>
+			</div>
+			<div id='buttonContainer'>
+				<input id='recoverUsernameButton' type='submit' value='Recover Username'>
+			</div>
+		</form>
+		<script type="text/javascript" src="src/javascript/recover-username.js"></script>
+		<script type='text/javascript' src='src/javascript/header.js'></script>
+	</body>
+</html>

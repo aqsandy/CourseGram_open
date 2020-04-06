@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	 	<meta charset='utf-8'>
+	    <title>CourseGram - Welcome!</title>
+        <link rel='stylesheet' type='text/css' href='src/css/admin.css'>
+        <link rel="stylesheet" type="text/css" href="src/libraries/semantic.css">
+	</head>
+	<body style="background-color: lightgrey;">
+        <div class="ui fixed inverted menu">
+            <div class="ui container">
+              <a href="./index.html" class="header item">
+                <img class="logo" id="home" style="width:10em;" src="./img/logo.png">
+              </a>
+              <a href="./admin.html" class="item">Home</a>
+              <a href="javascript:load_profile();" class="item">Profile Dataset</a>
+              <a href="javascript:load_program()" class="item">Program Dataset</a>
+              <a href="javascript:load_course()" class="item">Course Dataset</a>
+              <a href="javascript:load_requests();" class="item">Requests Process</a>
+              <a href="javascript:load_manage();" class="item">General manage</a>
+              <a href="javascript:logout()" class="item">Logout</a>
+            </div>
+          </div>
+
+        <div id="info">
+            <embed src="./admin/welcome.html"></embed>
+        </div>
+        <script src="src/libraries/jquery-3.1.1.min.js"></script>
+        <script src="src/libraries/semantic.js"></script>
+        <script type="text/javascript" src="src/storage.js"></script>
+        <script type="text/javascript" src="src/javascript/adminHeader.js"></script>
+        <script type="text/javascript" src="src/javascript/admin.js"></script>
+	</body>
+</html>
