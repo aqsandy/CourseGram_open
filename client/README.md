@@ -2,7 +2,9 @@
 
 START
 
-The app starts immediately on the home page in which a user is prompted to select a program they are interested in viewing. In our case we will be using the Major in Architecture program which gives us a good template for viewing our diagrams.
+First, you should copy all files under folder client to your http server folder, or you can simply open 'index.html'. The app starts immediately on the home page in which a user is prompted to select a program they are interested in viewing. In our case we will be using the Major in Architecture program which gives us a good template for viewing our diagrams.
+
+For server side, you need to run "npm start" under the server folder in command line(or bash on unix-like system) with necessary package installed.
 
 LOGIN
 
@@ -31,7 +33,11 @@ Taking account the sheer amount of the programs and the possible configurations 
 
 Firstly, we will need to find some sort of API if not create a webscraper to get the needed information. Then we have to create the appropriate edges and nodes and find a correct way to format them in cases such as too many disconnected nodes.
 
-We are grabbing the program data from the database's program collection for the graph. Analyzing the information for each course from course collection then reform a graph to user to show the requirement courses with prerequisite and co-requisite by arrowlines.
+We are grabbing the program data from the database's program collection for the graph. Analyzing the information for each course from course collection then reform a graph to user to show the requirement courses with prerequisite and co-requisite by arrowlines. All works are done with dagre-d3 library.
+
+For backend, we uses Mongodb as the website's database support and express.js for the RESTAPI support. We enabled CORS check in order to prevent invalid request from non-trusted web domain. Also, we do use cookie to check the status of the user; if the user is not a admin in the cookie, then even they send out the delete request to the server side, the server side would reject it.
+
+We also connect to database to get realtime data for courses, programs,and user profiles from admin side by API communication with the server side.
 
 FEATURES WE DID NOT IMPLEMENT AND WHY
 
@@ -39,7 +45,10 @@ FEATURES WE DID NOT IMPLEMENT AND WHY
 
 2. Print and Save to PDF functionality was not implemented due to complexity of d3 graphing implementation.
 
-3. Due to the lack of backend support, we are unable to develop delete/edit program, course and profile from admin side. Also, loading users profile and course info cannot get developed due to the same reason.
+3. Due to the lack of backend support, we are unable to develop edit program, course and profile from admin side. 
+
+4. We suppose to use different colour of clusters to distinguish the requirement under each program. However, due to the complexity of course and program data structure, we are unable to cluster courses. 
+
 Citations:
 
 1. https://github.com/dagrejs/dagre-d3/wiki
